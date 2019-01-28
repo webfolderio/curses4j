@@ -8,30 +8,30 @@ public class echo {
         Window window = new Window();
         window.initscr();
 
-        window.waddstr("Normally echo is on. Type your name and press Enter:\n");
-        window.wrefresh();
-        while (window.wgetch() != '\n') {
+        window.addstr("Normally echo is on. Type your name and press Enter:\n");
+        window.refresh();
+        while (window.getch() != '\n') {
             // no op
         }
 
-        window.mvwaddstr(2, 0, "Now echo is off. Type your name and press Enter:\n");
-        window.wrefresh();
+        window.mvaddstr(2, 0, "Now echo is off. Type your name and press Enter:\n");
+        window.refresh();
         window.noecho();
-        while (window.wgetch() != '\n') {
+        while (window.getch() != '\n') {
             // no op
         }
 
-        window.mvwaddstr(4, 0, "Echo is still off, but input is being displayed\n");
-        window.waddstr("and manipulated manually. Type your name and press Enter:\n");
+        window.mvaddstr(4, 0, "Echo is still off, but input is being displayed\n");
+        window.addstr("and manipulated manually. Type your name and press Enter:\n");
         do {
-            ch = window.wgetch();
-            window.waddch(Character.toUpperCase(ch));
-            window.wrefresh();
+            ch = window.getch();
+            window.addch(Character.toUpperCase(ch));
+            window.refresh();
         } while (ch != '\n');
 
-        window.waddstr("Press Enter to quit:");
-        window.wrefresh();
-        window.wgetch();
+        window.addstr("Press Enter to quit:");
+        window.refresh();
+        window.getch();
 
         window.endwin();
     }

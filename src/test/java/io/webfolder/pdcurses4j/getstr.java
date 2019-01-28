@@ -8,17 +8,17 @@ public class getstr {
         Window window = new Window();
 
         window.initscr();
-        window.waddstr("Enter the first 3 letters of your first name? ");
-        window.wrefresh();
-        String first = window.wgetnstr(3);
+        window.addstr("Enter the first 3 letters of your first name? ");
+        window.refresh();
+        String first = window.getnstr(3);
 
-        window.waddstr("Enter the first 3 letters of your last name? ");
-        window.wrefresh();
-        String last = window.wgetnstr(3);
+        window.addstr("Enter the first 3 letters of your last name? ");
+        window.refresh();
+        String last = window.getnstr(3);
 
-        window.wprintw(format("Your secret agent name is %s%s!", first, last));
-        window.wrefresh();
-        window.wgetch();
+        window.printw(format("Your secret agent name is %s%s!", first, last));
+        window.refresh();
+        window.getch();
 
         window.endwin();
     }

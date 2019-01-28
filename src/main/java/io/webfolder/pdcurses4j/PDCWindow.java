@@ -41,4 +41,14 @@ class PDCWindow {
     native int pdcurses4j_mvwdelch(long peer, int y, int x);
 
     native String pdcurses4j_wgetnstr(long peer, int n);
+
+    native String pdcurses4j_unctrl(int c);
+
+    native int pdcurses4j_getmaxx(long peer);
+
+    native int pdcurses4j_getmaxy(long peer);
+
+    native int pdcurses4j_wclear(long peer);
+
+    native int pdcurses4j_typeahead(int fields);
 }

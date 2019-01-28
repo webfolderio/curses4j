@@ -73,14 +73,14 @@ public class Window {
      * Turn on attrs in the current or specified window without affecting any
      * others.
      */
-    public int wattr_on(long attrs) {
+    public int attr_on(long attrs) {
         return window.pdcurses4j_wattr_on(window.peer, attrs);
     }
 
     /**
      * Prints a string.
      */
-    public int wprintw(String str) {
+    public int printw(String str) {
         return window.pdcurses4j_wprintw(window.peer, str);
     }
 
@@ -102,19 +102,19 @@ public class Window {
      * the screen. By first calling wnoutrefresh() for each window, it is then
      * possible to call doupdate() only once.
      */
-    public int wrefresh() {
+    public int refresh() {
         return window.pdcurses4j_wrefresh(window.peer);
     }
 
-    public int waddch(int ch) {
-        return waddch((char) ch);
+    public int addch(int ch) {
+        return addch((char) ch);
     }
 
-    public int waddch(char ch) {
+    public int addch(char ch) {
         return window.pdcurses4j_waddch(window.peer, ch);
     }
 
-    public int wgetch() {
+    public int getch() {
         return window.pdcurses4j_wgetch(window.peer);
     }
 
@@ -122,11 +122,11 @@ public class Window {
         return window.pdcurses4j_endwin();
     }
 
-    public int waddstr(String str) {
+    public int addstr(String str) {
         return window.pdcurses4j_waddstr(window.peer, str);
     }
 
-    public int mvwaddstr(int y, int x, String str) {
+    public int mvaddstr(int y, int x, String str) {
         return window.pdcurses4j_mvwaddstr(window.peer, y, x, str);
     }
 
@@ -142,15 +142,35 @@ public class Window {
         return window.pdcurses4j_napms(delay);
     }
 
-    public int mvwinsch(int y, int x, char ch) {
+    public int mvinsch(int y, int x, char ch) {
         return window.pdcurses4j_mvwinsch(window.peer, y, x, ch);
     }
 
-    public int mvwdelch(int y, int x) {
+    public int mvdelch(int y, int x) {
         return window.pdcurses4j_mvwdelch(window.peer, y, x);
     }
 
-    public String wgetnstr(int n) {
+    public String getnstr(int n) {
         return window.pdcurses4j_wgetnstr(window.peer, n);
+    }
+
+    public String unctrl(int c) {
+        return window.pdcurses4j_unctrl(c);
+    }
+
+    public int getmaxx() {
+        return window.pdcurses4j_getmaxx(window.peer);
+    }
+
+    public int getmaxy() {
+        return window.pdcurses4j_getmaxy(window.peer);
+    }
+
+    public int clear() {
+        return window.pdcurses4j_wclear(window.peer);
+    }
+
+    public int typeahead(int fields) {
+        return window.pdcurses4j_typeahead(fields);
     }
 }

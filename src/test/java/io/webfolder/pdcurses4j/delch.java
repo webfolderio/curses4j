@@ -10,7 +10,8 @@ public class delch {
     public static final int DELAY = 250;
 
     public static void main(String[] args) {
-        String text = "Elvis found alive *** Stock market tops 20,000 *** Rocky XII big box office hit *** Congressman indicted *** ";
+        String text  = "Elvis found alive *** Stock market tops 20,000 *** ";
+               text += "Rocky XII big box office hit *** Congressman indicted *** ";
 
         Window window = new Window();
 
@@ -18,11 +19,11 @@ public class delch {
         window.noecho();
         window.nodelay(true);
 
-        for (int i = 0; i < text.length() && window.wgetch() == ERR; i++) {
+        for (int i = 0; i < text.length() && window.getch() == ERR; i++) {
             char t = text.charAt(i);
-            window.mvwinsch(Y, X2, t);
-            window.mvwdelch(Y, X1);
-            window.wrefresh();
+            window.mvinsch(Y, X2, t);
+            window.mvdelch(Y, X1);
+            window.refresh();
             window.napms(DELAY);
         }
     }

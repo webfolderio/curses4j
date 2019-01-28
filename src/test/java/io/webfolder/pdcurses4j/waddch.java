@@ -5,11 +5,11 @@ public class waddch {
     public static void main(String[] args) throws InterruptedException {
         Window window = new Window();
         window.initscr();
-        window.waddch('H');
-        window.waddch('i');
-        window.waddch('!');
-        window.wrefresh();
-        window.wgetch();
+        window.addch('H');
+        window.addch('i');
+        window.addch('!');
+        window.refresh();
+        window.getch();
         window.endwin();
     }
 }
