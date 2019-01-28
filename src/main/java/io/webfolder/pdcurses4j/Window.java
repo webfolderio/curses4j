@@ -1,132 +1,156 @@
 package io.webfolder.pdcurses4j;
 
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
-import static io.webfolder.pdcurses4j.PDCursesLibrary.INSTANCE;
-import static com.sun.jna.Pointer.NULL;
-
 public class Window {
 
-	private final Pointer peer;
+    public static final short COLOR_BLACK = 0;
+    public static final short COLOR_RED = 1;
+    public static final short COLOR_GREEN = 2;
+    public static final short COLOR_BLUE = 4;
+    public static final short COLOR_WHITE = 7;
+    public static final short COLOR_CYAN = (COLOR_BLUE | COLOR_GREEN);
+    public static final short COLOR_MAGENTA = (COLOR_RED | COLOR_BLUE);
+    public static final short COLOR_YELLOW = (COLOR_RED | COLOR_GREEN);
 
-	public Window() {
-		this.peer = INSTANCE.initscr();
-	}
+    public static final long PDC_COLOR_SHIFT = 24;
+    public static final long A_COLOR = 0xff000000;
 
-	public static final short COLOR_BLACK = 0;
-	public static final short COLOR_RED = 1;
-	public static final short COLOR_GREEN = 2;
-	public static final short COLOR_BLUE = 4;
-	public static final short COLOR_CYAN = (COLOR_BLUE | COLOR_GREEN);
-	public static final short COLOR_MAGENTA = (COLOR_RED | COLOR_BLUE);
-	public static final short COLOR_YELLOW = (COLOR_RED | COLOR_GREEN);
-	public static final short COLOR_WHITE = 7;
+    public static final int FALSE = 0;
+    public static final int TRUE = 1;
+    public static final int ERR = -1;
+    public static final int OK = 0;
 
-	public static final long PDC_COLOR_SHIFT = 24;
+    private final PDCWindow window;
 
-	public static long A_COLOR = 0xff000000;
+    public static long COLOR_PAIR(long n) {
+        return (n << PDC_COLOR_SHIFT) & A_COLOR;
+    }
 
-	public static final int SIZEOF_WCHAR_T = 2;
+    public static long PAIR_NUMBER(long n) {
+        return (n & A_COLOR) >> PDC_COLOR_SHIFT;
+    }
 
-	public static long COLOR_PAIR(long n) {
-		return (n << PDC_COLOR_SHIFT) & A_COLOR;
-	}
+    public Window() {
+        this.window = new PDCWindow();
+    }
 
-	public static long PAIR_NUMBER(long n) {
-		return (n & A_COLOR) >> PDC_COLOR_SHIFT;
-	}
+    /**
+     * initscr() should be the first curses routine called. It will initialize all
+     * curses data structures, and arrange that the first call to refresh() will
+     * clear the screen.
+     * <p>
+     * In case of error, initscr() will write a message to standard error and end
+     * the program.
+     */
+    public void initscr() {
+        window.peer = window.pdcurses4j_initscr();
+    }
 
-	public int wrefresh() {
-		return INSTANCE.wrefresh(peer);
-	}
+    /**
+     * initializes eight basic colors (black, red, green, yellow, blue, magenta,
+     * cyan, and white), and two global variables: COLORS and COLOR_PAIRS
+     * (respectively defining the maximum number of colors and color-pairs the
+     * terminal is capable of displaying).
+     */
+    public int start_color() {
+        return window.pdcurses4j_start_color();
+    }
 
-	public int end() {
-		return INSTANCE.endwin();
-	}
+    /**
+     * init_pair() changes the definition of a color-pair.
+     * <p>
+     * It takes three arguments: the number of the color-pair to be redefined, and
+     * the new values of the foreground and background colors. The pair number must
+     * be between 0 and COLOR_PAIRS - 1, inclusive. The foreground and background
+     * must be between 0 and COLORS - 1, inclusive. If the color pair was previously
+     * initialized, the screen is refreshed, and all occurrences of that color-pair
+     * are changed to the new definition.
+     */
+    public int init_pair(short pair, short fg, short bg) {
+        return window.pdcurses4j_init_pair(pair, fg, bg);
+    }
 
-	public int wprintw(String str) {
-		return INSTANCE.wprintw(peer, str);
-	}
+    /**
+     * Turn on attrs in the current or specified window without affecting any
+     * others.
+     */
+    public int wattr_on(long attrs) {
+        return window.pdcurses4j_wattr_on(window.peer, attrs);
+    }
 
-	public int start_color() {
-		return INSTANCE.start_color();
-	}
+    /**
+     * Prints a string.
+     */
+    public int wprintw(String str) {
+        return window.pdcurses4j_wprintw(window.peer, str);
+    }
 
-	public int init_pair(int pair, short fg, short bg) {
-		return INSTANCE.init_pair((short) pair, fg, bg);
-	}
+    /**
+     * wrefresh() copies the named window to the physical terminal screen, taking
+     * into account what is already there in order to optimize cursor movement.
+     * <p>
+     * These routines must be called to get any output on the terminal, as other
+     * routines only manipulate data structures. Unless leaveok() has been enabled,
+     * the physical cursor of the terminal is left at the location of the window's
+     * cursor.
+     * <p>
+     * wnoutrefresh() and doupdate() allow multiple updates with more efficiency
+     * than wrefresh() alone. wrefresh() works by first calling wnoutrefresh(),
+     * which copies the named window to the virtual screen. It then calls
+     * doupdate(), which compares the virtual screen to the physical screen and does
+     * the actual update. A series of calls to wrefresh() will result in alternating
+     * calls to wnoutrefresh() and doupdate(), causing several bursts of output to
+     * the screen. By first calling wnoutrefresh() for each window, it is then
+     * possible to call doupdate() only once.
+     */
+    public int wrefresh() {
+        return window.pdcurses4j_wrefresh(window.peer);
+    }
 
-	public void wattr_on(long attrs) {
-		INSTANCE.wattr_on(peer, attrs, NULL);
-	}
+    public int waddch(int ch) {
+        return waddch((char) ch);
+    }
 
-	public void wattr_off(long attrs) {
-		INSTANCE.wattr_off(peer, attrs, NULL);
-	}
+    public int waddch(char ch) {
+        return window.pdcurses4j_waddch(window.peer, ch);
+    }
 
-	public void wbkgdset(long attrs) {
-		INSTANCE.wbkgdset(peer, attrs);
-	}
+    public int wgetch() {
+        return window.pdcurses4j_wgetch(window.peer);
+    }
 
-	public int getmaxy(Window window) {
-		return INSTANCE.getmaxy(window.peer);
-	}
+    public int endwin() {
+        return window.pdcurses4j_endwin();
+    }
 
-	public int getmaxx(Window window) {
-		return INSTANCE.getmaxx(window.peer);
-	}
+    public int waddstr(String str) {
+        return window.pdcurses4j_waddstr(window.peer, str);
+    }
 
-	public int beep() {
-		return INSTANCE.beep();
-	}
+    public int mvwaddstr(int y, int x, String str) {
+        return window.pdcurses4j_mvwaddstr(window.peer, y, x, str);
+    }
 
-	public int curs_set(int visibility) {
-		return INSTANCE.curs_set(visibility);
-	}
+    public int noecho() {
+        return window.pdcurses4j_noecho();
+    }
 
-	public char wget_wch() {
-		long address = 0;
-		try {
-			address = Native.malloc(SIZEOF_WCHAR_T);
-			Pointer ptr = new Pointer(address);
-			int ret = INSTANCE.wget_wch(peer, ptr);
-			if (ret == 0) {
-				return (char) ptr.getChar(0);
-			} else {
-				return 0;
-			}
-		} finally {
-			if (address > 0) {
-				Native.free(address);
-			}
-		}
-	}
+    public int nodelay(boolean bf) {
+        return window.pdcurses4j_nodelay(window.peer, bf ? TRUE : FALSE);
+    }
 
-	public int wclear() {
-		return INSTANCE.wclear(peer);
-	}	
+    public int napms(int delay) {
+        return window.pdcurses4j_napms(delay);
+    }
 
-	public int werase() {
-		return INSTANCE.werase(peer);
-	}
+    public int mvwinsch(int y, int x, char ch) {
+        return window.pdcurses4j_mvwinsch(window.peer, y, x, ch);
+    }
 
-	public boolean has_colors() {
-		return INSTANCE.has_colors();
-	}
+    public int mvwdelch(int y, int x) {
+        return window.pdcurses4j_mvwdelch(window.peer, y, x);
+    }
 
-	public boolean can_change_color() {
-		return INSTANCE.can_change_color();
-	}
-
-	public int flash() {
-		return INSTANCE.flash();
-	}
-
-	public int scrollok(boolean bf) {
-		return INSTANCE.scrollok(peer, bf);
-	}
-
-	public void setTitle(String title) {
-		INSTANCE.PDC_set_title(title);
-	}
+    public String wgetnstr(int n) {
+        return window.pdcurses4j_wgetnstr(window.peer, n);
+    }
 }
