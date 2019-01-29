@@ -1,18 +1,25 @@
 package io.webfolder.pdcurses4j;
 
-import static io.webfolder.pdcurses4j.Window.*;
+import static io.webfolder.pdcurses4j.Window.COLOR_BLUE;
+import static io.webfolder.pdcurses4j.Window.COLOR_CYAN;
+import static io.webfolder.pdcurses4j.Window.COLOR_PAIR;
+import static io.webfolder.pdcurses4j.Window.COLOR_RED;
+import static io.webfolder.pdcurses4j.Window.COLOR_WHITE;
+import static io.webfolder.pdcurses4j.Window.COLOR_YELLOW;
+import static io.webfolder.pdcurses4j.Window.endwin;
+import static io.webfolder.pdcurses4j.Window.init_pair;
+import static io.webfolder.pdcurses4j.Window.initscr;
+import static io.webfolder.pdcurses4j.Window.start_color;
+import static io.webfolder.pdcurses4j.Window.stdscr;
 
 public class kid2 {
 
     public static void main(String[] args) {
-
-        Window stdscr = new Window();
-
-        stdscr.initscr();
-        Window.start_color(); /* remember to check for errors! */
-        Window.init_pair((short) 1, COLOR_WHITE, COLOR_BLUE);
-        Window.init_pair((short) 2, COLOR_RED, COLOR_YELLOW);
-        Window.init_pair((short) 3, COLOR_CYAN, COLOR_WHITE);
+        initscr();
+        start_color(); /* remember to check for errors! */
+        init_pair((short) 1, COLOR_WHITE, COLOR_BLUE);
+        init_pair((short) 2, COLOR_RED, COLOR_YELLOW);
+        init_pair((short) 3, COLOR_CYAN, COLOR_WHITE);
 
         /* create subwindow and remember to check for errors! */
         Window sonny = stdscr.subwin(5, 20, 10, 30);
@@ -29,6 +36,6 @@ public class kid2 {
         stdscr.refresh();
         stdscr.getch();
 
-        Window.endwin();
+        endwin();
     }
 }

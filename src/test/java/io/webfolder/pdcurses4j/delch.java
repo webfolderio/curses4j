@@ -1,6 +1,9 @@
 package io.webfolder.pdcurses4j;
 
+import static io.webfolder.pdcurses4j.Window.stdscr;
 import static io.webfolder.pdcurses4j.Window.ERR;
+import static io.webfolder.pdcurses4j.Window.initscr;
+import static io.webfolder.pdcurses4j.Window.napms;
 
 public class delch {
 
@@ -13,18 +16,16 @@ public class delch {
         String text  = "Elvis found alive *** Stock market tops 20,000 *** ";
                text += "Rocky XII big box office hit *** Congressman indicted *** ";
 
-        Window window = new Window();
+        initscr();
+        stdscr.noecho();
+        stdscr.nodelay(true);
 
-        window.initscr();
-        window.noecho();
-        window.nodelay(true);
-
-        for (int i = 0; i < text.length() && window.getch() == ERR; i++) {
+        for (int i = 0; i < text.length() && stdscr.getch() == ERR; i++) {
             char t = text.charAt(i);
-            window.mvinsch(Y, X2, t);
-            window.mvdelch(Y, X1);
-            window.refresh();
-            Window.napms(DELAY);
+            stdscr.mvinsch(Y, X2, t);
+            stdscr.mvdelch(Y, X1);
+            stdscr.refresh();
+            napms(DELAY);
         }
     }
 }

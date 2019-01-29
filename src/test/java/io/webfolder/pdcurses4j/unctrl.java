@@ -1,4 +1,8 @@
 package io.webfolder.pdcurses4j;
+
+import static io.webfolder.pdcurses4j.Window.endwin;
+import static io.webfolder.pdcurses4j.Window.initscr;
+import static io.webfolder.pdcurses4j.Window.stdscr;
 import static java.lang.String.format;
 
 public class unctrl {
@@ -6,17 +10,14 @@ public class unctrl {
     public static final int MAX = 0x7f;
 
     public static void main(String[] args) {
-        int ch;
+        initscr();
 
-        Window window = new Window();
-        window.initscr();
-
-        for(ch = 0; ch <= MAX; ch++) {
-            window.printw(format("%s\t", Window.unctrl(ch)));
+        for(int ch = 0; ch <= MAX; ch++) {
+            stdscr.printw(format("%s\t", Window.unctrl(ch)));
         }
-        window.refresh();
-        window.getch();
+        stdscr.refresh();
+        stdscr.getch();
 
-        Window.endwin();
+        endwin();
     }
 }

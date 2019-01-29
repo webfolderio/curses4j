@@ -1,25 +1,26 @@
 package io.webfolder.pdcurses4j;
 
+import static io.webfolder.pdcurses4j.Window.endwin;
+import static io.webfolder.pdcurses4j.Window.initscr;
+import static io.webfolder.pdcurses4j.Window.stdscr;
 import static java.lang.String.format;
 
 public class getstr {
 
     public static void main(String[] args) {
-        Window window = new Window();
+        initscr();
+        stdscr.addstr("Enter the first 3 letters of your first name? ");
+        stdscr.refresh();
+        String first = stdscr.getnstr(3);
 
-        window.initscr();
-        window.addstr("Enter the first 3 letters of your first name? ");
-        window.refresh();
-        String first = window.getnstr(3);
+        stdscr.addstr("Enter the first 3 letters of your last name? ");
+        stdscr.refresh();
+        String last = stdscr.getnstr(3);
 
-        window.addstr("Enter the first 3 letters of your last name? ");
-        window.refresh();
-        String last = window.getnstr(3);
+        stdscr.printw(format("Your secret agent name is %s%s!", first, last));
+        stdscr.refresh();
+        stdscr.getch();
 
-        window.printw(format("Your secret agent name is %s%s!", first, last));
-        window.refresh();
-        window.getch();
-
-        Window.endwin();
+        endwin();
     }
 }

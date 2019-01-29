@@ -5,6 +5,12 @@ import static io.webfolder.pdcurses4j.Window.COLOR_PAIR;
 import static io.webfolder.pdcurses4j.Window.COLOR_RED;
 import static io.webfolder.pdcurses4j.Window.COLOR_WHITE;
 import static io.webfolder.pdcurses4j.Window.COLOR_YELLOW;
+import static io.webfolder.pdcurses4j.Window.endwin;
+import static io.webfolder.pdcurses4j.Window.init_pair;
+import static io.webfolder.pdcurses4j.Window.initscr;
+import static io.webfolder.pdcurses4j.Window.newwin;
+import static io.webfolder.pdcurses4j.Window.start_color;
+import static io.webfolder.pdcurses4j.Window.stdscr;
 import static java.lang.String.format;
 
 public class getparyx {
@@ -12,15 +18,14 @@ public class getparyx {
     public static void main(String[] args) {
         int row, col;
 
-        Window stdscr = new Window();
-        stdscr.initscr();
+        initscr();
 
-        Window.start_color();
+        start_color();
 
-        Window.init_pair((short) 1, COLOR_WHITE, COLOR_BLUE);
-        Window.init_pair((short) 2, COLOR_YELLOW, COLOR_RED);
+        init_pair((short) 1, COLOR_WHITE, COLOR_BLUE);
+        init_pair((short) 2, COLOR_YELLOW, COLOR_RED);
 
-        Window subby = Window.newwin(10, 30, 10, 40);
+        Window subby = newwin(10, 30, 10, 40);
         subby.bkgd(COLOR_PAIR(1));
         row = subby.getpary();
         col = subby.getparx();
@@ -39,6 +44,6 @@ public class getparyx {
         
         stdscr.getch();
 
-        Window.endwin();
+        endwin();
     }
 }

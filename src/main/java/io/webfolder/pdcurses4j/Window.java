@@ -20,9 +20,9 @@ public class Window {
     public static final int ERR = -1;
     public static final int OK = 0;
 
-    public final PDCWindow window;
+    private final PDCWindow peer = new PDCWindow();
 
-    private static final PDCWindow INSTANCE = new PDCWindow();
+    public static final Window stdscr = new Window();
 
     public static long COLOR_PAIR(long n) {
         return (n << PDC_COLOR_SHIFT) & A_COLOR;
@@ -30,10 +30,6 @@ public class Window {
 
     public static long PAIR_NUMBER(long n) {
         return (n & A_COLOR) >> PDC_COLOR_SHIFT;
-    }
-
-    public Window() {
-        this.window = new PDCWindow();
     }
 
     /**
@@ -44,8 +40,12 @@ public class Window {
      * In case of error, initscr() will write a message to standard error and end
      * the program.
      */
-    public void initscr() {
-        window.peer = window.pdcurses4j_initscr();
+    public static void initscr() {
+        if (stdscr.peer.peer == 0) {
+            stdscr.peer.peer = stdscr.peer.pdcurses4j_initscr();
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
     /**
@@ -55,7 +55,7 @@ public class Window {
      * terminal is capable of displaying).
      */
     public static int start_color() {
-        return INSTANCE.pdcurses4j_start_color();
+        return stdscr.peer.pdcurses4j_start_color();
     }
 
     /**
@@ -69,7 +69,7 @@ public class Window {
      * are changed to the new definition.
      */
     public static int init_pair(short pair, short fg, short bg) {
-        return INSTANCE.pdcurses4j_init_pair(pair, fg, bg);
+        return stdscr.peer.pdcurses4j_init_pair(pair, fg, bg);
     }
 
     /**
@@ -77,14 +77,14 @@ public class Window {
      * others.
      */
     public int attr_on(long attrs) {
-        return window.pdcurses4j_wattr_on(window.peer, attrs);
+        return peer.pdcurses4j_wattr_on(peer.peer, attrs);
     }
 
     /**
      * Prints a string.
      */
     public int printw(String str) {
-        return window.pdcurses4j_wprintw(window.peer, str);
+        return peer.pdcurses4j_wprintw(peer.peer, str);
     }
 
     /**
@@ -106,7 +106,7 @@ public class Window {
      * possible to call doupdate() only once.
      */
     public int refresh() {
-        return window.pdcurses4j_wrefresh(window.peer);
+        return peer.pdcurses4j_wrefresh(peer.peer);
     }
 
     public int addch(int ch) {
@@ -114,116 +114,116 @@ public class Window {
     }
 
     public int addch(char ch) {
-        return window.pdcurses4j_waddch(window.peer, ch);
+        return peer.pdcurses4j_waddch(peer.peer, ch);
     }
 
     public int getch() {
-        return window.pdcurses4j_wgetch(window.peer);
+        return peer.pdcurses4j_wgetch(peer.peer);
     }
 
     public static int endwin() {
-        return INSTANCE.pdcurses4j_endwin();
+        return stdscr.peer.pdcurses4j_endwin();
     }
 
     public int addstr(String str) {
-        return window.pdcurses4j_waddstr(window.peer, str);
+        return peer.pdcurses4j_waddstr(peer.peer, str);
     }
 
     public int mvaddstr(int y, int x, String str) {
-        return window.pdcurses4j_mvwaddstr(window.peer, y, x, str);
+        return peer.pdcurses4j_mvwaddstr(peer.peer, y, x, str);
     }
 
     public int noecho() {
-        return INSTANCE.pdcurses4j_noecho();
+        return stdscr.peer.pdcurses4j_noecho();
     }
 
     public int nodelay(boolean bf) {
-        return window.pdcurses4j_nodelay(window.peer, bf ? TRUE : FALSE);
+        return peer.pdcurses4j_nodelay(peer.peer, bf ? TRUE : FALSE);
     }
 
     public static int napms(int delay) {
-        return INSTANCE.pdcurses4j_napms(delay);
+        return stdscr.peer.pdcurses4j_napms(delay);
     }
 
     public int mvinsch(int y, int x, char ch) {
-        return window.pdcurses4j_mvwinsch(window.peer, y, x, ch);
+        return peer.pdcurses4j_mvwinsch(peer.peer, y, x, ch);
     }
 
     public int mvdelch(int y, int x) {
-        return window.pdcurses4j_mvwdelch(window.peer, y, x);
+        return peer.pdcurses4j_mvwdelch(peer.peer, y, x);
     }
 
     public String getnstr(int n) {
-        return window.pdcurses4j_wgetnstr(window.peer, n);
+        return peer.pdcurses4j_wgetnstr(peer.peer, n);
     }
 
     public static String unctrl(int c) {
-        return INSTANCE.pdcurses4j_unctrl(c);
+        return stdscr.peer.pdcurses4j_unctrl(c);
     }
 
     public int getmaxx() {
-        return window.pdcurses4j_getmaxx(window.peer);
+        return stdscr.peer.pdcurses4j_getmaxx(peer.peer);
     }
 
     public int getmaxy() {
-        return window.pdcurses4j_getmaxy(window.peer);
+        return stdscr.peer.pdcurses4j_getmaxy(peer.peer);
     }
 
     public int clear() {
-        return window.pdcurses4j_wclear(window.peer);
+        return stdscr.peer.pdcurses4j_wclear(peer.peer);
     }
 
     public static int typeahead(int fields) {
-        return INSTANCE.pdcurses4j_typeahead(fields);
+        return stdscr.peer.pdcurses4j_typeahead(fields);
     }
 
     public static int def_shell_mode() {
-        return INSTANCE.pdcurses4j_def_shell_mode();
+        return stdscr.peer.pdcurses4j_def_shell_mode();
     }
 
     public static Window newwin(int nlines, int ncols, int begy, int begx) {
-        long newwin = INSTANCE.pdcurses4j_newwin(nlines, ncols, begy, begx);
+        long newwin = stdscr.peer.pdcurses4j_newwin(nlines, ncols, begy, begx);
         if (newwin <= ERR) {
             return null;
         }
         Window window = new Window();
-        window.window.peer = newwin;
+        window.peer.peer = newwin;
         return window;
     }
 
     public int getpary() {
-        return window.pdcurses4j_getpary(window.peer);
+        return peer.pdcurses4j_getpary(peer.peer);
     }
 
     public int getparx() {
-        return window.pdcurses4j_getparx(window.peer);
+        return peer.pdcurses4j_getparx(peer.peer);
     }
 
     public int bkgd(long ch) {
-        return window.pdcurses4j_bkgd(window.peer, ch);
+        return peer.pdcurses4j_bkgd(peer.peer, ch);
     }
 
     public Window subwin(int nlines, int ncols, int begy, int begx) {
-        long subwin = window.pdcurses4j_subwin(window.peer, nlines, ncols, begy, begx);
+        long subwin = peer.pdcurses4j_subwin(peer.peer, nlines, ncols, begy, begx);
         if (subwin <= ERR) {
             return null;
         }
         Window window = new Window();
-        window.window.peer = subwin;
+        window.peer.peer = subwin;
         return window;
     }
 
     public int touchwin() {
-        return window.pdcurses4j_touchwin(window.peer);
+        return peer.pdcurses4j_touchwin(peer.peer);
     }
 
     public Window derwin(int nlines, int ncols, int begy, int begx) {
-        long subwin = window.pdcurses4j_derwin(window.peer, nlines, ncols, begy, begx);
+        long subwin = peer.pdcurses4j_derwin(peer.peer, nlines, ncols, begy, begx);
         if (subwin <= ERR) {
             return null;
         }
         Window window = new Window();
-        window.window.peer = subwin;
+        window.peer.peer = subwin;
         return window;
     }
 }

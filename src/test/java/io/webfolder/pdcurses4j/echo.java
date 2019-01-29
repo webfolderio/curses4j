@@ -1,38 +1,41 @@
 package io.webfolder.pdcurses4j;
 
+import static io.webfolder.pdcurses4j.Window.endwin;
+import static io.webfolder.pdcurses4j.Window.initscr;
+import static io.webfolder.pdcurses4j.Window.stdscr;
+
 public class echo {
 
     public static void main(String[] args) {
         int ch;
 
-        Window window = new Window();
-        window.initscr();
+        initscr();
 
-        window.addstr("Normally echo is on. Type your name and press Enter:\n");
-        window.refresh();
-        while (window.getch() != '\n') {
+        stdscr.addstr("Normally echo is on. Type your name and press Enter:\n");
+        stdscr.refresh();
+        while (stdscr.getch() != '\n') {
             // no op
         }
 
-        window.mvaddstr(2, 0, "Now echo is off. Type your name and press Enter:\n");
-        window.refresh();
-        window.noecho();
-        while (window.getch() != '\n') {
+        stdscr.mvaddstr(2, 0, "Now echo is off. Type your name and press Enter:\n");
+        stdscr.refresh();
+        stdscr.noecho();
+        while (stdscr.getch() != '\n') {
             // no op
         }
 
-        window.mvaddstr(4, 0, "Echo is still off, but input is being displayed\n");
-        window.addstr("and manipulated manually. Type your name and press Enter:\n");
+        stdscr.mvaddstr(4, 0, "Echo is still off, but input is being displayed\n");
+        stdscr.addstr("and manipulated manually. Type your name and press Enter:\n");
         do {
-            ch = window.getch();
-            window.addch(Character.toUpperCase(ch));
-            window.refresh();
+            ch = stdscr.getch();
+            stdscr.addch(Character.toUpperCase(ch));
+            stdscr.refresh();
         } while (ch != '\n');
 
-        window.addstr("Press Enter to quit:");
-        window.refresh();
-        window.getch();
+        stdscr.addstr("Press Enter to quit:");
+        stdscr.refresh();
+        stdscr.getch();
 
-        Window.endwin();
+        endwin();
     }
 }
