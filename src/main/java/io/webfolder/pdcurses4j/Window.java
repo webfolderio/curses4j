@@ -16,10 +16,13 @@ public class Window {
 
     public static final int FALSE = 0;
     public static final int TRUE = 1;
+
     public static final int ERR = -1;
     public static final int OK = 0;
 
     private final PDCWindow window;
+
+    private static final PDCWindow INSTANCE = new PDCWindow();
 
     public static long COLOR_PAIR(long n) {
         return (n << PDC_COLOR_SHIFT) & A_COLOR;
@@ -51,8 +54,8 @@ public class Window {
      * (respectively defining the maximum number of colors and color-pairs the
      * terminal is capable of displaying).
      */
-    public int start_color() {
-        return window.pdcurses4j_start_color();
+    public static int start_color() {
+        return INSTANCE.pdcurses4j_start_color();
     }
 
     /**
@@ -65,8 +68,8 @@ public class Window {
      * initialized, the screen is refreshed, and all occurrences of that color-pair
      * are changed to the new definition.
      */
-    public int init_pair(short pair, short fg, short bg) {
-        return window.pdcurses4j_init_pair(pair, fg, bg);
+    public static int init_pair(short pair, short fg, short bg) {
+        return INSTANCE.pdcurses4j_init_pair(pair, fg, bg);
     }
 
     /**
@@ -118,8 +121,8 @@ public class Window {
         return window.pdcurses4j_wgetch(window.peer);
     }
 
-    public int endwin() {
-        return window.pdcurses4j_endwin();
+    public static int endwin() {
+        return INSTANCE.pdcurses4j_endwin();
     }
 
     public int addstr(String str) {
@@ -131,15 +134,15 @@ public class Window {
     }
 
     public int noecho() {
-        return window.pdcurses4j_noecho();
+        return INSTANCE.pdcurses4j_noecho();
     }
 
     public int nodelay(boolean bf) {
         return window.pdcurses4j_nodelay(window.peer, bf ? TRUE : FALSE);
     }
 
-    public int napms(int delay) {
-        return window.pdcurses4j_napms(delay);
+    public static int napms(int delay) {
+        return INSTANCE.pdcurses4j_napms(delay);
     }
 
     public int mvinsch(int y, int x, char ch) {
@@ -154,8 +157,8 @@ public class Window {
         return window.pdcurses4j_wgetnstr(window.peer, n);
     }
 
-    public String unctrl(int c) {
-        return window.pdcurses4j_unctrl(c);
+    public static String unctrl(int c) {
+        return INSTANCE.pdcurses4j_unctrl(c);
     }
 
     public int getmaxx() {
@@ -170,7 +173,11 @@ public class Window {
         return window.pdcurses4j_wclear(window.peer);
     }
 
-    public int typeahead(int fields) {
-        return window.pdcurses4j_typeahead(fields);
+    public static int typeahead(int fields) {
+        return INSTANCE.pdcurses4j_typeahead(fields);
+    }
+
+    public static int def_shell_mode() {
+        return INSTANCE.pdcurses4j_def_shell_mode();
     }
 }

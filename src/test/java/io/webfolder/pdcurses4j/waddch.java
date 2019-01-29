@@ -10,6 +10,6 @@ public class waddch {
         window.addch('!');
         window.refresh();
         window.getch();
-        window.endwin();
+        Window.endwin();
     }
 }

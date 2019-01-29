@@ -51,4 +51,6 @@ class PDCWindow {
     native int pdcurses4j_wclear(long peer);
 
     native int pdcurses4j_typeahead(int fields);
+
+    native int pdcurses4j_def_shell_mode();
 }

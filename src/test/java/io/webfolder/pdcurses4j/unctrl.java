@@ -12,11 +12,11 @@ public class unctrl {
         window.initscr();
 
         for(ch = 0; ch <= MAX; ch++) {
-            window.printw(format("%s\t", window.unctrl(ch)));
+            window.printw(format("%s\t", Window.unctrl(ch)));
         }
         window.refresh();
         window.getch();
 
-        window.endwin();
+        Window.endwin();
     }
 }

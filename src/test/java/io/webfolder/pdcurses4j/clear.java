@@ -22,6 +22,6 @@ public class clear {
         window.refresh(); /* don't forget this! */
         window.getch();
 
-        window.endwin();
+        Window.endwin();
     }
 }

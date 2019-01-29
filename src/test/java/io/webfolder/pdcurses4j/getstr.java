@@ -20,6 +20,6 @@ public class getstr {
         window.refresh();
         window.getch();
 
-        window.endwin();
+        Window.endwin();
     }
 }

@@ -24,7 +24,7 @@ public class delch {
             window.mvinsch(Y, X2, t);
             window.mvdelch(Y, X1);
             window.refresh();
-            window.napms(DELAY);
+            Window.napms(DELAY);
         }
     }
 }

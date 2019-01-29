@@ -33,6 +33,6 @@ public class echo {
         window.refresh();
         window.getch();
 
-        window.endwin();
+        Window.endwin();
     }
 }

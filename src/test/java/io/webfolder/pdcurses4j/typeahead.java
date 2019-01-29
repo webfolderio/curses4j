@@ -5,13 +5,13 @@ public class typeahead {
     public static void main(String[] args) {
         Window window = new Window();
         window.initscr();
-        window.typeahead(-1); /* Disable typeahead */
+        Window.typeahead(-1); /* Disable typeahead */
 
         window.addstr("All this text will be put to the screen without a\n");
         window.addstr("keyboard interruption.");
         window.refresh();
         window.getch();
 
-        window.endwin();
+        Window.endwin();
     }
 }
