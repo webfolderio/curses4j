@@ -20,7 +20,7 @@ public class Window {
     public static final int ERR = -1;
     public static final int OK = 0;
 
-    private final PDCWindow window;
+    public final PDCWindow window;
 
     private static final PDCWindow INSTANCE = new PDCWindow();
 
@@ -179,5 +179,51 @@ public class Window {
 
     public static int def_shell_mode() {
         return INSTANCE.pdcurses4j_def_shell_mode();
+    }
+
+    public static Window newwin(int nlines, int ncols, int begy, int begx) {
+        long newwin = INSTANCE.pdcurses4j_newwin(nlines, ncols, begy, begx);
+        if (newwin <= ERR) {
+            return null;
+        }
+        Window window = new Window();
+        window.window.peer = newwin;
+        return window;
+    }
+
+    public int getpary() {
+        return window.pdcurses4j_getpary(window.peer);
+    }
+
+    public int getparx() {
+        return window.pdcurses4j_getparx(window.peer);
+    }
+
+    public int bkgd(long ch) {
+        return window.pdcurses4j_bkgd(window.peer, ch);
+    }
+
+    public Window subwin(int nlines, int ncols, int begy, int begx) {
+        long subwin = window.pdcurses4j_subwin(window.peer, nlines, ncols, begy, begx);
+        if (subwin <= ERR) {
+            return null;
+        }
+        Window window = new Window();
+        window.window.peer = subwin;
+        return window;
+    }
+
+    public int touchwin() {
+        return window.pdcurses4j_touchwin(window.peer);
+    }
+
+    public Window derwin(int nlines, int ncols, int begy, int begx) {
+        long subwin = window.pdcurses4j_derwin(window.peer, nlines, ncols, begy, begx);
+        if (subwin <= ERR) {
+            return null;
+        }
+        Window window = new Window();
+        window.window.peer = subwin;
+        return window;
     }
 }

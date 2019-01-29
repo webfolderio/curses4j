@@ -140,6 +140,47 @@ jint pdcurses4j_typeahead(JNIEnv *env, jobject that, jint fields) {
   return typeahead(fields);
 }
 
+jint pdcurses4j_def_shell_mode(JNIEnv *env, jobject that) {
+  return def_shell_mode();
+}
+
+jlong pdcurses4j_newwin(JNIEnv *env, jobject that, jint nlines, jint ncols, jint begy, jint begx) {
+ WINDOW* win = newwin(nlines, ncols, begy, begx);
+ return win;
+}
+
+jint pdcurses4j_getpary(JNIEnv *env, jobject that, jlong peer) {
+ WINDOW* win = *(WINDOW **) &peer;
+ return getpary(win);
+}
+
+jint pdcurses4j_getparx(JNIEnv *env, jobject that, jlong peer) {
+ WINDOW* win = *(WINDOW **) &peer;
+ return getparx(win);
+}
+
+jint pdcurses4j_bkgd(JNIEnv *env, jobject that, jlong peer, jlong ch) {
+ WINDOW* win = *(WINDOW **) &peer;
+ return wbkgd(win, ch);
+}
+
+jlong pdcurses4j_subwin(JNIEnv *env, jobject that, jlong peer, jint nlines, jint ncols, jint begy, jint begx) {
+ WINDOW* win = *(WINDOW **) &peer;
+ WINDOW* sub = subwin(win, nlines, ncols, begy, begx);
+ return (jlong) sub;
+}
+
+jint pdcurses4j_touchwin(JNIEnv *env, jobject that, jlong peer) {
+ WINDOW* win = *(WINDOW **) &peer;
+ return touchwin(win);
+}
+
+jlong pdcurses4j_derwin(JNIEnv *env, jobject that, jlong peer, jint nlines, jint ncols, jint begy, jint begx) {
+ WINDOW* win = *(WINDOW **) &peer;
+ WINDOW* sub = derwin(win, nlines, ncols, begy, begx);
+ return (jlong) sub;
+}
+
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     JNIEnv* env;
     if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
@@ -169,9 +210,17 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         { "pdcurses4j_getmaxx", "(J)I", (void*) pdcurses4j_getmaxx },
         { "pdcurses4j_getmaxy", "(J)I", (void*) pdcurses4j_getmaxy },
         { "pdcurses4j_wclear", "(J)I", (void*) pdcurses4j_wclear },
-        { "pdcurses4j_typeahead", "(I)I", (void*) pdcurses4j_typeahead }
-        
+        { "pdcurses4j_typeahead", "(I)I", (void*) pdcurses4j_typeahead },
+        { "pdcurses4j_def_shell_mode", "()I", (void*) pdcurses4j_def_shell_mode },
+        { "pdcurses4j_newwin", "(IIII)J", (void*) pdcurses4j_newwin },
+        { "pdcurses4j_getpary", "(J)I", (void*) pdcurses4j_getpary },
+        { "pdcurses4j_getparx", "(J)I", (void*) pdcurses4j_getparx },
+        { "pdcurses4j_bkgd", "(JJ)I", (void*) pdcurses4j_bkgd },
+        { "pdcurses4j_subwin", "(JIIII)J", (void*) pdcurses4j_subwin },
+        { "pdcurses4j_touchwin", "(J)I", (void*) pdcurses4j_touchwin },
+        { "pdcurses4j_derwin", "(JIIII)J", (void*) pdcurses4j_derwin }
     };
+
     (*env)->RegisterNatives(env, klass, methods, sizeof(methods) / sizeof(methods[0]));
     return JNI_VERSION_1_8;
 }

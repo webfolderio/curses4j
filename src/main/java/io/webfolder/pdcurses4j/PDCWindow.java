@@ -53,4 +53,18 @@ class PDCWindow {
     native int pdcurses4j_typeahead(int fields);
 
     native int pdcurses4j_def_shell_mode();
+
+    native long pdcurses4j_newwin(int nlines, int ncols, int begy, int begx);
+
+    native int pdcurses4j_getpary(long peer);
+
+    native int pdcurses4j_getparx(long peer);
+
+    native int pdcurses4j_bkgd(long peer, long ch);
+
+    native long pdcurses4j_subwin(long peer, int nlines, int ncols, int begy, int begx);
+
+    native int pdcurses4j_touchwin(long peer);
+
+    native long pdcurses4j_derwin(long peer, int nlines, int ncols, int begy, int begx);
 }
