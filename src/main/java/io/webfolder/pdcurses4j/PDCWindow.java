@@ -67,4 +67,6 @@ class PDCWindow {
     native int pdcurses4j_touchwin(long peer);
 
     native long pdcurses4j_derwin(long peer, int nlines, int ncols, int begy, int begx);
+
+    native int pdcurses4j_scrollok(long peer, int bf);
 }

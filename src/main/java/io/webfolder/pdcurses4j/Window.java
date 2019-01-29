@@ -230,4 +230,8 @@ public class Window {
         window.peer.peer = subwin;
         return window;
     }
+
+    public int scrollok(boolean bf) {
+        return peer.pdcurses4j_scrollok(peer.peer, bf ? TRUE : FALSE);
+    }
 }

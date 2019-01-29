@@ -181,6 +181,11 @@ jlong pdcurses4j_derwin(JNIEnv *env, jobject that, jlong peer, jint nlines, jint
  return (jlong) sub;
 }
 
+jint pdcurses4j_scrollok(JNIEnv *env, jobject that, jlong peer, int bf) {
+ WINDOW* win = *(WINDOW **) &peer;
+ return (jint) scrollok(win, bf);
+}
+
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     JNIEnv* env;
     if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
@@ -218,7 +223,8 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         { "pdcurses4j_bkgd", "(JJ)I", (void*) pdcurses4j_bkgd },
         { "pdcurses4j_subwin", "(JIIII)J", (void*) pdcurses4j_subwin },
         { "pdcurses4j_touchwin", "(J)I", (void*) pdcurses4j_touchwin },
-        { "pdcurses4j_derwin", "(JIIII)J", (void*) pdcurses4j_derwin }
+        { "pdcurses4j_derwin", "(JIIII)J", (void*) pdcurses4j_derwin },
+        { "pdcurses4j_scrollok", "(JI)I", (void*) pdcurses4j_scrollok }
     };
 
     (*env)->RegisterNatives(env, klass, methods, sizeof(methods) / sizeof(methods[0]));

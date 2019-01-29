@@ -10,7 +10,6 @@ import static io.webfolder.pdcurses4j.Window.init_pair;
 import static io.webfolder.pdcurses4j.Window.initscr;
 import static io.webfolder.pdcurses4j.Window.newwin;
 import static io.webfolder.pdcurses4j.Window.start_color;
-import static io.webfolder.pdcurses4j.Window.stdscr;
 import static java.lang.String.format;
 
 public class getparyx {
@@ -29,10 +28,8 @@ public class getparyx {
         subby.bkgd(COLOR_PAIR(1));
         row = subby.getpary();
         col = subby.getparx();
-
         subby.printw(format("This subwin's org: %d, %d.", row, col));
         subby.refresh();
-        subby.getch();
 
         Window sonny = subby.subwin(7, 30, 13, 40);
         sonny.bkgd(COLOR_PAIR(2));
@@ -41,7 +38,7 @@ public class getparyx {
         sonny.printw(format("This subwin's org: %d, %d.", row, col));
         sonny.refresh();
 
-        stdscr.getch();
+        sonny.getch();
 
         endwin();
     }
