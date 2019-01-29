@@ -22,8 +22,8 @@ public class getparyx {
 
         start_color();
 
-        init_pair((short) 1, COLOR_WHITE, COLOR_BLUE);
-        init_pair((short) 2, COLOR_YELLOW, COLOR_RED);
+        init_pair(1, COLOR_WHITE, COLOR_BLUE);
+        init_pair(2, COLOR_YELLOW, COLOR_RED);
 
         Window subby = newwin(10, 30, 10, 40);
         subby.bkgd(COLOR_PAIR(1));
@@ -41,7 +41,6 @@ public class getparyx {
         sonny.printw(format("This subwin's org: %d, %d.", row, col));
         sonny.refresh();
 
-        
         stdscr.getch();
 
         endwin();

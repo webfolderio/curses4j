@@ -17,9 +17,9 @@ public class kid2 {
     public static void main(String[] args) {
         initscr();
         start_color(); /* remember to check for errors! */
-        init_pair((short) 1, COLOR_WHITE, COLOR_BLUE);
-        init_pair((short) 2, COLOR_RED, COLOR_YELLOW);
-        init_pair((short) 3, COLOR_CYAN, COLOR_WHITE);
+        init_pair(1, COLOR_WHITE, COLOR_BLUE);
+        init_pair(2, COLOR_RED, COLOR_YELLOW);
+        init_pair(3, COLOR_CYAN, COLOR_WHITE);
 
         /* create subwindow and remember to check for errors! */
         Window sonny = stdscr.subwin(5, 20, 10, 30);

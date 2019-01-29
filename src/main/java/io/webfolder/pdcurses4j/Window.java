@@ -68,8 +68,12 @@ public class Window {
      * initialized, the screen is refreshed, and all occurrences of that color-pair
      * are changed to the new definition.
      */
-    public static int init_pair(short pair, short fg, short bg) {
-        return stdscr.peer.pdcurses4j_init_pair(pair, fg, bg);
+    public static int init_pair(int pair, short fg, short bg) {
+        if (pair > Short.MAX_VALUE) {
+            throw new RuntimeException("pair must be smaller than: " + Short.MAX_VALUE);
+        } else {
+            return stdscr.peer.pdcurses4j_init_pair((short) pair, fg, bg);
+        }
     }
 
     /**
