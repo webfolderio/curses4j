@@ -1,5 +1,7 @@
 package io.webfolder.pdcurses4j;
 
+import static java.lang.String.format;
+
 public class Window {
 
     public static final short COLOR_BLACK = 0;
@@ -87,8 +89,8 @@ public class Window {
     /**
      * Prints a string.
      */
-    public int printw(String str) {
-        return peer.pdcurses4j_wprintw(peer.peer, str);
+    public int printw(String str, Object ...args) {
+        return peer.pdcurses4j_wprintw(peer.peer, format(str, args));
     }
 
     /**
@@ -233,5 +235,9 @@ public class Window {
 
     public int scrollok(boolean bf) {
         return peer.pdcurses4j_scrollok(peer.peer, bf ? TRUE : FALSE);
+    }
+
+    public int box(char verch, char horch) {
+        return peer.pdcurses4j_box(peer.peer, verch, horch);
     }
 }

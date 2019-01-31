@@ -1,21 +1,20 @@
-package io.webfolder.pdcurses4j;
+package io.webfolder.pdcurses4j.chapter01;
 
 import static io.webfolder.pdcurses4j.Window.endwin;
 import static io.webfolder.pdcurses4j.Window.initscr;
 import static io.webfolder.pdcurses4j.Window.stdscr;
-import static io.webfolder.pdcurses4j.Window.typeahead;
 
-public class typeahead {
+/**
+ * @see https://c-for-dummies.com/ncurses/source_code/01-02_goodbye-final.php
+ */
+public class Goodbye {
 
     public static void main(String[] args) {
         initscr();
-        typeahead(-1); /* Disable typeahead */
-
-        stdscr.addstr("All this text will be put to the screen without a\n");
-        stdscr.addstr("keyboard interruption.");
+        stdscr.addstr("Goodbye, cruel world!");
         stdscr.refresh();
         stdscr.getch();
-
+        
         endwin();
     }
 }
