@@ -1,4 +1,4 @@
-wget -O pdcurses.zip https://github.com/wmcbrine/PDCurses/archive/3.7.zip
+curl -O pdcurses.zip https://github.com/wmcbrine/PDCurses/archive/3.7.zip --output pdcurses.zip
 jar xf pdcurses.zip
 copy /Y src\main\native\libobjs.mif PDCurses-3.7\common\libobjs.mif
 copy /Y src\main\native\Makefile.vc PDCurses-3.7\wincon\Makefile.vc
