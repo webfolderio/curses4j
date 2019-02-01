@@ -60,7 +60,7 @@ class PDCWindow {
 
     native int pdcurses4j_getparx(long peer);
 
-    native int pdcurses4j_bkgd(long peer, long ch);
+    native int pdcurses4j_wbkgd(long peer, long ch);
 
     native long pdcurses4j_subwin(long peer, int nlines, int ncols, int begy, int begx);
 
@@ -71,4 +71,26 @@ class PDCWindow {
     native int pdcurses4j_scrollok(long peer, int bf);
 
     native int pdcurses4j_box(long peer, char verch, char horch);
+
+    native int pdcurses4j_wmove(long peer, int y, int x);
+
+    native int pdcurses4j_wattron(long peer, long attrs);
+
+    native int pdcurses4j_wattroff(long peer, long attrs);
+
+    native int pdcurses4j_wattrset(long peer, long attrs);
+
+    native int pdcurses4j_can_change_color();
+
+    native int pdcurses4j_init_color(short color, short red, short green, short blue);
+
+    native int pdcurses4j_beep();
+
+    native int pdcurses4j_flash();
+
+    native int pdcurses4j_has_colors();
+
+    native int pdcurses4j_colors();
+
+    native int pdcurses4j_color_pairs();
 }

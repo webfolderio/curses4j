@@ -14,7 +14,7 @@ public class Goodbye {
         stdscr.addstr("Goodbye, cruel world!");
         stdscr.refresh();
         stdscr.getch();
-        
+
         endwin();
     }
 }

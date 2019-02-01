@@ -22,6 +22,42 @@ public class Window {
     public static final int ERR = -1;
     public static final int OK = 0;
 
+    /*** Video attribute macros ***/
+
+    public static final long A_NORMAL = 0;
+
+    public static final long A_ALTCHARSET = 0x00010000;
+    public static final long A_RIGHT = 0x00020000;
+    public static final long A_LEFT = 0x00040000;
+    public static final long A_ITALIC = 0x00080000;
+    public static final long A_UNDERLINE = 0x00100000;
+    public static final long A_REVERSE = 0x00200000;
+    public static final long A_BLINK = 0x00400000;
+    public static final long A_BOLD = 0x00800000;
+
+    public static final long A_ATTRIBUTES = 0xffff0000;
+    public static final long A_CHARTEXT = 0x0000ffff;
+
+    public static final long A_LEFTLINE = A_LEFT;
+    public static final long A_RIGHTLINE = A_RIGHT;
+    public static final long A_STANDOUT = (A_REVERSE | A_BOLD); /* X/Open */
+
+    public static final long A_DIM = A_NORMAL;
+    public static final long A_INVIS = A_NORMAL;
+    public static final long A_PROTECT = A_NORMAL;
+
+    public static final long A_HORIZONTAL = A_NORMAL;
+    public static final long A_LOW = A_NORMAL;
+    public static final long A_TOP = A_NORMAL;
+    public static final long A_VERTICAL = A_NORMAL;
+
+    @Deprecated
+    public static final long CHR_MSK = A_CHARTEXT; /* Obsolete */
+    @Deprecated
+    public static final long ATR_MSK = A_ATTRIBUTES; /* Obsolete */
+    @Deprecated
+    public static final long ATR_NRM = A_NORMAL; /* Obsolete */
+
     private final PDCWindow peer = new PDCWindow();
 
     public static final Window stdscr = new Window();
@@ -78,6 +114,10 @@ public class Window {
         }
     }
 
+    public static int init_color(short color, short red, short green, short blue) {
+        return stdscr.peer.pdcurses4j_init_color(color, red, green, blue);
+    }
+
     /**
      * Turn on attrs in the current or specified window without affecting any
      * others.
@@ -89,7 +129,7 @@ public class Window {
     /**
      * Prints a string.
      */
-    public int printw(String str, Object ...args) {
+    public int printw(String str, Object... args) {
         return peer.pdcurses4j_wprintw(peer.peer, format(str, args));
     }
 
@@ -113,6 +153,10 @@ public class Window {
      */
     public int refresh() {
         return peer.pdcurses4j_wrefresh(peer.peer);
+    }
+
+    public static boolean can_change_color() {
+        return stdscr.peer.pdcurses4j_can_change_color() == TRUE;
     }
 
     public int addch(int ch) {
@@ -206,7 +250,7 @@ public class Window {
     }
 
     public int bkgd(long ch) {
-        return peer.pdcurses4j_bkgd(peer.peer, ch);
+        return peer.pdcurses4j_wbkgd(peer.peer, ch);
     }
 
     public Window subwin(int nlines, int ncols, int begy, int begx) {
@@ -239,5 +283,41 @@ public class Window {
 
     public int box(char verch, char horch) {
         return peer.pdcurses4j_box(peer.peer, verch, horch);
+    }
+
+    public int move(int y, int x) {
+        return peer.pdcurses4j_wmove(peer.peer, y, x);
+    }
+
+    public int attron(long attrs) {
+        return peer.pdcurses4j_wattron(peer.peer, attrs);
+    }
+
+    public int attroff(long attrs) {
+        return peer.pdcurses4j_wattroff(peer.peer, attrs);
+    }
+
+    public int attrset(long attrs) {
+        return peer.pdcurses4j_wattrset(peer.peer, attrs);
+    }
+
+    public static int beep() {
+        return stdscr.peer.pdcurses4j_beep();
+    }
+
+    public static int flash() {
+        return stdscr.peer.pdcurses4j_flash();
+    }
+
+    public static boolean has_colors() {
+        return stdscr.peer.pdcurses4j_has_colors() == TRUE;
+    }
+
+    public static int COLORS() {
+        return stdscr.peer.pdcurses4j_colors();
+    }
+
+    public static int COLOR_PAIRS() {
+        return stdscr.peer.pdcurses4j_color_pairs();
     }
 }
