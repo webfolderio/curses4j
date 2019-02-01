@@ -28,3 +28,4 @@ hs_err_pid*
 /native
 /.classpath
 /.project
+/PDCurses-3.7

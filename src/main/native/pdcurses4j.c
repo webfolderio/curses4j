@@ -1,6 +1,10 @@
 #include <jni.h>
 #include "curses.h"
 
+#include <io.h>
+#include <fcntl.h>
+#include <windows.h>
+
 static JavaVM *jvm;
 
 jlong pdcurses4j_initscr(JNIEnv *env, jobject that) {
@@ -146,7 +150,7 @@ jint pdcurses4j_def_shell_mode(JNIEnv *env, jobject that) {
 
 jlong pdcurses4j_newwin(JNIEnv *env, jobject that, jint nlines, jint ncols, jint begy, jint begx) {
  WINDOW* win = newwin(nlines, ncols, begy, begx);
- return win;
+ return (jlong) win;
 }
 
 jint pdcurses4j_getpary(JNIEnv *env, jobject that, jlong peer) {
@@ -159,7 +163,7 @@ jint pdcurses4j_getparx(JNIEnv *env, jobject that, jlong peer) {
  return getparx(win);
 }
 
-jint pdcurses4j_bkgd(JNIEnv *env, jobject that, jlong peer, jlong ch) {
+jint pdcurses4j_wbkgd(JNIEnv *env, jobject that, jlong peer, jlong ch) {
  WINDOW* win = *(WINDOW **) &peer;
  return wbkgd(win, ch);
 }
@@ -184,6 +188,59 @@ jlong pdcurses4j_derwin(JNIEnv *env, jobject that, jlong peer, jint nlines, jint
 jint pdcurses4j_scrollok(JNIEnv *env, jobject that, jlong peer, int bf) {
  WINDOW* win = *(WINDOW **) &peer;
  return (jint) scrollok(win, bf);
+}
+
+jint pdcurses4j_box(JNIEnv *env, jobject that, jlong peer, jchar verch, jchar horch) {
+ WINDOW* win = *(WINDOW **) &peer;
+ return (jint) box(win, verch, horch);
+}
+
+jint pdcurses4j_wmove(JNIEnv *env, jobject that, jlong peer, jint y, jint x) {
+ WINDOW* win = *(WINDOW **) &peer;
+ return (jint) wmove(win, y, x);
+}
+
+jint pdcurses4j_wattron(JNIEnv *env, jobject that, jlong peer, jlong attrs) {
+ WINDOW* win = *(WINDOW **) &peer;
+ return (jint) wattron(win, attrs);
+}
+
+jint pdcurses4j_wattroff(JNIEnv *env, jobject that, jlong peer, jlong attrs) {
+ WINDOW* win = *(WINDOW **) &peer;
+ return (jint) wattroff(win, attrs);
+}
+
+jint pdcurses4j_wattrset(JNIEnv *env, jobject that, jlong peer, jlong attrs) {
+ WINDOW* win = *(WINDOW **) &peer;
+ return (jint) wattrset(win, attrs);
+}
+
+jint pdcurses4j_can_change_color(JNIEnv *env, jobject that) {
+ return (jint) can_change_color();
+}
+
+jint pdcurses4j_init_color(JNIEnv *env, jobject that, jshort color, jshort red, jshort green, jshort blue) {
+ return init_color(color, red, green, blue);
+}
+
+jint pdcurses4j_beep(JNIEnv *env, jobject that) {
+ return beep();
+}
+
+jint pdcurses4j_flash(JNIEnv *env, jobject that) {
+ return flash();
+}
+
+jint pdcurses4j_has_colors(JNIEnv *env, jobject that) {
+ return (jint) has_colors();
+}
+
+jint pdcurses4j_colors(JNIEnv *env, jobject that) {
+ return (jint) COLORS;
+}
+
+jint pdcurses4j_color_pairs(JNIEnv *env, jobject that) {
+ return (jint) COLOR_PAIRS;
 }
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
@@ -220,11 +277,23 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         { "pdcurses4j_newwin", "(IIII)J", (void*) pdcurses4j_newwin },
         { "pdcurses4j_getpary", "(J)I", (void*) pdcurses4j_getpary },
         { "pdcurses4j_getparx", "(J)I", (void*) pdcurses4j_getparx },
-        { "pdcurses4j_bkgd", "(JJ)I", (void*) pdcurses4j_bkgd },
+        { "pdcurses4j_wbkgd", "(JJ)I", (void*) pdcurses4j_wbkgd },
         { "pdcurses4j_subwin", "(JIIII)J", (void*) pdcurses4j_subwin },
         { "pdcurses4j_touchwin", "(J)I", (void*) pdcurses4j_touchwin },
         { "pdcurses4j_derwin", "(JIIII)J", (void*) pdcurses4j_derwin },
-        { "pdcurses4j_scrollok", "(JI)I", (void*) pdcurses4j_scrollok }
+        { "pdcurses4j_scrollok", "(JI)I", (void*) pdcurses4j_scrollok },
+        { "pdcurses4j_box", "(JCC)I", (void*) pdcurses4j_box },
+        { "pdcurses4j_wmove", "(JII)I", (void*) pdcurses4j_wmove },
+        { "pdcurses4j_wattron", "(JJ)I", (void*) pdcurses4j_wattron },
+        { "pdcurses4j_wattroff", "(JJ)I", (void*) pdcurses4j_wattroff },
+        { "pdcurses4j_wattrset", "(JJ)I", (void*) pdcurses4j_wattrset },
+        { "pdcurses4j_can_change_color", "()I", (void*) pdcurses4j_can_change_color },
+        { "pdcurses4j_init_color", "(SSSS)I", (void*) pdcurses4j_init_color },
+        { "pdcurses4j_beep", "()I", (void*) pdcurses4j_beep },
+        { "pdcurses4j_flash", "()I", (void*) pdcurses4j_flash },
+        { "pdcurses4j_has_colors", "()I", (void*) pdcurses4j_has_colors },
+        { "pdcurses4j_colors", "()I", (void*) pdcurses4j_colors },
+        { "pdcurses4j_color_pairs", "()I", (void*) pdcurses4j_color_pairs }
     };
 
     (*env)->RegisterNatives(env, klass, methods, sizeof(methods) / sizeof(methods[0]));
