@@ -1,5 +1,4 @@
-curl https://github.com/wmcbrine/PDCurses/archive/3.7.zip --output pdcurses.zip
-"%JAVA_HOME%\bin\jar.exe" xf pdcurses.zip
+"%JAVA_HOME%\bin\jar.exe" xf 3.7.zip
 copy /Y src\main\native\libobjs.mif PDCurses-3.7\common\libobjs.mif
 copy /Y src\main\native\Makefile.vc PDCurses-3.7\wincon\Makefile.vc
 copy /Y src\main\native\pdcurses4j.c PDCurses-3.7\pdcurses\pdcurses4j.c
