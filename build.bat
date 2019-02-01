@@ -1,3 +1,4 @@
+call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
 "%JAVA_HOME%\bin\jar.exe" xf 3.7.zip
 copy /Y src\main\native\libobjs.mif PDCurses-3.7\common\libobjs.mif
 copy /Y src\main\native\Makefile.vc PDCurses-3.7\wincon\Makefile.vc
