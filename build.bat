@@ -7,3 +7,4 @@ cd PDCurses-3.7\wincon
 nmake -f Makefile.vc UTF8=Y WIDE=Y DLL=Y clean all
 cd ..
 cd ..
+mkdir PDCurses-3.7\wincon\pdcurses.dll src\main\resources\META-INF\pdcurses.dll

@@ -29,3 +29,4 @@ hs_err_pid*
 /.classpath
 /.project
 /PDCurses-3.7
+/src/main/resources/META-INF/pdcurses.dll

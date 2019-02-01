@@ -1,11 +1,29 @@
 package io.webfolder.pdcurses4j;
 
+import static java.lang.System.load;
+import static java.nio.file.Files.copy;
+import static java.nio.file.Files.createTempFile;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+
 class PDCWindow {
 
     long peer;
 
     static {
-        System.load("C:\\projects\\pdcurses4j\\native\\wincon\\pdcurses.dll");
+        ClassLoader cl = PDCWindow.class.getClassLoader();
+        Path libFile;
+        try (InputStream is = cl.getResourceAsStream("META-INF/pdcurses.dll")) {
+            libFile = createTempFile("pdcurses", ".dll");
+            copy(is, libFile, REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        libFile.toFile().deleteOnExit();
+        load(libFile.toAbsolutePath().toString());
     }
 
     native long pdcurses4j_initscr();
