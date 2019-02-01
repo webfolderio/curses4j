@@ -64,7 +64,7 @@ PDCLIBS		= $(CURSESDLL)
 PDCLIBS		= $(LIBCURSES)
 !endif
 
-BUILD		= $(CC) -I$(PDCURSES_SRCDIR) /I%JAVA_HOME%\include /I%JAVA_HOME%\include\win32 -c $(CFLAGS) $(DLLOPT) \
+BUILD		= $(CC) -I$(PDCURSES_SRCDIR) /I..\..\src\main\native\include /I..\..\src\main\native\include\win32 -c $(CFLAGS) $(DLLOPT) \
 $(WIDEOPT) $(UTF8OPT) $(INFOPT)
 
 all:	$(PDCLIBS)
