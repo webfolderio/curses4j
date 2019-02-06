@@ -52,22 +52,22 @@ public class Window {
     public static final int A_VERTICAL = A_NORMAL;
 
     @Deprecated
-    public static final long CHR_MSK = A_CHARTEXT; /* Obsolete */
+    public static final int CHR_MSK = A_CHARTEXT; /* Obsolete */
     @Deprecated
-    public static final long ATR_MSK = A_ATTRIBUTES; /* Obsolete */
+    public static final int ATR_MSK = A_ATTRIBUTES; /* Obsolete */
     @Deprecated
-    public static final long ATR_NRM = A_NORMAL; /* Obsolete */
+    public static final int ATR_NRM = A_NORMAL; /* Obsolete */
 
     private final PDCWindow peer = new PDCWindow();
 
     public static final Window stdscr = new Window();
 
-    public static long COLOR_PAIR(long n) {
-        return (n << PDC_COLOR_SHIFT) & A_COLOR;
+    public static int COLOR_PAIR(int n) {
+        return stdscr.peer.pdcurses4j_color_pair(n);
     }
 
-    public static long PAIR_NUMBER(long n) {
-        return (n & A_COLOR) >> PDC_COLOR_SHIFT;
+    public static int pdcurses4j_pair_number(int n) {
+        return stdscr.peer.pdcurses4j_pair_number(n);
     }
 
     /**
@@ -122,7 +122,7 @@ public class Window {
      * Turn on attrs in the current or specified window without affecting any
      * others.
      */
-    public int attr_on(long attrs) {
+    public int attr_on(int attrs) {
         return peer.pdcurses4j_wattr_on(peer.peer, attrs);
     }
 
@@ -249,7 +249,7 @@ public class Window {
         return peer.pdcurses4j_getparx(peer.peer);
     }
 
-    public int bkgd(long ch) {
+    public int bkgd(int ch) {
         return peer.pdcurses4j_wbkgd(peer.peer, ch);
     }
 
@@ -289,15 +289,15 @@ public class Window {
         return peer.pdcurses4j_wmove(peer.peer, y, x);
     }
 
-    public int attron(long attrs) {
+    public int attron(int attrs) {
         return peer.pdcurses4j_wattron(peer.peer, attrs);
     }
 
-    public int attroff(long attrs) {
+    public int attroff(int attrs) {
         return peer.pdcurses4j_wattroff(peer.peer, attrs);
     }
 
-    public int attrset(long attrs) {
+    public int attrset(int attrs) {
         return peer.pdcurses4j_wattrset(peer.peer, attrs);
     }
 

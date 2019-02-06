@@ -21,7 +21,7 @@ jint pdcurses4j_init_pair(JNIEnv *env, jobject that, jshort pair, jshort fg, jsh
  return (jint) init_pair(pair, fg, bg);
 }
 
-jint pdcurses4j_wattr_on(JNIEnv *env, jobject that, jlong peer, jlong attrs) {
+jint pdcurses4j_wattr_on(JNIEnv *env, jobject that, jlong peer, jint attrs) {
  WINDOW* win = *(WINDOW **) &peer;
  return (jint) wattr_on(win, attrs, NULL);
 }
@@ -200,17 +200,17 @@ jint pdcurses4j_wmove(JNIEnv *env, jobject that, jlong peer, jint y, jint x) {
  return (jint) wmove(win, y, x);
 }
 
-jint pdcurses4j_wattron(JNIEnv *env, jobject that, jlong peer, jlong attrs) {
+jint pdcurses4j_wattron(JNIEnv *env, jobject that, jlong peer, jint attrs) {
  WINDOW* win = *(WINDOW **) &peer;
  return (jint) wattron(win, attrs);
 }
 
-jint pdcurses4j_wattroff(JNIEnv *env, jobject that, jlong peer, jlong attrs) {
+jint pdcurses4j_wattroff(JNIEnv *env, jobject that, jlong peer, jint attrs) {
  WINDOW* win = *(WINDOW **) &peer;
  return (jint) wattroff(win, attrs);
 }
 
-jint pdcurses4j_wattrset(JNIEnv *env, jobject that, jlong peer, jlong attrs) {
+jint pdcurses4j_wattrset(JNIEnv *env, jobject that, jlong peer, jint attrs) {
  WINDOW* win = *(WINDOW **) &peer;
  return (jint) wattrset(win, attrs);
 }
@@ -243,6 +243,14 @@ jint pdcurses4j_color_pairs(JNIEnv *env, jobject that) {
  return (jint) COLOR_PAIRS;
 }
 
+jint pdcurses4j_color_pair(JNIEnv *env, jobject that, jint n) {
+ return (jint) COLOR_PAIR(n);
+}
+
+jint pdcurses4j_pair_number(JNIEnv *env, jobject that, jint n) {
+ return (jint) PAIR_NUMBER(n);
+}
+
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     JNIEnv* env;
     if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
@@ -254,7 +262,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         { "pdcurses4j_initscr", "()J", (void*) pdcurses4j_initscr },
         { "pdcurses4j_start_color", "()I", (void*) pdcurses4j_start_color },
         { "pdcurses4j_init_pair", "(SSS)I", (void*) pdcurses4j_init_pair },
-        { "pdcurses4j_wattr_on", "(JJ)I", (void*) pdcurses4j_wattr_on },
+        { "pdcurses4j_wattr_on", "(JI)I", (void*) pdcurses4j_wattr_on },
         { "pdcurses4j_wprintw", "(JLjava/lang/String;)I", (void*) pdcurses4j_wprintw },
         { "pdcurses4j_wrefresh", "(J)I", (void*) pdcurses4j_wrefresh },
         { "pdcurses4j_endwin", "()I", (void*) pdcurses4j_endwin },
@@ -284,16 +292,18 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         { "pdcurses4j_scrollok", "(JI)I", (void*) pdcurses4j_scrollok },
         { "pdcurses4j_box", "(JCC)I", (void*) pdcurses4j_box },
         { "pdcurses4j_wmove", "(JII)I", (void*) pdcurses4j_wmove },
-        { "pdcurses4j_wattron", "(JJ)I", (void*) pdcurses4j_wattron },
-        { "pdcurses4j_wattroff", "(JJ)I", (void*) pdcurses4j_wattroff },
-        { "pdcurses4j_wattrset", "(JJ)I", (void*) pdcurses4j_wattrset },
+        { "pdcurses4j_wattron", "(JI)I", (void*) pdcurses4j_wattron },
+        { "pdcurses4j_wattroff", "(JI)I", (void*) pdcurses4j_wattroff },
+        { "pdcurses4j_wattrset", "(JI)I", (void*) pdcurses4j_wattrset },
         { "pdcurses4j_can_change_color", "()I", (void*) pdcurses4j_can_change_color },
         { "pdcurses4j_init_color", "(SSSS)I", (void*) pdcurses4j_init_color },
         { "pdcurses4j_beep", "()I", (void*) pdcurses4j_beep },
         { "pdcurses4j_flash", "()I", (void*) pdcurses4j_flash },
         { "pdcurses4j_has_colors", "()I", (void*) pdcurses4j_has_colors },
         { "pdcurses4j_colors", "()I", (void*) pdcurses4j_colors },
-        { "pdcurses4j_color_pairs", "()I", (void*) pdcurses4j_color_pairs }
+        { "pdcurses4j_color_pairs", "()I", (void*) pdcurses4j_color_pairs },
+        { "pdcurses4j_color_pair", "(I)I", (void*) pdcurses4j_color_pair },
+        { "pdcurses4j_pair_number", "(I)I", (void*) pdcurses4j_pair_number }
     };
 
     (*env)->RegisterNatives(env, klass, methods, sizeof(methods) / sizeof(methods[0]));

@@ -39,7 +39,7 @@ class PDCWindow {
 
     native int pdcurses4j_init_pair(short pair, short fg, short bg);
 
-    native int pdcurses4j_wattr_on(long peer, long attrs);
+    native int pdcurses4j_wattr_on(long peer, int attrs);
 
     native int pdcurses4j_wprintw(long peer, String str);
 
@@ -99,11 +99,11 @@ class PDCWindow {
 
     native int pdcurses4j_wmove(long peer, int y, int x);
 
-    native int pdcurses4j_wattron(long peer, long attrs);
+    native int pdcurses4j_wattron(long peer, int attrs);
 
-    native int pdcurses4j_wattroff(long peer, long attrs);
+    native int pdcurses4j_wattroff(long peer, int attrs);
 
-    native int pdcurses4j_wattrset(long peer, long attrs);
+    native int pdcurses4j_wattrset(long peer, int attrs);
 
     native int pdcurses4j_can_change_color();
 
@@ -118,4 +118,8 @@ class PDCWindow {
     native int pdcurses4j_colors();
 
     native int pdcurses4j_color_pairs();
+
+    native int pdcurses4j_color_pair(int n);
+
+    native int pdcurses4j_pair_number(int n);
 }
