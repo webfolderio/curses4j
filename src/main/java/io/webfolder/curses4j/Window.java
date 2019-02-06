@@ -12,10 +12,6 @@ public class Window {
 
     private final CursesWindow peer = new CursesWindow();
 
-    public static String unctrl(int c) {
-        return stdscr.peer.curses4j_unctrl(c);
-    }
-
     /**
      * initscr() should be the first curses routine called. It will initialize all
      * curses data structures, and arrange that the first call to refresh() will

@@ -1,5 +1,6 @@
 package io.webfolder.curses4j;
 
+import static io.webfolder.curses4j.CursesWindow.*;
 import static io.webfolder.curses4j.CursesWindow.curses4j_beep;
 import static io.webfolder.curses4j.CursesWindow.curses4j_can_change_color;
 import static io.webfolder.curses4j.CursesWindow.curses4j_color_pair;
@@ -176,6 +177,10 @@ public class Curses {
 
     public static int getpary() {
         return stdscr.getparx();
+    }
+
+    public static String unctrl(int c) {
+        return curses4j_unctrl(c);
     }
 
     public static boolean has_colors() {

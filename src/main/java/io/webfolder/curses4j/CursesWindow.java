@@ -69,6 +69,8 @@ class CursesWindow {
 
     native static int curses4j_typeahead(int fields);
 
+    native static String curses4j_unctrl(int c);
+
     native int curses4j_box(long peer, char verch, char horch);
 
     native long curses4j_derwin(long peer, int nlines, int ncols, int begy, int begx);
@@ -96,8 +98,6 @@ class CursesWindow {
     native long curses4j_subwin(long peer, int nlines, int ncols, int begy, int begx);
 
     native int curses4j_touchwin(long peer);
-
-    native String curses4j_unctrl(int c);
 
     native int curses4j_waddch(long peer, int ch);
 
