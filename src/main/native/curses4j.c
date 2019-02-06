@@ -17,11 +17,11 @@ jlong curses4j_initscr(JNIEnv *env, jobject that) {
   return peer;
 }
 
-jint curses4j_start_color(JNIEnv *env, jobject that) {
+jint curses4j_start_color(JNIEnv *env, jclass that) {
   return (jint) start_color();
 }
 
-jint curses4j_init_pair(JNIEnv *env, jobject that, jshort pair, jshort fg, jshort bg) {
+jint curses4j_init_pair(JNIEnv *env, jclass that, jshort pair, jshort fg, jshort bg) {
  return (jint) init_pair(pair, fg, bg);
 }
 
@@ -61,7 +61,7 @@ jstring curses4j_wgetnstr(JNIEnv *env, jobject that, jlong peer, jint n) {
  }
 }
 
-jint curses4j_endwin(JNIEnv *env, jobject that) {
+jint curses4j_endwin(JNIEnv *env, jclass that) {
  return endwin();
 }
 
@@ -95,7 +95,7 @@ jint curses4j_mvwaddstr(JNIEnv *env, jobject that, jlong peer, jint y, jint x, j
  return ret;
 }
 
-jint curses4j_noecho(JNIEnv *env, jobject that) {
+jint curses4j_noecho(JNIEnv *env, jclass that) {
  return noecho();
 }
 
@@ -104,7 +104,7 @@ jint curses4j_nodelay(JNIEnv *env, jobject that, jlong peer, int bf) {
  return nodelay(win, bf);
 }
 
-jint curses4j_napms(JNIEnv *env, jobject that, jint delay) {
+jint curses4j_napms(JNIEnv *env, jclass that, jint delay) {
  return napms(delay);
 }
 
@@ -118,7 +118,7 @@ jint curses4j_mvwdelch(JNIEnv *env, jobject that, jint peer, jint y, jint x) {
  return mvwdelch(win, y, x);
 }
 
-jstring curses4j_unctrl(JNIEnv *env, jobject that, jint c) {
+jstring curses4j_unctrl(JNIEnv *env, jclass that, jint c) {
  const char *_str = unctrl(c);
  jstring str = NULL;
  if (_str) {
@@ -144,7 +144,7 @@ jint curses4j_wclear(JNIEnv *env, jobject that, jint peer) {
  return wclear(win);
 }
 
-jint curses4j_typeahead(JNIEnv *env, jobject that, jint fields) {
+jint curses4j_typeahead(JNIEnv *env, jclass that, jint fields) {
   return typeahead(fields);
 }
 
@@ -219,11 +219,11 @@ jint curses4j_wattrset(JNIEnv *env, jobject that, jlong peer, jint attrs) {
  return (jint) wattrset(win, attrs);
 }
 
-jint curses4j_can_change_color(JNIEnv *env, jobject that) {
+jint curses4j_can_change_color(JNIEnv *env, jclass that) {
  return (jint) can_change_color();
 }
 
-jint curses4j_init_color(JNIEnv *env, jobject that, jshort color, jshort red, jshort green, jshort blue) {
+jint curses4j_init_color(JNIEnv *env, jclass that, jshort color, jshort red, jshort green, jshort blue) {
  return init_color(color, red, green, blue);
 }
 

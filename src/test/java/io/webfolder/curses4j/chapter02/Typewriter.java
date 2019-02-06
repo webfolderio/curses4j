@@ -1,8 +1,10 @@
 package io.webfolder.curses4j.chapter02;
 
-import static io.webfolder.curses4j.Window.endwin;
-import static io.webfolder.curses4j.Window.initscr;
-import static io.webfolder.curses4j.Window.stdscr;
+import static io.webfolder.curses4j.Curses.addstr;
+import static io.webfolder.curses4j.Curses.endwin;
+import static io.webfolder.curses4j.Curses.getch;
+import static io.webfolder.curses4j.Curses.initscr;
+import static io.webfolder.curses4j.Curses.refresh;
 
 /**
  * https://c-for-dummies.com/ncurses/source_code/02-06_typewriter.php
@@ -14,11 +16,11 @@ public class Typewriter {
         int ch = 0;
 
         initscr();
-        stdscr.addstr("Type a few lines of text\n");
-        stdscr.addstr("Press ~ to quit\n");
-        stdscr.refresh();
+        addstr("Type a few lines of text\n");
+        addstr("Press ~ to quit\n");
+        refresh();
 
-        while ((ch = stdscr.getch()) != '~')
+        while ((ch = getch()) != '~')
             ;
 
         endwin();

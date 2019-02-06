@@ -35,17 +35,11 @@ class CursesWindow {
 
     native long curses4j_initscr();
 
-    native int curses4j_start_color();
-
-    native int curses4j_init_pair(short pair, short fg, short bg);
-
     native int curses4j_wattr_on(long peer, int attrs);
 
     native int curses4j_wprintw(long peer, String str);
 
     native int curses4j_wrefresh(long peer);
-
-    native int curses4j_endwin();
 
     native int curses4j_waddch(long peer, int ch);
 
@@ -55,11 +49,7 @@ class CursesWindow {
 
     native int curses4j_mvwaddstr(long peer, int y, int x, String str);
 
-    native int curses4j_noecho();
-
     native int curses4j_nodelay(long peer, int bf);
-
-    native int curses4j_napms(int delay);
 
     native int curses4j_mvwinsch(long peer, int y, int x, char ch);
 
@@ -67,15 +57,11 @@ class CursesWindow {
 
     native String curses4j_wgetnstr(long peer, int n);
 
-    native String curses4j_unctrl(int c);
-
     native int curses4j_getmaxx(long peer);
 
     native int curses4j_getmaxy(long peer);
 
     native int curses4j_wclear(long peer);
-
-    native int curses4j_typeahead(int fields);
 
     native int curses4j_def_shell_mode();
 
@@ -105,9 +91,23 @@ class CursesWindow {
 
     native int curses4j_wattrset(long peer, int attrs);
 
-    native int curses4j_can_change_color();
+    native String curses4j_unctrl(int c);
 
-    native int curses4j_init_color(short color, short red, short green, short blue);
+    native static int curses4j_init_color(short color, short red, short green, short blue);
+
+    native static int curses4j_can_change_color();
+
+    native static int curses4j_start_color();
+
+    native static int curses4j_init_pair(short pair, short fg, short bg);
+
+    native static int curses4j_napms(int delay);
+
+    native static int curses4j_noecho();
+
+    native static int curses4j_endwin();
+
+    native static int curses4j_typeahead(int fields);
 
     native static int curses4j_beep();
 

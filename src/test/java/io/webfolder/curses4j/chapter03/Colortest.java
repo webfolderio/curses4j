@@ -1,13 +1,15 @@
 package io.webfolder.curses4j.chapter03;
 
-import static io.webfolder.curses4j.Window.COLORS;
-import static io.webfolder.curses4j.Window.COLOR_PAIRS;
-import static io.webfolder.curses4j.Window.OK;
-import static io.webfolder.curses4j.Window.endwin;
-import static io.webfolder.curses4j.Window.has_colors;
-import static io.webfolder.curses4j.Window.initscr;
-import static io.webfolder.curses4j.Window.start_color;
-import static io.webfolder.curses4j.Window.stdscr;
+import static io.webfolder.curses4j.Curses.COLORS;
+import static io.webfolder.curses4j.Curses.COLOR_PAIRS;
+import static io.webfolder.curses4j.Curses.OK;
+import static io.webfolder.curses4j.Curses.endwin;
+import static io.webfolder.curses4j.Curses.getch;
+import static io.webfolder.curses4j.Curses.has_colors;
+import static io.webfolder.curses4j.Curses.initscr;
+import static io.webfolder.curses4j.Curses.printw;
+import static io.webfolder.curses4j.Curses.refresh;
+import static io.webfolder.curses4j.Curses.start_color;
 
 /**
  * @see https://c-for-dummies.com/ncurses/source_code/03-03_colortest.php
@@ -32,11 +34,11 @@ public class Colortest {
         }
 
         /* colors are okay; continue */
-        stdscr.printw("Colors initialized.\n");
-        stdscr.printw("%d colors available.\n", COLORS());
-        stdscr.printw("%d color pairs.", COLOR_PAIRS());
-        stdscr.refresh();
-        stdscr.getch();
+        printw("Colors initialized.\n");
+        printw("%d colors available.\n", COLORS());
+        printw("%d color pairs.", COLOR_PAIRS());
+        refresh();
+        getch();
 
         endwin();
     }

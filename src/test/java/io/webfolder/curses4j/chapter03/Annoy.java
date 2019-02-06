@@ -1,10 +1,16 @@
 package io.webfolder.curses4j.chapter03;
 
-import static io.webfolder.curses4j.Window.A_BOLD;
-import static io.webfolder.curses4j.Window.A_UNDERLINE;
-import static io.webfolder.curses4j.Window.endwin;
-import static io.webfolder.curses4j.Window.initscr;
-import static io.webfolder.curses4j.Window.stdscr;
+import static io.webfolder.curses4j.Curses.A_BOLD;
+import static io.webfolder.curses4j.Curses.A_UNDERLINE;
+import static io.webfolder.curses4j.Curses.addch;
+import static io.webfolder.curses4j.Curses.addstr;
+import static io.webfolder.curses4j.Curses.attroff;
+import static io.webfolder.curses4j.Curses.attrset;
+import static io.webfolder.curses4j.Curses.endwin;
+import static io.webfolder.curses4j.Curses.getch;
+import static io.webfolder.curses4j.Curses.initscr;
+import static io.webfolder.curses4j.Curses.printw;
+import static io.webfolder.curses4j.Curses.refresh;
 
 /**
  * @see https://c-for-dummies.com/ncurses/source_code/03-02_annoy.php
@@ -20,16 +26,16 @@ public class Annoy {
         for (a = 0; a < text.length; a++) {
             for (b = 0; b < text.length; b++) {
                 if (b == a)
-                    stdscr.attrset(A_BOLD | A_UNDERLINE);
-                stdscr.printw("%s", text[b]);
+                    attrset(A_BOLD | A_UNDERLINE);
+                printw("%s", text[b]);
                 if (b == a)
-                    stdscr.attroff(A_BOLD | A_UNDERLINE);
-                stdscr.addch(' ');
+                    attroff(A_BOLD | A_UNDERLINE);
+                addch(' ');
             }
-            stdscr.addstr("\b\n");
+            addstr("\b\n");
         }
-        stdscr.refresh();
-        stdscr.getch();
+        refresh();
+        getch();
 
         endwin();
     }

@@ -1,21 +1,23 @@
 package io.webfolder.curses4j.chapter04;
 
-import static io.webfolder.curses4j.Window.A_BOLD;
-import static io.webfolder.curses4j.Window.A_REVERSE;
-import static io.webfolder.curses4j.Window.endwin;
-import static io.webfolder.curses4j.Window.initscr;
-import static io.webfolder.curses4j.Window.stdscr;
+import static io.webfolder.curses4j.Curses.A_BOLD;
+import static io.webfolder.curses4j.Curses.A_REVERSE;
+import static io.webfolder.curses4j.Curses.addch;
+import static io.webfolder.curses4j.Curses.endwin;
+import static io.webfolder.curses4j.Curses.getch;
+import static io.webfolder.curses4j.Curses.initscr;
+import static io.webfolder.curses4j.Curses.refresh;
 
 public class Charattrib {
 
     public static void main(String[] args) {
         initscr();
 
-        stdscr.addch('c');
-        stdscr.addch(A_BOLD | 'a');
-        stdscr.addch(A_REVERSE | 't');
-        stdscr.refresh();
-        stdscr.getch();
+        addch('c');
+        addch(A_BOLD | 'a');
+        addch(A_REVERSE | 't');
+        refresh();
+        getch();
 
         endwin();
     }
