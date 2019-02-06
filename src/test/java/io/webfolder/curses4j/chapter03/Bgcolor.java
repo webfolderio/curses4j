@@ -1,15 +1,15 @@
-package io.webfolder.pdcurses4j.chapter03;
+package io.webfolder.curses4j.chapter03;
 
-import static io.webfolder.pdcurses4j.Window.COLOR_BLUE;
-import static io.webfolder.pdcurses4j.Window.COLOR_GREEN;
-import static io.webfolder.pdcurses4j.Window.COLOR_PAIR;
-import static io.webfolder.pdcurses4j.Window.COLOR_RED;
-import static io.webfolder.pdcurses4j.Window.COLOR_WHITE;
-import static io.webfolder.pdcurses4j.Window.endwin;
-import static io.webfolder.pdcurses4j.Window.init_pair;
-import static io.webfolder.pdcurses4j.Window.initscr;
-import static io.webfolder.pdcurses4j.Window.start_color;
-import static io.webfolder.pdcurses4j.Window.stdscr;
+import static io.webfolder.curses4j.Window.COLOR_BLUE;
+import static io.webfolder.curses4j.Window.COLOR_GREEN;
+import static io.webfolder.curses4j.Window.COLOR_PAIR;
+import static io.webfolder.curses4j.Window.COLOR_RED;
+import static io.webfolder.curses4j.Window.COLOR_WHITE;
+import static io.webfolder.curses4j.Window.endwin;
+import static io.webfolder.curses4j.Window.init_pair;
+import static io.webfolder.curses4j.Window.initscr;
+import static io.webfolder.curses4j.Window.start_color;
+import static io.webfolder.curses4j.Window.stdscr;
 
 /**
  * @see https://c-for-dummies.com/ncurses/source_code/03-08_bgcolor2.php

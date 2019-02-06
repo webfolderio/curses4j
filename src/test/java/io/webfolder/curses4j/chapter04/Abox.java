@@ -1,14 +1,14 @@
-package io.webfolder.pdcurses4j.chapter04;
+package io.webfolder.curses4j.chapter04;
 
-import static io.webfolder.pdcurses4j.Window.ACS_HLINE;
-import static io.webfolder.pdcurses4j.Window.ACS_LLCORNER;
-import static io.webfolder.pdcurses4j.Window.ACS_LRCORNER;
-import static io.webfolder.pdcurses4j.Window.ACS_ULCORNER;
-import static io.webfolder.pdcurses4j.Window.ACS_URCORNER;
-import static io.webfolder.pdcurses4j.Window.ACS_VLINE;
-import static io.webfolder.pdcurses4j.Window.endwin;
-import static io.webfolder.pdcurses4j.Window.initscr;
-import static io.webfolder.pdcurses4j.Window.stdscr;
+import static io.webfolder.curses4j.Window.ACS_HLINE;
+import static io.webfolder.curses4j.Window.ACS_LLCORNER;
+import static io.webfolder.curses4j.Window.ACS_LRCORNER;
+import static io.webfolder.curses4j.Window.ACS_ULCORNER;
+import static io.webfolder.curses4j.Window.ACS_URCORNER;
+import static io.webfolder.curses4j.Window.ACS_VLINE;
+import static io.webfolder.curses4j.Window.endwin;
+import static io.webfolder.curses4j.Window.initscr;
+import static io.webfolder.curses4j.Window.stdscr;
 
 /**
  * @see https://c-for-dummies.com/ncurses/source_code/04-07_abox.php

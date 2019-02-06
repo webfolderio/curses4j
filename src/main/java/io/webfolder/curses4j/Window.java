@@ -1,13 +1,13 @@
-package io.webfolder.pdcurses4j;
+package io.webfolder.curses4j;
 
-import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_beep;
-import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_color_pair;
-import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_color_pairs;
-import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_colors;
-import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_flash;
-import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_has_colors;
-import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_pair_number;
-import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_pdc_acs;
+import static io.webfolder.curses4j.CursesWindow.pdcurses4j_beep;
+import static io.webfolder.curses4j.CursesWindow.pdcurses4j_color_pair;
+import static io.webfolder.curses4j.CursesWindow.pdcurses4j_color_pairs;
+import static io.webfolder.curses4j.CursesWindow.pdcurses4j_colors;
+import static io.webfolder.curses4j.CursesWindow.pdcurses4j_flash;
+import static io.webfolder.curses4j.CursesWindow.pdcurses4j_has_colors;
+import static io.webfolder.curses4j.CursesWindow.pdcurses4j_pair_number;
+import static io.webfolder.curses4j.CursesWindow.pdcurses4j_pdc_acs;
 import static java.lang.String.format;
 
 public class Window {
@@ -89,7 +89,7 @@ public class Window {
     @Deprecated
     public static final int ATR_NRM = A_NORMAL; /* Obsolete */
 
-    private final PDCWindow peer = new PDCWindow();
+    private final CursesWindow peer = new CursesWindow();
 
     public static final Window stdscr = new Window();
 

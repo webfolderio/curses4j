@@ -32,3 +32,6 @@ hs_err_pid*
 /src/main/resources/META-INF/pdcurses.dll
 /libpdcurses4j.so
 /src/main/resources/META-INF/libpdcurses4j.so
+/libcurses4j.so
+/src/main/resources/META-INF/curses4j.dll
+/src/main/resources/META-INF/libcurses4j.so

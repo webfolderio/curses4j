@@ -1,8 +1,8 @@
-package io.webfolder.pdcurses4j.chapter02;
+package io.webfolder.curses4j.chapter02;
 
-import static io.webfolder.pdcurses4j.Window.endwin;
-import static io.webfolder.pdcurses4j.Window.initscr;
-import static io.webfolder.pdcurses4j.Window.stdscr;
+import static io.webfolder.curses4j.Window.endwin;
+import static io.webfolder.curses4j.Window.initscr;
+import static io.webfolder.curses4j.Window.stdscr;
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;

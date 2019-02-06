@@ -265,7 +265,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         return -1;
     }
     jvm = vm;
-    jclass klass = (*env)->FindClass(env, "io/webfolder/pdcurses4j/PDCWindow");
+    jclass klass = (*env)->FindClass(env, "io/webfolder/curses4j/CursesWindow");
     JNINativeMethod methods[] = {
         { "pdcurses4j_initscr", "()J", (void*) pdcurses4j_initscr },
         { "pdcurses4j_start_color", "()I", (void*) pdcurses4j_start_color },

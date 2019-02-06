@@ -1,6 +1,6 @@
-package io.webfolder.pdcurses4j.chapter03;
+package io.webfolder.curses4j.chapter03;
 
-import static io.webfolder.pdcurses4j.Window.*;
+import static io.webfolder.curses4j.Window.*;
 
 /**
  * @see https://c-for-dummies.com/ncurses/source_code/03-09_notice.php

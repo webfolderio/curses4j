@@ -1,13 +1,13 @@
-package io.webfolder.pdcurses4j.chapter03;
+package io.webfolder.curses4j.chapter03;
 
-import static io.webfolder.pdcurses4j.Window.COLORS;
-import static io.webfolder.pdcurses4j.Window.COLOR_PAIRS;
-import static io.webfolder.pdcurses4j.Window.OK;
-import static io.webfolder.pdcurses4j.Window.endwin;
-import static io.webfolder.pdcurses4j.Window.has_colors;
-import static io.webfolder.pdcurses4j.Window.initscr;
-import static io.webfolder.pdcurses4j.Window.start_color;
-import static io.webfolder.pdcurses4j.Window.stdscr;
+import static io.webfolder.curses4j.Window.COLORS;
+import static io.webfolder.curses4j.Window.COLOR_PAIRS;
+import static io.webfolder.curses4j.Window.OK;
+import static io.webfolder.curses4j.Window.endwin;
+import static io.webfolder.curses4j.Window.has_colors;
+import static io.webfolder.curses4j.Window.initscr;
+import static io.webfolder.curses4j.Window.start_color;
+import static io.webfolder.curses4j.Window.stdscr;
 
 /**
  * @see https://c-for-dummies.com/ncurses/source_code/03-03_colortest.php
