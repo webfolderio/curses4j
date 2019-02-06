@@ -1,5 +1,13 @@
 package io.webfolder.pdcurses4j;
 
+import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_beep;
+import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_color_pair;
+import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_color_pairs;
+import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_colors;
+import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_flash;
+import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_has_colors;
+import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_pair_number;
+import static io.webfolder.pdcurses4j.PDCWindow.pdcurses4j_pdc_acs;
 import static java.lang.String.format;
 
 public class Window {
@@ -13,7 +21,7 @@ public class Window {
     public static final short COLOR_MAGENTA = (COLOR_RED | COLOR_BLUE);
     public static final short COLOR_YELLOW = (COLOR_RED | COLOR_GREEN);
 
-    public static final int  PDC_COLOR_SHIFT = 24;
+    public static final int PDC_COLOR_SHIFT = 24;
     public static final int A_COLOR = 0xff000000;
 
     public static final int FALSE = 0;
@@ -51,6 +59,29 @@ public class Window {
     public static final int A_TOP = A_NORMAL;
     public static final int A_VERTICAL = A_NORMAL;
 
+    /* VT100-compatible symbols -- box chars */
+
+    public static final int ACS_ULCORNER  = PDC_ACS('l');
+    public static final int ACS_LLCORNER  = PDC_ACS('m');
+    public static final int ACS_URCORNER  = PDC_ACS('k');
+    public static final int ACS_LRCORNER  = PDC_ACS('j');
+    public static final int ACS_RTEE      = PDC_ACS('u');
+    public static final int ACS_LTEE      = PDC_ACS('t');
+    public static final int ACS_BTEE      = PDC_ACS('v');
+    public static final int ACS_TTEE      = PDC_ACS('w');
+    public static final int ACS_HLINE     = PDC_ACS('q');
+    public static final int ACS_VLINE     = PDC_ACS('x');
+    public static final int ACS_PLUS      = PDC_ACS('n');
+
+    /* VT100-compatible symbols -- other */
+    public static final int ACS_S1        = PDC_ACS('o');
+    public static final int ACS_S9        = PDC_ACS('s');
+    public static final int ACS_DIAMOND   = PDC_ACS('`');
+    public static final int ACS_CKBOARD   = PDC_ACS('a');
+    public static final int ACS_DEGREE    = PDC_ACS('f');
+    public static final int ACS_PLMINUS   = PDC_ACS('g');
+    public static final int ACS_BULLET    = PDC_ACS('~');
+
     @Deprecated
     public static final int CHR_MSK = A_CHARTEXT; /* Obsolete */
     @Deprecated
@@ -63,11 +94,15 @@ public class Window {
     public static final Window stdscr = new Window();
 
     public static int COLOR_PAIR(int n) {
-        return stdscr.peer.pdcurses4j_color_pair(n);
+        return pdcurses4j_color_pair(n);
     }
 
-    public static int pdcurses4j_pair_number(int n) {
-        return stdscr.peer.pdcurses4j_pair_number(n);
+    public static int PAIR_NUMBER(int n) {
+        return pdcurses4j_pair_number(n);
+    }
+
+    public static int PDC_ACS(int w) {
+        return pdcurses4j_pdc_acs(w);
     }
 
     /**
@@ -160,11 +195,11 @@ public class Window {
     }
 
     public int addch(int ch) {
-        return addch((char) ch);
+        return peer.pdcurses4j_waddch(peer.peer, ch);
     }
 
     public int addch(char ch) {
-        return peer.pdcurses4j_waddch(peer.peer, ch);
+        return addch((int) ch);
     }
 
     public int getch() {
@@ -302,22 +337,22 @@ public class Window {
     }
 
     public static int beep() {
-        return stdscr.peer.pdcurses4j_beep();
+        return pdcurses4j_beep();
     }
 
     public static int flash() {
-        return stdscr.peer.pdcurses4j_flash();
+        return pdcurses4j_flash();
     }
 
     public static boolean has_colors() {
-        return stdscr.peer.pdcurses4j_has_colors() == TRUE;
+        return pdcurses4j_has_colors() == TRUE;
     }
 
     public static int COLORS() {
-        return stdscr.peer.pdcurses4j_colors();
+        return pdcurses4j_colors();
     }
 
     public static int COLOR_PAIRS() {
-        return stdscr.peer.pdcurses4j_color_pairs();
+        return pdcurses4j_color_pairs();
     }
 }

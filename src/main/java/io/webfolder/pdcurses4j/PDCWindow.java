@@ -47,7 +47,7 @@ class PDCWindow {
 
     native int pdcurses4j_endwin();
 
-    native int pdcurses4j_waddch(long peer, char ch);
+    native int pdcurses4j_waddch(long peer, int ch);
 
     native int pdcurses4j_wgetch(long peer);
 
@@ -109,17 +109,19 @@ class PDCWindow {
 
     native int pdcurses4j_init_color(short color, short red, short green, short blue);
 
-    native int pdcurses4j_beep();
+    native static int pdcurses4j_beep();
 
-    native int pdcurses4j_flash();
+    native static int pdcurses4j_flash();
 
-    native int pdcurses4j_has_colors();
+    native static int pdcurses4j_has_colors();
 
-    native int pdcurses4j_colors();
+    native static int pdcurses4j_colors();
 
-    native int pdcurses4j_color_pairs();
+    native static int pdcurses4j_color_pairs();
 
-    native int pdcurses4j_color_pair(int n);
+    native static int pdcurses4j_color_pair(int n);
 
-    native int pdcurses4j_pair_number(int n);
+    native static int pdcurses4j_pair_number(int n);
+
+    native static int pdcurses4j_pdc_acs(int w);
 }
