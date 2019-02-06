@@ -1,9 +1,11 @@
 package io.webfolder.pdcurses4j;
 
+import static java.lang.System.getProperty;
 import static java.lang.System.load;
 import static java.nio.file.Files.copy;
 import static java.nio.file.Files.createTempFile;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import static java.util.Locale.ENGLISH;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,11 +15,16 @@ class PDCWindow {
 
     long peer;
 
+    private static final String OS = getProperty("os.name").toLowerCase(ENGLISH);
+
+    private static final boolean WINDOWS = OS.startsWith("windows");
+
     static {
         ClassLoader cl = PDCWindow.class.getClassLoader();
         Path libFile;
-        try (InputStream is = cl.getResourceAsStream("META-INF/pdcurses.dll")) {
-            libFile = createTempFile("pdcurses", ".dll");
+        String library = WINDOWS ? "META-INF/pdcurses.dll" : "META-INF/libpdcurses4j.so";
+        try (InputStream is = cl.getResourceAsStream(library)) {
+            libFile = createTempFile("pdcurses", WINDOWS ? ".dll" : ".so");
             copy(is, libFile, REPLACE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException(e);

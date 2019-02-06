@@ -1,11 +1,11 @@
+#include "stdlib.h"
+
 #include <jni.h>
 #include "curses.h"
 
-#include <io.h>
-#include <fcntl.h>
-#include <windows.h>
-
 static JavaVM *jvm;
+
+#define PDC_RGB 1
 
 jlong pdcurses4j_initscr(JNIEnv *env, jobject that) {
   WINDOW* win = initscr();
@@ -115,7 +115,7 @@ jint pdcurses4j_mvwdelch(JNIEnv *env, jobject that, jint peer, jint y, jint x) {
 }
 
 jstring pdcurses4j_unctrl(JNIEnv *env, jobject that, jint c) {
- char *_str = unctrl(c);
+ const char *_str = unctrl(c);
  jstring str = NULL;
  if (_str) {
    str = (*env)->NewStringUTF(env, _str);

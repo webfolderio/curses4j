@@ -4,6 +4,9 @@ import static io.webfolder.pdcurses4j.Window.endwin;
 import static io.webfolder.pdcurses4j.Window.initscr;
 import static io.webfolder.pdcurses4j.Window.stdscr;
 
+/**
+ * https://c-for-dummies.com/ncurses/source_code/02-06_typewriter.php
+ */
 public class Typewriter {
 
     public static void main(String[] args) {
