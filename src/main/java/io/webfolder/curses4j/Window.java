@@ -1,13 +1,13 @@
 package io.webfolder.curses4j;
 
-import static io.webfolder.curses4j.CursesWindow.pdcurses4j_beep;
-import static io.webfolder.curses4j.CursesWindow.pdcurses4j_color_pair;
-import static io.webfolder.curses4j.CursesWindow.pdcurses4j_color_pairs;
-import static io.webfolder.curses4j.CursesWindow.pdcurses4j_colors;
-import static io.webfolder.curses4j.CursesWindow.pdcurses4j_flash;
-import static io.webfolder.curses4j.CursesWindow.pdcurses4j_has_colors;
-import static io.webfolder.curses4j.CursesWindow.pdcurses4j_pair_number;
-import static io.webfolder.curses4j.CursesWindow.pdcurses4j_pdc_acs;
+import static io.webfolder.curses4j.CursesWindow.curses4j_beep;
+import static io.webfolder.curses4j.CursesWindow.curses4j_color_pair;
+import static io.webfolder.curses4j.CursesWindow.curses4j_color_pairs;
+import static io.webfolder.curses4j.CursesWindow.curses4j_colors;
+import static io.webfolder.curses4j.CursesWindow.curses4j_flash;
+import static io.webfolder.curses4j.CursesWindow.curses4j_has_colors;
+import static io.webfolder.curses4j.CursesWindow.curses4j_pair_number;
+import static io.webfolder.curses4j.CursesWindow.curses4j_pdc_acs;
 import static java.lang.String.format;
 
 public class Window {
@@ -94,15 +94,15 @@ public class Window {
     public static final Window stdscr = new Window();
 
     public static int COLOR_PAIR(int n) {
-        return pdcurses4j_color_pair(n);
+        return curses4j_color_pair(n);
     }
 
     public static int PAIR_NUMBER(int n) {
-        return pdcurses4j_pair_number(n);
+        return curses4j_pair_number(n);
     }
 
     public static int PDC_ACS(int w) {
-        return pdcurses4j_pdc_acs(w);
+        return curses4j_pdc_acs(w);
     }
 
     /**
@@ -115,7 +115,7 @@ public class Window {
      */
     public static void initscr() {
         if (stdscr.peer.peer == 0) {
-            stdscr.peer.peer = stdscr.peer.pdcurses4j_initscr();
+            stdscr.peer.peer = stdscr.peer.curses4j_initscr();
         } else {
             throw new IllegalStateException();
         }
@@ -128,7 +128,7 @@ public class Window {
      * terminal is capable of displaying).
      */
     public static int start_color() {
-        return stdscr.peer.pdcurses4j_start_color();
+        return stdscr.peer.curses4j_start_color();
     }
 
     /**
@@ -145,12 +145,12 @@ public class Window {
         if (pair > Short.MAX_VALUE) {
             throw new RuntimeException("pair must be smaller than: " + Short.MAX_VALUE);
         } else {
-            return stdscr.peer.pdcurses4j_init_pair((short) pair, fg, bg);
+            return stdscr.peer.curses4j_init_pair((short) pair, fg, bg);
         }
     }
 
     public static int init_color(short color, short red, short green, short blue) {
-        return stdscr.peer.pdcurses4j_init_color(color, red, green, blue);
+        return stdscr.peer.curses4j_init_color(color, red, green, blue);
     }
 
     /**
@@ -158,14 +158,14 @@ public class Window {
      * others.
      */
     public int attr_on(int attrs) {
-        return peer.pdcurses4j_wattr_on(peer.peer, attrs);
+        return peer.curses4j_wattr_on(peer.peer, attrs);
     }
 
     /**
      * Prints a string.
      */
     public int printw(String str, Object... args) {
-        return peer.pdcurses4j_wprintw(peer.peer, format(str, args));
+        return peer.curses4j_wprintw(peer.peer, format(str, args));
     }
 
     /**
@@ -187,15 +187,15 @@ public class Window {
      * possible to call doupdate() only once.
      */
     public int refresh() {
-        return peer.pdcurses4j_wrefresh(peer.peer);
+        return peer.curses4j_wrefresh(peer.peer);
     }
 
     public static boolean can_change_color() {
-        return stdscr.peer.pdcurses4j_can_change_color() == TRUE;
+        return stdscr.peer.curses4j_can_change_color() == TRUE;
     }
 
     public int addch(int ch) {
-        return peer.pdcurses4j_waddch(peer.peer, ch);
+        return peer.curses4j_waddch(peer.peer, ch);
     }
 
     public int addch(char ch) {
@@ -203,71 +203,71 @@ public class Window {
     }
 
     public int getch() {
-        return peer.pdcurses4j_wgetch(peer.peer);
+        return peer.curses4j_wgetch(peer.peer);
     }
 
     public static int endwin() {
-        return stdscr.peer.pdcurses4j_endwin();
+        return stdscr.peer.curses4j_endwin();
     }
 
     public int addstr(String str) {
-        return peer.pdcurses4j_waddstr(peer.peer, str);
+        return peer.curses4j_waddstr(peer.peer, str);
     }
 
     public int mvaddstr(int y, int x, String str) {
-        return peer.pdcurses4j_mvwaddstr(peer.peer, y, x, str);
+        return peer.curses4j_mvwaddstr(peer.peer, y, x, str);
     }
 
     public int noecho() {
-        return stdscr.peer.pdcurses4j_noecho();
+        return stdscr.peer.curses4j_noecho();
     }
 
     public int nodelay(boolean bf) {
-        return peer.pdcurses4j_nodelay(peer.peer, bf ? TRUE : FALSE);
+        return peer.curses4j_nodelay(peer.peer, bf ? TRUE : FALSE);
     }
 
     public static int napms(int delay) {
-        return stdscr.peer.pdcurses4j_napms(delay);
+        return stdscr.peer.curses4j_napms(delay);
     }
 
     public int mvinsch(int y, int x, char ch) {
-        return peer.pdcurses4j_mvwinsch(peer.peer, y, x, ch);
+        return peer.curses4j_mvwinsch(peer.peer, y, x, ch);
     }
 
     public int mvdelch(int y, int x) {
-        return peer.pdcurses4j_mvwdelch(peer.peer, y, x);
+        return peer.curses4j_mvwdelch(peer.peer, y, x);
     }
 
     public String getnstr(int n) {
-        return peer.pdcurses4j_wgetnstr(peer.peer, n);
+        return peer.curses4j_wgetnstr(peer.peer, n);
     }
 
     public static String unctrl(int c) {
-        return stdscr.peer.pdcurses4j_unctrl(c);
+        return stdscr.peer.curses4j_unctrl(c);
     }
 
     public int getmaxx() {
-        return stdscr.peer.pdcurses4j_getmaxx(peer.peer);
+        return stdscr.peer.curses4j_getmaxx(peer.peer);
     }
 
     public int getmaxy() {
-        return stdscr.peer.pdcurses4j_getmaxy(peer.peer);
+        return stdscr.peer.curses4j_getmaxy(peer.peer);
     }
 
     public int clear() {
-        return stdscr.peer.pdcurses4j_wclear(peer.peer);
+        return stdscr.peer.curses4j_wclear(peer.peer);
     }
 
     public static int typeahead(int fields) {
-        return stdscr.peer.pdcurses4j_typeahead(fields);
+        return stdscr.peer.curses4j_typeahead(fields);
     }
 
     public static int def_shell_mode() {
-        return stdscr.peer.pdcurses4j_def_shell_mode();
+        return stdscr.peer.curses4j_def_shell_mode();
     }
 
     public static Window newwin(int nlines, int ncols, int begy, int begx) {
-        long newwin = stdscr.peer.pdcurses4j_newwin(nlines, ncols, begy, begx);
+        long newwin = stdscr.peer.curses4j_newwin(nlines, ncols, begy, begx);
         if (newwin <= ERR) {
             return null;
         }
@@ -277,19 +277,19 @@ public class Window {
     }
 
     public int getpary() {
-        return peer.pdcurses4j_getpary(peer.peer);
+        return peer.curses4j_getpary(peer.peer);
     }
 
     public int getparx() {
-        return peer.pdcurses4j_getparx(peer.peer);
+        return peer.curses4j_getparx(peer.peer);
     }
 
     public int bkgd(int ch) {
-        return peer.pdcurses4j_wbkgd(peer.peer, ch);
+        return peer.curses4j_wbkgd(peer.peer, ch);
     }
 
     public Window subwin(int nlines, int ncols, int begy, int begx) {
-        long subwin = peer.pdcurses4j_subwin(peer.peer, nlines, ncols, begy, begx);
+        long subwin = peer.curses4j_subwin(peer.peer, nlines, ncols, begy, begx);
         if (subwin <= ERR) {
             return null;
         }
@@ -299,11 +299,11 @@ public class Window {
     }
 
     public int touchwin() {
-        return peer.pdcurses4j_touchwin(peer.peer);
+        return peer.curses4j_touchwin(peer.peer);
     }
 
     public Window derwin(int nlines, int ncols, int begy, int begx) {
-        long subwin = peer.pdcurses4j_derwin(peer.peer, nlines, ncols, begy, begx);
+        long subwin = peer.curses4j_derwin(peer.peer, nlines, ncols, begy, begx);
         if (subwin <= ERR) {
             return null;
         }
@@ -313,46 +313,46 @@ public class Window {
     }
 
     public int scrollok(boolean bf) {
-        return peer.pdcurses4j_scrollok(peer.peer, bf ? TRUE : FALSE);
+        return peer.curses4j_scrollok(peer.peer, bf ? TRUE : FALSE);
     }
 
     public int box(char verch, char horch) {
-        return peer.pdcurses4j_box(peer.peer, verch, horch);
+        return peer.curses4j_box(peer.peer, verch, horch);
     }
 
     public int move(int y, int x) {
-        return peer.pdcurses4j_wmove(peer.peer, y, x);
+        return peer.curses4j_wmove(peer.peer, y, x);
     }
 
     public int attron(int attrs) {
-        return peer.pdcurses4j_wattron(peer.peer, attrs);
+        return peer.curses4j_wattron(peer.peer, attrs);
     }
 
     public int attroff(int attrs) {
-        return peer.pdcurses4j_wattroff(peer.peer, attrs);
+        return peer.curses4j_wattroff(peer.peer, attrs);
     }
 
     public int attrset(int attrs) {
-        return peer.pdcurses4j_wattrset(peer.peer, attrs);
+        return peer.curses4j_wattrset(peer.peer, attrs);
     }
 
     public static int beep() {
-        return pdcurses4j_beep();
+        return curses4j_beep();
     }
 
     public static int flash() {
-        return pdcurses4j_flash();
+        return curses4j_flash();
     }
 
     public static boolean has_colors() {
-        return pdcurses4j_has_colors() == TRUE;
+        return curses4j_has_colors() == TRUE;
     }
 
     public static int COLORS() {
-        return pdcurses4j_colors();
+        return curses4j_colors();
     }
 
     public static int COLOR_PAIRS() {
-        return pdcurses4j_color_pairs();
+        return curses4j_color_pairs();
     }
 }
