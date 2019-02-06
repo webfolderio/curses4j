@@ -1,14 +1,15 @@
 package io.webfolder.curses4j;
 
-import static io.webfolder.curses4j.CursesWindow.*;
 import static io.webfolder.curses4j.CursesWindow.curses4j_beep;
 import static io.webfolder.curses4j.CursesWindow.curses4j_can_change_color;
 import static io.webfolder.curses4j.CursesWindow.curses4j_color_pair;
 import static io.webfolder.curses4j.CursesWindow.curses4j_color_pairs;
 import static io.webfolder.curses4j.CursesWindow.curses4j_colors;
+import static io.webfolder.curses4j.CursesWindow.curses4j_def_shell_mode;
 import static io.webfolder.curses4j.CursesWindow.curses4j_endwin;
 import static io.webfolder.curses4j.CursesWindow.curses4j_flash;
 import static io.webfolder.curses4j.CursesWindow.curses4j_has_colors;
+import static io.webfolder.curses4j.CursesWindow.curses4j_init_color;
 import static io.webfolder.curses4j.CursesWindow.curses4j_init_pair;
 import static io.webfolder.curses4j.CursesWindow.curses4j_napms;
 import static io.webfolder.curses4j.CursesWindow.curses4j_noecho;
@@ -97,100 +98,92 @@ public class Curses {
     @Deprecated
     public static final int ATR_NRM = A_NORMAL; /* Obsolete */
 
-    public static int endwin() {
-        return curses4j_endwin();
-    }
-
-    public static int noecho() {
-        return curses4j_noecho();
-    }
-
-    public static int napms(int delay) {
-        return curses4j_napms(delay);
-    }
-
-    public static int COLOR_PAIR(int n) {
-        return curses4j_color_pair(n);
-    }
-
-    public static int PAIR_NUMBER(int n) {
-        return curses4j_pair_number(n);
-    }
-
-    public static int PDC_ACS(int w) {
-        return curses4j_pdc_acs(w);
-    }
-
-    public static int beep() {
-        return curses4j_beep();
-    }
-
-    public static int flash() {
-        return curses4j_flash();
-    }
-
-    public static boolean has_colors() {
-        return curses4j_has_colors() == TRUE;
-    }
-
-    public static int COLORS() {
-        return curses4j_colors();
-    }
-
-    public static int COLOR_PAIRS() {
-        return curses4j_color_pairs();
-    }
-
-    public static int typeahead(int fields) {
-        return curses4j_typeahead(fields);
-    }
-
-    public static void initscr() {
-        Window.initscr();
+    public static int addch(int ch) {
+        return stdscr.addch(ch);
     }
 
     public static int addstr(String str) {
         return stdscr.addstr(str);
     }
 
-    public static int refresh() {
-        return stdscr.refresh();
-    }
-
-    public static int getch() {
-        return stdscr.getch();
-    }
-
-    public static int addch(int ch) {
-        return stdscr.addch(ch);
-    }
-
-    public static int move(int y, int x) {
-        return stdscr.move(x, y);
-    }
-
-    public static int printw(String str, Object... args) {
-        return stdscr.printw(str, args);
-    }
-
-    public static String getnstr(int n) {
-        return stdscr.getnstr(n);
-    }
-
-    public static int attrset(int attrs) {
-        return stdscr.attrset(attrs);
+    public static int attroff(int attrs) {
+        return stdscr.attroff(attrs);
     }
 
     public static int attron(int attrs) {
         return stdscr.attr_on(attrs);
     }
 
-    public static int attroff(int attrs) {
-        return stdscr.attroff(attrs);
+    public static int attrset(int attrs) {
+        return stdscr.attrset(attrs);
+    }
+
+    public static int beep() {
+        return curses4j_beep();
+    }
+
+    public static int bkgd(int ch) {
+        return stdscr.bkgd(ch);
     }
 
     public static int box(char verch, char horch) {
         return stdscr.box(verch, horch);
+    }
+
+    public static boolean can_change_color() {
+        return curses4j_can_change_color() == TRUE;
+    }
+
+    public static int clear() {
+        return stdscr.clear();
+    }
+
+    public static int COLOR_PAIR(int n) {
+        return curses4j_color_pair(n);
+    }
+
+    public static int COLOR_PAIRS() {
+        return curses4j_color_pairs();
+    }
+
+    public static int COLORS() {
+        return curses4j_colors();
+    }
+
+    public static int def_shell_mode() {
+        return curses4j_def_shell_mode();
+    }
+
+    public static int endwin() {
+        return curses4j_endwin();
+    }
+
+    public static int flash() {
+        return curses4j_flash();
+    }
+
+    public static int getch() {
+        return stdscr.getch();
+    }
+
+    public static String getnstr(int n) {
+        return stdscr.getnstr(n);
+    }
+
+    public static int getparx() {
+        return stdscr.getpary();
+    }
+
+    public static int getpary() {
+        return stdscr.getparx();
+    }
+
+    public static boolean has_colors() {
+        return curses4j_has_colors() == TRUE;
+    }
+
+    public static int init_color(short color, short red, short green, short blue) {
+        return curses4j_init_color(color, red, green, blue);
     }
 
     /**
@@ -211,6 +204,46 @@ public class Curses {
         }
     }
 
+    public static void initscr() {
+        Window.initscr();
+    }
+
+    public static int move(int y, int x) {
+        return stdscr.move(x, y);
+    }
+
+    public static int napms(int delay) {
+        return curses4j_napms(delay);
+    }
+
+    public static Window newwin(int nlines, int ncols, int begy, int begx) {
+        return Window.newwin(nlines, ncols, begy, begx);
+    }
+
+    public static int noecho() {
+        return curses4j_noecho();
+    }
+
+    public static int PAIR_NUMBER(int n) {
+        return curses4j_pair_number(n);
+    }
+
+    public static int PDC_ACS(int w) {
+        return curses4j_pdc_acs(w);
+    }
+
+    public static int printw(String str, Object... args) {
+        return stdscr.printw(str, args);
+    }
+
+    public static int refresh() {
+        return stdscr.refresh();
+    }
+
+    public static int scrollok(boolean bf) {
+        return stdscr.scrollok(bf);
+    }
+
     /**
      * initializes eight basic colors (black, red, green, yellow, blue, magenta,
      * cyan, and white), and two global variables: COLORS and COLOR_PAIRS
@@ -221,15 +254,15 @@ public class Curses {
         return curses4j_start_color();
     }
 
-    public static int bkgd(int ch) {
-        return stdscr.bkgd(ch);
+    public static Window subwin(int nlines, int ncols, int begy, int begx) {
+        return stdscr.subwin(nlines, ncols, begy, begx);
     }
 
-    public static boolean can_change_color() {
-        return curses4j_can_change_color() == TRUE;
+    public static int touchwin() {
+        return stdscr.touchwin();
     }
 
-    public static int init_color(short color, short red, short green, short blue) {
-        return curses4j_init_color(color, red, green, blue);
+    public static int typeahead(int fields) {
+        return curses4j_typeahead(fields);
     }
 }

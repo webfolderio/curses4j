@@ -148,11 +148,11 @@ jint curses4j_typeahead(JNIEnv *env, jclass that, jint fields) {
   return typeahead(fields);
 }
 
-jint curses4j_def_shell_mode(JNIEnv *env, jobject that) {
+jint curses4j_def_shell_mode(JNIEnv *env, jclass that) {
   return def_shell_mode();
 }
 
-jlong curses4j_newwin(JNIEnv *env, jobject that, jint nlines, jint ncols, jint begy, jint begx) {
+jlong curses4j_newwin(JNIEnv *env, jclass that, jint nlines, jint ncols, jint begy, jint begx) {
  WINDOW* win = newwin(nlines, ncols, begy, begx);
  return (jlong) win;
 }
