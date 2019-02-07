@@ -22,75 +22,72 @@ import static io.webfolder.curses4j.Window.stdscr;
 
 public class Curses {
 
-    public static final short COLOR_BLACK = 0;
-    public static final short COLOR_RED = 1;
-    public static final short COLOR_GREEN = 2;
-    public static final short COLOR_BLUE = 4;
-    public static final short COLOR_WHITE = 7;
-    public static final short COLOR_CYAN = (COLOR_BLUE | COLOR_GREEN);
-    public static final short COLOR_MAGENTA = (COLOR_RED | COLOR_BLUE);
-    public static final short COLOR_YELLOW = (COLOR_RED | COLOR_GREEN);
+    public static final short COLOR_BLACK   = 0;
+    public static final short COLOR_RED     = 1;
+    public static final short COLOR_GREEN   = 2;
+    public static final short COLOR_BLUE    = 4;
+    public static final short COLOR_WHITE   = 7;
+    public static final short COLOR_CYAN    = COLOR_BLUE | COLOR_GREEN;
+    public static final short COLOR_MAGENTA = COLOR_RED  | COLOR_BLUE ;
+    public static final short COLOR_YELLOW  = COLOR_RED  | COLOR_GREEN;
 
     public static final int PDC_COLOR_SHIFT = 24;
-    public static final int A_COLOR = 0xff000000;
 
     public static final int FALSE = 0;
-    public static final int TRUE = 1;
+    public static final int TRUE  = 1;
 
     public static final int ERR = -1;
-    public static final int OK = 0;
+    public static final int OK  =  0;
 
     /*** Video attribute macros ***/
-
-    public static final int A_NORMAL = 0;
-
+    public static final int A_NORMAL     = 0x00000000;
+    public static final int A_COLOR      = 0xff000000;
     public static final int A_ALTCHARSET = 0x00010000;
-    public static final int A_RIGHT = 0x00020000;
-    public static final int A_LEFT = 0x00040000;
-    public static final int A_ITALIC = 0x00080000;
-    public static final int A_UNDERLINE = 0x00100000;
-    public static final int A_REVERSE = 0x00200000;
-    public static final int A_BLINK = 0x00400000;
-    public static final int A_BOLD = 0x00800000;
+    public static final int A_RIGHT      = 0x00020000;
+    public static final int A_LEFT       = 0x00040000;
+    public static final int A_ITALIC     = 0x00080000;
+    public static final int A_UNDERLINE  = 0x00100000;
+    public static final int A_REVERSE    = 0x00200000;
+    public static final int A_BLINK      = 0x00400000;
+    public static final int A_BOLD       = 0x00800000;
 
     public static final int A_ATTRIBUTES = 0xffff0000;
-    public static final int A_CHARTEXT = 0x0000ffff;
+    public static final int A_CHARTEXT   = 0x0000ffff;
 
-    public static final int A_LEFTLINE = A_LEFT;
-    public static final int A_RIGHTLINE = A_RIGHT;
-    public static final int A_STANDOUT = (A_REVERSE | A_BOLD); /* X/Open */
+    public static final int A_LEFTLINE   = A_LEFT;
+    public static final int A_RIGHTLINE  = A_RIGHT;
+    public static final int A_STANDOUT   = A_REVERSE | A_BOLD; /* X/Open */
 
-    public static final int A_DIM = A_NORMAL;
-    public static final int A_INVIS = A_NORMAL;
+    public static final int A_DIM     = A_NORMAL;
+    public static final int A_INVIS   = A_NORMAL;
     public static final int A_PROTECT = A_NORMAL;
 
     public static final int A_HORIZONTAL = A_NORMAL;
-    public static final int A_LOW = A_NORMAL;
-    public static final int A_TOP = A_NORMAL;
-    public static final int A_VERTICAL = A_NORMAL;
+    public static final int A_LOW        = A_NORMAL;
+    public static final int A_TOP        = A_NORMAL;
+    public static final int A_VERTICAL   = A_NORMAL;
 
     /* VT100-compatible symbols -- box chars */
-
-    public static final int ACS_ULCORNER  = PDC_ACS('l');
-    public static final int ACS_LLCORNER  = PDC_ACS('m');
-    public static final int ACS_URCORNER  = PDC_ACS('k');
-    public static final int ACS_LRCORNER  = PDC_ACS('j');
-    public static final int ACS_RTEE      = PDC_ACS('u');
-    public static final int ACS_LTEE      = PDC_ACS('t');
-    public static final int ACS_BTEE      = PDC_ACS('v');
-    public static final int ACS_TTEE      = PDC_ACS('w');
-    public static final int ACS_HLINE     = PDC_ACS('q');
-    public static final int ACS_VLINE     = PDC_ACS('x');
-    public static final int ACS_PLUS      = PDC_ACS('n');
+    public static final int ACS_ULCORNER = PDC_ACS('l');
+    public static final int ACS_LLCORNER = PDC_ACS('m');
+    public static final int ACS_URCORNER = PDC_ACS('k');
+    public static final int ACS_LRCORNER = PDC_ACS('j');
+    public static final int ACS_RTEE     = PDC_ACS('u');
+    public static final int ACS_LTEE     = PDC_ACS('t');
+    public static final int ACS_BTEE     = PDC_ACS('v');
+    public static final int ACS_TTEE     = PDC_ACS('w');
+    public static final int ACS_HLINE    = PDC_ACS('q');
+    public static final int ACS_VLINE    = PDC_ACS('x');
+    public static final int ACS_PLUS     = PDC_ACS('n');
 
     /* VT100-compatible symbols -- other */
-    public static final int ACS_S1        = PDC_ACS('o');
-    public static final int ACS_S9        = PDC_ACS('s');
-    public static final int ACS_DIAMOND   = PDC_ACS('`');
-    public static final int ACS_CKBOARD   = PDC_ACS('a');
-    public static final int ACS_DEGREE    = PDC_ACS('f');
-    public static final int ACS_PLMINUS   = PDC_ACS('g');
-    public static final int ACS_BULLET    = PDC_ACS('~');
+    public static final int ACS_S1       = PDC_ACS('o');
+    public static final int ACS_S9       = PDC_ACS('s');
+    public static final int ACS_DIAMOND  = PDC_ACS('`');
+    public static final int ACS_CKBOARD  = PDC_ACS('a');
+    public static final int ACS_DEGREE   = PDC_ACS('f');
+    public static final int ACS_PLMINUS  = PDC_ACS('g');
+    public static final int ACS_BULLET   = PDC_ACS('~');
 
     /* That goes double for these -- undocumented SysV symbols. Don't use them. */
     public static final int ACS_S3       = PDC_ACS('p');
