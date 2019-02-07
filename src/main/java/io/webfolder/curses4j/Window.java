@@ -8,7 +8,7 @@ import static java.lang.String.format;
 
 public class Window {
 
-    public static final Window stdscr = new Window();
+    static final Window stdscr = new Window();
 
     private final CursesWindow peer = new CursesWindow();
 

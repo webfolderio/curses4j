@@ -1,6 +1,5 @@
 package io.webfolder.curses4j;
 
-import static io.webfolder.curses4j.CursesWindow.*;
 import static io.webfolder.curses4j.CursesWindow.curses4j_beep;
 import static io.webfolder.curses4j.CursesWindow.curses4j_can_change_color;
 import static io.webfolder.curses4j.CursesWindow.curses4j_color_pair;
@@ -18,6 +17,7 @@ import static io.webfolder.curses4j.CursesWindow.curses4j_pair_number;
 import static io.webfolder.curses4j.CursesWindow.curses4j_pdc_acs;
 import static io.webfolder.curses4j.CursesWindow.curses4j_start_color;
 import static io.webfolder.curses4j.CursesWindow.curses4j_typeahead;
+import static io.webfolder.curses4j.CursesWindow.curses4j_unctrl;
 import static io.webfolder.curses4j.Window.stdscr;
 
 public class Curses {
@@ -92,12 +92,21 @@ public class Curses {
     public static final int ACS_PLMINUS   = PDC_ACS('g');
     public static final int ACS_BULLET    = PDC_ACS('~');
 
+    /* That goes double for these -- undocumented SysV symbols. Don't use them. */
+    public static final int ACS_S3       = PDC_ACS('p');
+    public static final int ACS_S7       = PDC_ACS('r');
+    public static final int ACS_LEQUAL   = PDC_ACS('y');
+    public static final int ACS_GEQUAL   = PDC_ACS('z');
+    public static final int ACS_PI       = PDC_ACS('{');
+    public static final int ACS_NEQUAL   = PDC_ACS('|');
+    public static final int ACS_STERLING = PDC_ACS('}');
+
     @Deprecated
-    public static final int CHR_MSK = A_CHARTEXT; /* Obsolete */
+    public static final int CHR_MSK = A_CHARTEXT;
     @Deprecated
-    public static final int ATR_MSK = A_ATTRIBUTES; /* Obsolete */
+    public static final int ATR_MSK = A_ATTRIBUTES;
     @Deprecated
-    public static final int ATR_NRM = A_NORMAL; /* Obsolete */
+    public static final int ATR_NRM = A_NORMAL;
 
     public static int addch(int ch) {
         return stdscr.addch(ch);
