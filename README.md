@@ -1,8 +1,10 @@
 # curses4j
 
-[![AppVeyor](https://img.shields.io/appveyor/ci/WebFolder/curses4j.svg?label=Windows)](https://ci.appveyor.com/project/WebFolder/curses4j) [![circleci](https://img.shields.io/appveyor/ci/WebFolder/curses4j.svg?label=Ubuntu)](https://circleci.com/gh/webfolderio/curses4j) 
+[![AppVeyor](https://img.shields.io/appveyor/ci/WebFolder/curses4j.svg?label=Windows)](https://ci.appveyor.com/project/WebFolder/curses4j) [![circleci](https://img.shields.io/appveyor/ci/WebFolder/curses4j.svg?label=Ubuntu)](https://circleci.com/gh/webfolderio/curses4j) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This is an easy-to-use, fully cross-platform Java wrapper for the *nix curses terminal library. The project is able to load the OS-specific native implementation of curses at runtime which means you can deploy the same binary to Windows & Linux
+
+
+This is an easy-to-use, fully cross-platform Java wrapper for the *nix curses terminal library. The project is able to load the OS-specific native implementation of curses at runtime which means you can deploy the same binary to Windows & Linux.
 
 Supported Java Versions
 -----------------------
@@ -18,7 +20,7 @@ Supported Platforms
 
 How it is tested
 ----------------
-curses4j is regularly tested on [appveyor](https://ci.appveyor.com/project/WebFolder/curses4j) (Windows), [circleci](https://circleci.com/gh/webfolderio/curses4j) (Ubuntu) and [travis](https://travis-ci.org/webfolderio/curses4j) (macOS).
+curses4j is regularly tested on [appveyor](https://ci.appveyor.com/project/WebFolder/curses4j) (Windows), [circleci](https://circleci.com/gh/webfolderio/curses4j) (Ubuntu).
 
 Integration with Maven
 ----------------------
