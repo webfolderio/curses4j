@@ -283,65 +283,65 @@ jint curses4j_cols(JNIEnv *env, jclass klass) {
 }
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
-    JNIEnv* env;
-    if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
-        return -1;
-    }
-    jvm = vm;
-    jclass klass = (*env)->FindClass(env, "io/webfolder/curses4j/CursesWindow");
-    JNINativeMethod methods[] = {
-        { "curses4j_initscr", "()J", (void*) curses4j_initscr },
-        { "curses4j_start_color", "()I", (void*) curses4j_start_color },
-        { "curses4j_init_pair", "(SSS)I", (void*) curses4j_init_pair },
-        { "curses4j_wattr_on", "(JI)I", (void*) curses4j_wattr_on },
-        { "curses4j_wprintw", "(JLjava/lang/String;)I", (void*) curses4j_wprintw },
-        { "curses4j_wrefresh", "(J)I", (void*) curses4j_wrefresh },
-        { "curses4j_endwin", "()I", (void*) curses4j_endwin },
-        { "curses4j_waddch", "(JI)I", (void*) curses4j_waddch },
-        { "curses4j_wgetch", "(J)I", (void*) curses4j_wgetch },
-        { "curses4j_waddstr", "(JLjava/lang/String;)I", (void*) curses4j_waddstr },
-        { "curses4j_mvwaddstr", "(JIILjava/lang/String;)I", (void*) curses4j_mvwaddstr },
-        { "curses4j_noecho", "()I", (void*) curses4j_noecho },
-        { "curses4j_nodelay", "(JI)I", (void*) curses4j_nodelay },
-        { "curses4j_napms", "(I)I", (void*) curses4j_napms },
-        { "curses4j_mvwinsch", "(JIIC)I", (void*) curses4j_mvwinsch },
-        { "curses4j_mvwdelch", "(JII)I", (void*) curses4j_mvwdelch },
-        { "curses4j_wgetnstr", "(JI)Ljava/lang/String;", (void*) curses4j_wgetnstr },
-        { "curses4j_unctrl", "(I)Ljava/lang/String;", (void*) curses4j_unctrl },
-        { "curses4j_getmaxx", "(J)I", (void*) curses4j_getmaxx },
-        { "curses4j_getmaxy", "(J)I", (void*) curses4j_getmaxy },
-        { "curses4j_wclear", "(J)I", (void*) curses4j_wclear },
-        { "curses4j_typeahead", "(I)I", (void*) curses4j_typeahead },
-        { "curses4j_def_shell_mode", "()I", (void*) curses4j_def_shell_mode },
-        { "curses4j_newwin", "(IIII)J", (void*) curses4j_newwin },
-        { "curses4j_getpary", "(J)I", (void*) curses4j_getpary },
-        { "curses4j_getparx", "(J)I", (void*) curses4j_getparx },
-        { "curses4j_wbkgd", "(JJ)I", (void*) curses4j_wbkgd },
-        { "curses4j_subwin", "(JIIII)J", (void*) curses4j_subwin },
-        { "curses4j_touchwin", "(J)I", (void*) curses4j_touchwin },
-        { "curses4j_derwin", "(JIIII)J", (void*) curses4j_derwin },
-        { "curses4j_scrollok", "(JI)I", (void*) curses4j_scrollok },
-        { "curses4j_box", "(JCC)I", (void*) curses4j_box },
-        { "curses4j_wmove", "(JII)I", (void*) curses4j_wmove },
-        { "curses4j_wattron", "(JI)I", (void*) curses4j_wattron },
-        { "curses4j_wattroff", "(JI)I", (void*) curses4j_wattroff },
-        { "curses4j_wattrset", "(JI)I", (void*) curses4j_wattrset },
-        { "curses4j_can_change_color", "()I", (void*) curses4j_can_change_color },
-        { "curses4j_init_color", "(SSSS)I", (void*) curses4j_init_color },
-        { "curses4j_beep", "()I", (void*) curses4j_beep },
-        { "curses4j_flash", "()I", (void*) curses4j_flash },
-        { "curses4j_has_colors", "()I", (void*) curses4j_has_colors },
-        { "curses4j_colors", "()I", (void*) curses4j_colors },
-        { "curses4j_color_pairs", "()I", (void*) curses4j_color_pairs },
-        { "curses4j_color_pair", "(I)I", (void*) curses4j_color_pair },
-        { "curses4j_pair_number", "(I)I", (void*) curses4j_pair_number },
-        { "curses4j_pdc_acs", "(I)I", (void*) curses4j_pdc_acs },
-        { "curses4j_mvwaddch", "(JIII)I", (void*) curses4j_mvwaddch },
-        { "curses4j_getcury", "(J)I", (void*) curses4j_getcury },
-        { "curses4j_getcurx", "(J)I", (void*) curses4j_getcurx },
-        { "curses4j_lines", "()I", (void*)  curses4j_lines },
-        { "curses4j_cols", "()I", (void*) curses4j_cols }
-    };
-    (*env)->RegisterNatives(env, klass, methods, sizeof(methods) / sizeof(methods[0]));
-    return JNI_VERSION_1_8;
+  JNIEnv* env;
+  if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
+      return -1;
+  }
+  jvm = vm;
+  jclass klass = (*env)->FindClass(env, "io/webfolder/curses4j/CursesWindow");
+  JNINativeMethod methods[] = {
+    { "curses4j_initscr", "()J", (void*) curses4j_initscr },
+    { "curses4j_start_color", "()I", (void*) curses4j_start_color },
+    { "curses4j_init_pair", "(SSS)I", (void*) curses4j_init_pair },
+    { "curses4j_wattr_on", "(JI)I", (void*) curses4j_wattr_on },
+    { "curses4j_wprintw", "(JLjava/lang/String;)I", (void*) curses4j_wprintw },
+    { "curses4j_wrefresh", "(J)I", (void*) curses4j_wrefresh },
+    { "curses4j_endwin", "()I", (void*) curses4j_endwin },
+    { "curses4j_waddch", "(JI)I", (void*) curses4j_waddch },
+    { "curses4j_wgetch", "(J)I", (void*) curses4j_wgetch },
+    { "curses4j_waddstr", "(JLjava/lang/String;)I", (void*) curses4j_waddstr },
+    { "curses4j_mvwaddstr", "(JIILjava/lang/String;)I", (void*) curses4j_mvwaddstr },
+    { "curses4j_noecho", "()I", (void*) curses4j_noecho },
+    { "curses4j_nodelay", "(JI)I", (void*) curses4j_nodelay },
+    { "curses4j_napms", "(I)I", (void*) curses4j_napms },
+    { "curses4j_mvwinsch", "(JIIC)I", (void*) curses4j_mvwinsch },
+    { "curses4j_mvwdelch", "(JII)I", (void*) curses4j_mvwdelch },
+    { "curses4j_wgetnstr", "(JI)Ljava/lang/String;", (void*) curses4j_wgetnstr },
+    { "curses4j_unctrl", "(I)Ljava/lang/String;", (void*) curses4j_unctrl },
+    { "curses4j_getmaxx", "(J)I", (void*) curses4j_getmaxx },
+    { "curses4j_getmaxy", "(J)I", (void*) curses4j_getmaxy },
+    { "curses4j_wclear", "(J)I", (void*) curses4j_wclear },
+    { "curses4j_typeahead", "(I)I", (void*) curses4j_typeahead },
+    { "curses4j_def_shell_mode", "()I", (void*) curses4j_def_shell_mode },
+    { "curses4j_newwin", "(IIII)J", (void*) curses4j_newwin },
+    { "curses4j_getpary", "(J)I", (void*) curses4j_getpary },
+    { "curses4j_getparx", "(J)I", (void*) curses4j_getparx },
+    { "curses4j_wbkgd", "(JJ)I", (void*) curses4j_wbkgd },
+    { "curses4j_subwin", "(JIIII)J", (void*) curses4j_subwin },
+    { "curses4j_touchwin", "(J)I", (void*) curses4j_touchwin },
+    { "curses4j_derwin", "(JIIII)J", (void*) curses4j_derwin },
+    { "curses4j_scrollok", "(JI)I", (void*) curses4j_scrollok },
+    { "curses4j_box", "(JCC)I", (void*) curses4j_box },
+    { "curses4j_wmove", "(JII)I", (void*) curses4j_wmove },
+    { "curses4j_wattron", "(JI)I", (void*) curses4j_wattron },
+    { "curses4j_wattroff", "(JI)I", (void*) curses4j_wattroff },
+    { "curses4j_wattrset", "(JI)I", (void*) curses4j_wattrset },
+    { "curses4j_can_change_color", "()I", (void*) curses4j_can_change_color },
+    { "curses4j_init_color", "(SSSS)I", (void*) curses4j_init_color },
+    { "curses4j_beep", "()I", (void*) curses4j_beep },
+    { "curses4j_flash", "()I", (void*) curses4j_flash },
+    { "curses4j_has_colors", "()I", (void*) curses4j_has_colors },
+    { "curses4j_colors", "()I", (void*) curses4j_colors },
+    { "curses4j_color_pairs", "()I", (void*) curses4j_color_pairs },
+    { "curses4j_color_pair", "(I)I", (void*) curses4j_color_pair },
+    { "curses4j_pair_number", "(I)I", (void*) curses4j_pair_number },
+    { "curses4j_pdc_acs", "(I)I", (void*) curses4j_pdc_acs },
+    { "curses4j_mvwaddch", "(JIII)I", (void*) curses4j_mvwaddch },
+    { "curses4j_getcury", "(J)I", (void*) curses4j_getcury },
+    { "curses4j_getcurx", "(J)I", (void*) curses4j_getcurx },
+    { "curses4j_lines", "()I", (void*)  curses4j_lines },
+    { "curses4j_cols", "()I", (void*) curses4j_cols }
+  };
+  (*env)->RegisterNatives(env, klass, methods, sizeof(methods) / sizeof(methods[0]));
+  return JNI_VERSION_1_8;
 }
