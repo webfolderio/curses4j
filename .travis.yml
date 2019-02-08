@@ -1,0 +1,20 @@
+matrix:
+  include:
+   - os: osx
+     osx_image: xcode10
+     env: CC=gcc-8 CXX=g++-8
+     language: java
+
+cache:
+  directories:
+  - $HOME/.m2
+  - $HOME/Library/Caches/Homebrew
+
+before_install:
+  - brew cask uninstall oclint
+
+install:
+  - brew install gcc@8
+
+script:
+  - ./build.sh
