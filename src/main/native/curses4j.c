@@ -17,246 +17,269 @@ jlong curses4j_initscr(JNIEnv *env, jobject that) {
   return peer;
 }
 
-jint curses4j_start_color(JNIEnv *env, jclass that) {
+jint curses4j_start_color(JNIEnv *env, jclass klass) {
   return (jint) start_color();
 }
 
-jint curses4j_init_pair(JNIEnv *env, jclass that, jshort pair, jshort fg, jshort bg) {
- return (jint) init_pair(pair, fg, bg);
+jint curses4j_init_pair(JNIEnv *env, jclass klass, jshort pair, jshort fg, jshort bg) {
+  return (jint) init_pair(pair, fg, bg);
 }
 
 jint curses4j_wattr_on(JNIEnv *env, jobject that, jlong peer, jint attrs) {
- WINDOW* win = *(WINDOW **) &peer;
- return (jint) wattr_on(win, attrs, NULL);
+  WINDOW* win = *(WINDOW **) &peer;
+  return (jint) wattr_on(win, attrs, NULL);
 }
 
 jint curses4j_wrefresh(JNIEnv *env, jobject that, jlong peer) {
- WINDOW* win = *(WINDOW **) &peer;
- return (jint) wrefresh(win);
+  WINDOW* win = *(WINDOW **) &peer;
+  return (jint) wrefresh(win);
 }
 
 jint curses4j_wprintw(JNIEnv *env, jobject that, jlong peer, jstring str) {
- const char *_str = str == NULL ? NULL : (char *) (*env)->GetStringUTFChars(env, str, NULL);
- WINDOW* win = *(WINDOW **) &peer;
- jint ret = (jint) wprintw(win, _str);
- if (_str) {
-  (*env)->ReleaseStringUTFChars(env, str, _str);
- }
- return ret;
+  const char *_str = str == NULL ? NULL : (char *) (*env)->GetStringUTFChars(env, str, NULL);
+  WINDOW* win = *(WINDOW **) &peer;
+  jint ret = (jint) wprintw(win, _str);
+  if (_str) {
+    (*env)->ReleaseStringUTFChars(env, str, _str);
+  }
+  return ret;
 }
 
 jstring curses4j_wgetnstr(JNIEnv *env, jobject that, jlong peer, jint n) {
- if (n <= 0) {
-  return NULL;
- }
- WINDOW* win = *(WINDOW **) &peer;
- char *_str = malloc(sizeof(char) * (n + 1));
- if (wgetnstr(win, _str, n) > ERR) {
-  jstring str = (*env)->NewStringUTF(env, _str);
-  free(_str);
-  return str;
- } else {
-  free(_str);
-  return NULL;
- }
+  if (n <= 0) {
+   return NULL;
+  }
+  WINDOW* win = *(WINDOW **) &peer;
+  char *_str = malloc(sizeof(char) * (n + 1));
+  if (wgetnstr(win, _str, n) > ERR) {
+   jstring str = (*env)->NewStringUTF(env, _str);
+   free(_str);
+   return str;
+  } else {
+   free(_str);
+   return NULL;
+  }
 }
 
-jint curses4j_endwin(JNIEnv *env, jclass that) {
- return endwin();
+jint curses4j_endwin(JNIEnv *env, jclass klass) {
+  return endwin();
 }
 
 jint curses4j_waddch(JNIEnv *env, jobject that, jlong peer, jint ch) {
- WINDOW* win = *(WINDOW **) &peer;
- return waddch(win, ch);
+  WINDOW* win = *(WINDOW **) &peer;
+  return waddch(win, ch);
 }
 
 jint curses4j_wgetch(JNIEnv *env, jobject that, jlong peer) {
- WINDOW* win = *(WINDOW **) &peer;
- return wgetch(win);
+  WINDOW* win = *(WINDOW **) &peer;
+  return wgetch(win);
 }
 
 jint curses4j_waddstr(JNIEnv *env, jobject that, jlong peer, jstring str) {
- const char *_str = str == NULL ? NULL : (char *) (*env)->GetStringUTFChars(env, str, NULL);
- WINDOW* win = *(WINDOW **) &peer;
- jint ret = (jint) waddstr(win, _str);
- if (_str) {
-  (*env)->ReleaseStringUTFChars(env, str, _str);
- }
- return ret;
+  const char *_str = str == NULL ? NULL : (char *) (*env)->GetStringUTFChars(env, str, NULL);
+  WINDOW* win = *(WINDOW **) &peer;
+  jint ret = (jint) waddstr(win, _str);
+  if (_str) {
+    (*env)->ReleaseStringUTFChars(env, str, _str);
+  }
+  return ret;
 }
 
 jint curses4j_mvwaddstr(JNIEnv *env, jobject that, jlong peer, jint y, jint x, jstring str) {
- const char *_str = str == NULL ? NULL : (char *) (*env)->GetStringUTFChars(env, str, NULL);
- WINDOW* win = *(WINDOW **) &peer;
- jint ret = (jint) mvwaddstr(win, y, x, _str);
- if (_str) {
-  (*env)->ReleaseStringUTFChars(env, str, _str);
- }
- return ret;
+  const char *_str = str == NULL ? NULL : (char *) (*env)->GetStringUTFChars(env, str, NULL);
+  WINDOW* win = *(WINDOW **) &peer;
+  jint ret = (jint) mvwaddstr(win, y, x, _str);
+  if (_str) {
+    (*env)->ReleaseStringUTFChars(env, str, _str);
+  }
+  return ret;
 }
 
-jint curses4j_noecho(JNIEnv *env, jclass that) {
- return noecho();
+jint curses4j_noecho(JNIEnv *env, jclass klass) {
+  return noecho();
 }
 
 jint curses4j_nodelay(JNIEnv *env, jobject that, jlong peer, int bf) {
- WINDOW* win = *(WINDOW **) &peer;
- return nodelay(win, bf);
+  WINDOW* win = *(WINDOW **) &peer;
+  return nodelay(win, bf);
 }
 
-jint curses4j_napms(JNIEnv *env, jclass that, jint delay) {
- return napms(delay);
+jint curses4j_napms(JNIEnv *env, jclass klass, jint delay) {
+  return napms(delay);
 }
 
 jint curses4j_mvwinsch(JNIEnv *env, jobject that, jint peer, jint y, jint x, jchar ch) {
- WINDOW* win = *(WINDOW **) &peer;
- return mvwinsch(win, y, x, ch);
+  WINDOW* win = *(WINDOW **) &peer;
+  return mvwinsch(win, y, x, ch);
 }
 
 jint curses4j_mvwdelch(JNIEnv *env, jobject that, jint peer, jint y, jint x) {
- WINDOW* win = *(WINDOW **) &peer;
- return mvwdelch(win, y, x);
+  WINDOW* win = *(WINDOW **) &peer;
+  return mvwdelch(win, y, x);
 }
 
-jstring curses4j_unctrl(JNIEnv *env, jclass that, jint c) {
- const char *_str = unctrl(c);
- jstring str = NULL;
- if (_str) {
-   str = (*env)->NewStringUTF(env, _str);
-   return str;
- } else {
-   return NULL;
- }
+jstring curses4j_unctrl(JNIEnv *env, jclass klass, jint c) {
+  const char *_str = unctrl(c);
+  jstring str = NULL;
+  if (_str) {
+    str = (*env)->NewStringUTF(env, _str);
+    return str;
+  } else {
+    return NULL;
+  }
 }
 
 jint curses4j_getmaxx(JNIEnv *env, jobject that, jint peer) {
- WINDOW* win = *(WINDOW **) &peer;
- return getmaxx(win);
+  WINDOW* win = *(WINDOW **) &peer;
+  return getmaxx(win);
 }
 
 jint curses4j_getmaxy(JNIEnv *env, jobject that, jint peer) {
- WINDOW* win = *(WINDOW **) &peer;
- return getmaxy(win);
+  WINDOW* win = *(WINDOW **) &peer;
+  return getmaxy(win);
 }
 
 jint curses4j_wclear(JNIEnv *env, jobject that, jint peer) {
- WINDOW* win = *(WINDOW **) &peer;
- return wclear(win);
+  WINDOW* win = *(WINDOW **) &peer;
+  return wclear(win);
 }
 
-jint curses4j_typeahead(JNIEnv *env, jclass that, jint fields) {
+jint curses4j_typeahead(JNIEnv *env, jclass klass, jint fields) {
   return typeahead(fields);
 }
 
-jint curses4j_def_shell_mode(JNIEnv *env, jclass that) {
+jint curses4j_def_shell_mode(JNIEnv *env, jclass klass) {
   return def_shell_mode();
 }
 
-jlong curses4j_newwin(JNIEnv *env, jclass that, jint nlines, jint ncols, jint begy, jint begx) {
- WINDOW* win = newwin(nlines, ncols, begy, begx);
- return (jlong) win;
+jlong curses4j_newwin(JNIEnv *env, jclass klass, jint nlines, jint ncols, jint begy, jint begx) {
+  WINDOW* win = newwin(nlines, ncols, begy, begx);
+  return (jlong) win;
 }
 
 jint curses4j_getpary(JNIEnv *env, jobject that, jlong peer) {
- WINDOW* win = *(WINDOW **) &peer;
- return getpary(win);
+  WINDOW* win = *(WINDOW **) &peer;
+  return getpary(win);
 }
 
 jint curses4j_getparx(JNIEnv *env, jobject that, jlong peer) {
- WINDOW* win = *(WINDOW **) &peer;
- return getparx(win);
+  WINDOW* win = *(WINDOW **) &peer;
+  return getparx(win);
 }
 
 jint curses4j_wbkgd(JNIEnv *env, jobject that, jlong peer, jlong ch) {
- WINDOW* win = *(WINDOW **) &peer;
- return wbkgd(win, ch);
+  WINDOW* win = *(WINDOW **) &peer;
+  return wbkgd(win, ch);
 }
 
 jlong curses4j_subwin(JNIEnv *env, jobject that, jlong peer, jint nlines, jint ncols, jint begy, jint begx) {
- WINDOW* win = *(WINDOW **) &peer;
- WINDOW* sub = subwin(win, nlines, ncols, begy, begx);
- return (jlong) sub;
+  WINDOW* win = *(WINDOW **) &peer;
+  WINDOW* sub = subwin(win, nlines, ncols, begy, begx);
+  return (jlong) sub;
 }
 
 jint curses4j_touchwin(JNIEnv *env, jobject that, jlong peer) {
- WINDOW* win = *(WINDOW **) &peer;
- return touchwin(win);
+  WINDOW* win = *(WINDOW **) &peer;
+  return touchwin(win);
 }
 
 jlong curses4j_derwin(JNIEnv *env, jobject that, jlong peer, jint nlines, jint ncols, jint begy, jint begx) {
- WINDOW* win = *(WINDOW **) &peer;
- WINDOW* sub = derwin(win, nlines, ncols, begy, begx);
- return (jlong) sub;
+  WINDOW* win = *(WINDOW **) &peer;
+  WINDOW* sub = derwin(win, nlines, ncols, begy, begx);
+  return (jlong) sub;
 }
 
 jint curses4j_scrollok(JNIEnv *env, jobject that, jlong peer, int bf) {
- WINDOW* win = *(WINDOW **) &peer;
- return (jint) scrollok(win, bf);
+  WINDOW* win = *(WINDOW **) &peer;
+  return (jint) scrollok(win, bf);
 }
 
 jint curses4j_box(JNIEnv *env, jobject that, jlong peer, jchar verch, jchar horch) {
- WINDOW* win = *(WINDOW **) &peer;
- return (jint) box(win, verch, horch);
+  WINDOW* win = *(WINDOW **) &peer;
+  return (jint) box(win, verch, horch);
 }
 
 jint curses4j_wmove(JNIEnv *env, jobject that, jlong peer, jint y, jint x) {
- WINDOW* win = *(WINDOW **) &peer;
- return (jint) wmove(win, y, x);
+  WINDOW* win = *(WINDOW **) &peer;
+  return (jint) wmove(win, y, x);
 }
 
 jint curses4j_wattron(JNIEnv *env, jobject that, jlong peer, jint attrs) {
- WINDOW* win = *(WINDOW **) &peer;
- return (jint) wattron(win, attrs);
+  WINDOW* win = *(WINDOW **) &peer;
+  return (jint) wattron(win, attrs);
 }
 
 jint curses4j_wattroff(JNIEnv *env, jobject that, jlong peer, jint attrs) {
- WINDOW* win = *(WINDOW **) &peer;
- return (jint) wattroff(win, attrs);
+  WINDOW* win = *(WINDOW **) &peer;
+  return (jint) wattroff(win, attrs);
 }
 
 jint curses4j_wattrset(JNIEnv *env, jobject that, jlong peer, jint attrs) {
- WINDOW* win = *(WINDOW **) &peer;
- return (jint) wattrset(win, attrs);
+  WINDOW* win = *(WINDOW **) &peer;
+  return (jint) wattrset(win, attrs);
 }
 
-jint curses4j_can_change_color(JNIEnv *env, jclass that) {
- return (jint) can_change_color();
+jint curses4j_can_change_color(JNIEnv *env, jclass klass) {
+  return (jint) can_change_color();
 }
 
-jint curses4j_init_color(JNIEnv *env, jclass that, jshort color, jshort red, jshort green, jshort blue) {
- return init_color(color, red, green, blue);
+jint curses4j_init_color(JNIEnv *env, jclass klass, jshort color, jshort red, jshort green, jshort blue) {
+  return init_color(color, red, green, blue);
 }
 
-jint curses4j_beep(JNIEnv *env, jclass that) {
- return beep();
+jint curses4j_beep(JNIEnv *env, jclass klass) {
+  return beep();
 }
 
-jint curses4j_flash(JNIEnv *env, jclass that) {
- return flash();
+jint curses4j_flash(JNIEnv *env, jclass klass) {
+  return flash();
 }
 
-jint curses4j_has_colors(JNIEnv *env, jclass that) {
- return (jint) has_colors();
+jint curses4j_has_colors(JNIEnv *env, jclass klass) {
+  return (jint) has_colors();
 }
 
-jint curses4j_colors(JNIEnv *env, jclass that) {
+jint curses4j_colors(JNIEnv *env, jclass klass) {
  return (jint) COLORS;
 }
 
 jint curses4j_color_pairs(JNIEnv *env, jclass klass) {
- return (jint) COLOR_PAIRS;
+  return (jint) COLOR_PAIRS;
 }
 
 jint curses4j_color_pair(JNIEnv *env, jclass klass, jint n) {
- return (jint) COLOR_PAIR(n);
+  return (jint) COLOR_PAIR(n);
 }
 
 jint curses4j_pair_number(JNIEnv *env, jclass klass, jint n) {
- return (jint) PAIR_NUMBER(n);
+  return (jint) PAIR_NUMBER(n);
 }
 
 jint curses4j_pdc_acs(JNIEnv *env, jclass klass, jint w) {
- return PDC_ACS(w);
+  return PDC_ACS(w);
+}
+
+jint curses4j_mvaddch(JNIEnv *env, jobject that, jlong peer, jint y, jint x, jint ch) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return mvwaddch(win, y, x, ch);
+}
+
+jint curses4j_getcury(JNIEnv *env, jobject that, jlong peer) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return getcury(peer);
+}
+
+jint curses4j_getcurx(JNIEnv *env, jobject that, jlong peer) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return getcurx(peer);
+}
+
+jint curses4j_lines(JNIEnv *env, jclass klass) {
+  return (jint) LINES;
+}
+
+jint curses4j_cols(JNIEnv *env, jclass klass) {
+  return (jint) COLS;
 }
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
@@ -312,9 +335,13 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         { "curses4j_color_pairs", "()I", (void*) curses4j_color_pairs },
         { "curses4j_color_pair", "(I)I", (void*) curses4j_color_pair },
         { "curses4j_pair_number", "(I)I", (void*) curses4j_pair_number },
-        { "curses4j_pdc_acs", "(I)I", (void*) curses4j_pdc_acs }
+        { "curses4j_pdc_acs", "(I)I", (void*) curses4j_pdc_acs },
+        { "curses4j_mvaddch", "(JIII)I", (void*) curses4j_mvaddch },
+        { "curses4j_getcury", "(J)I", (void*) curses4j_getcury },
+        { "curses4j_getcurx", "(J)I", (void*) curses4j_getcurx },
+        { "curses4j_lines", "()I", (void*)  curses4j_lines },
+        { "curses4j_cols", "()I", (void*) curses4j_cols }
     };
-
     (*env)->RegisterNatives(env, klass, methods, sizeof(methods) / sizeof(methods[0]));
     return JNI_VERSION_1_8;
 }

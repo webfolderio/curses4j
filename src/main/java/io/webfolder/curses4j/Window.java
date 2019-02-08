@@ -182,4 +182,20 @@ public class Window {
     public int touchwin() {
         return peer.curses4j_touchwin(peer.peer);
     }
+
+    public int mvaddch(int y, int x, char ch) {
+        return peer.curses4j_mvaddch(peer.peer, y, x, (int) ch);
+    }
+
+    public int mvaddch(int y, int x, int ch) {
+        return peer.curses4j_mvaddch(peer.peer, y, x, ch);
+    }
+
+    public int getcury() {
+        return peer.curses4j_getcury(peer.peer);
+    }
+
+    public int getcurx() {
+        return peer.curses4j_getcurx(peer.peer);
+    }
 }

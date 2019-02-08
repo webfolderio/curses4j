@@ -1,5 +1,6 @@
 package io.webfolder.curses4j;
 
+import static io.webfolder.curses4j.CursesWindow.*;
 import static io.webfolder.curses4j.CursesWindow.curses4j_beep;
 import static io.webfolder.curses4j.CursesWindow.curses4j_can_change_color;
 import static io.webfolder.curses4j.CursesWindow.curses4j_color_pair;
@@ -31,15 +32,13 @@ public class Curses {
     public static final short COLOR_MAGENTA = COLOR_RED  | COLOR_BLUE ;
     public static final short COLOR_YELLOW  = COLOR_RED  | COLOR_GREEN;
 
-    public static final int PDC_COLOR_SHIFT = 24;
+    public static final int FALSE        = 0;
+    public static final int TRUE         = 1;
 
-    public static final int FALSE = 0;
-    public static final int TRUE  = 1;
+    public static final int ERR          = -1;
+    public static final int OK           =  0;
 
-    public static final int ERR = -1;
-    public static final int OK  =  0;
-
-    /*** Video attribute macros ***/
+    /* Video attribute macros */
     public static final int A_NORMAL     = 0x00000000;
     public static final int A_COLOR      = 0xff000000;
     public static final int A_ALTCHARSET = 0x00010000;
@@ -58,9 +57,9 @@ public class Curses {
     public static final int A_RIGHTLINE  = A_RIGHT;
     public static final int A_STANDOUT   = A_REVERSE | A_BOLD; /* X/Open */
 
-    public static final int A_DIM     = A_NORMAL;
-    public static final int A_INVIS   = A_NORMAL;
-    public static final int A_PROTECT = A_NORMAL;
+    public static final int A_DIM        = A_NORMAL;
+    public static final int A_INVIS      = A_NORMAL;
+    public static final int A_PROTECT    = A_NORMAL;
 
     public static final int A_HORIZONTAL = A_NORMAL;
     public static final int A_LOW        = A_NORMAL;
@@ -255,6 +254,34 @@ public class Curses {
         return stdscr.scrollok(bf);
     }
 
+    public static int getmaxy() {
+        return stdscr.getmaxy();
+    }
+
+    public static int getmaxx() {
+        return stdscr.getmaxx();
+    }
+
+    public static int mvaddstr(int y, int x, String str) {
+        return stdscr.mvaddstr(y, x, str);
+    }
+
+    public static int mvaddch(int y, int x, char ch) {
+        return stdscr.mvaddch(y, x, ch);
+    }
+
+    public static int mvaddch(int y, int x, int ch) {
+        return stdscr.mvaddch(y, x, ch);
+    }
+
+    public static int getcury() {
+        return stdscr.getcury();
+    }
+
+    public static int getcurx() {
+        return stdscr.getcurx();
+    }
+
     /**
      * initializes eight basic colors (black, red, green, yellow, blue, magenta,
      * cyan, and white), and two global variables: COLORS and COLOR_PAIRS
@@ -275,5 +302,13 @@ public class Curses {
 
     public static int typeahead(int fields) {
         return curses4j_typeahead(fields);
+    }
+
+    public static int LINES() {
+        return curses4j_lines();
+    }
+
+    public static int COLS() {
+        return curses4j_cols();
     }
 }
