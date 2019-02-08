@@ -16,7 +16,7 @@ jobs:
           command: 'sudo apt-get -q --yes install libncurses-dev'
       - run:
           name: Build
-          command: 'mkdir build && cd build && cmake .. && strip libcurses4j.so'
+          command: 'mkdir build && cd build && cmake .. && make && strip libcurses4j.so'
 
       - restore_cache:
           keys:
