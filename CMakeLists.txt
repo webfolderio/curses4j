@@ -18,6 +18,7 @@ endif()
     INCLUDE_DIRECTORIES(${JAVA_INCLUDE_PATH2})
 
 file(GLOB_RECURSE curses4j_SRC
+    "*.h"
     "src/main/native/curses4j.c"
 )
 
