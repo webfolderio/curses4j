@@ -14,4 +14,5 @@ install:
   - brew install gcc@8
 
 script:
-  - ./build.sh
+  - mkdir build
+  - cd build && CC=gcc-8 CXX=g++-8 cmake .. && make
