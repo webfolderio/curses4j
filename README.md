@@ -20,7 +20,7 @@ Supported Platforms
 
 How it is tested
 ----------------
-curses4j is regularly tested on [appveyor](https://ci.appveyor.com/project/WebFolder/curses4j) (Windows), [circleci](https://circleci.com/gh/webfolderio/curses4j) (Ubuntu).
+curses4j is regularly tested on [appveyor](https://ci.appveyor.com/project/WebFolder/curses4j) (Windows) and [circleci](https://circleci.com/gh/webfolderio/curses4j) (Ubuntu).
 
 Integration with Maven
 ----------------------
