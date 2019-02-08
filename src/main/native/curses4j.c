@@ -266,12 +266,12 @@ jint curses4j_mvwaddch(JNIEnv *env, jobject that, jlong peer, jint y, jint x, ji
 
 jint curses4j_getcury(JNIEnv *env, jobject that, jlong peer) {
   WINDOW* win = *(WINDOW **) &peer;
-  return getcury(peer);
+  return (jint) getcury(win);
 }
 
 jint curses4j_getcurx(JNIEnv *env, jobject that, jlong peer) {
   WINDOW* win = *(WINDOW **) &peer;
-  return getcurx(peer);
+  return (jint) getcurx(win);
 }
 
 jint curses4j_lines(JNIEnv *env, jclass klass) {
