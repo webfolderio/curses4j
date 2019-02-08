@@ -4,7 +4,7 @@
 
 
 
-This is an easy-to-use, fully cross-platform Java wrapper for the *nix curses terminal library. The project is able to load the OS-specific native implementation of curses at runtime which means you can deploy the same binary to Windows & Linux.
+This is an easy-to-use, fully cross-platform Java wrapper for the [ncurses](https://en.wikipedia.org/wiki/Ncurses) in GNU/Linux and [PDCurses](https://en.wikipedia.org/wiki/PDCurses) in Windows terminal library. The project is able to load the OS-specific native implementation of curses at runtime which means you can deploy the same binary to Windows & Linux.
 
 Supported Java Versions
 -----------------------
@@ -16,7 +16,7 @@ Both the JRE and the JDK are suitable for use with this library.
 Supported Platforms
 -------------------
 * Windows 8 & Windows 10 (64-bit)
-* Ubuntu (64-bit)
+* GNU/Linux (64-bit)
 
 How it is tested
 ----------------
