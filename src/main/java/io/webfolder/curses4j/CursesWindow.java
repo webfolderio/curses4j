@@ -129,7 +129,7 @@ class CursesWindow {
 
     native int curses4j_wrefresh(long peer);
 
-    native int curses4j_mvaddch(long peer, int y, int x, int ch);
+    native int curses4j_mvwaddch(long peer, int y, int x, int ch);
 
     native int curses4j_getcury(long peer);
 

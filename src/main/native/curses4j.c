@@ -259,7 +259,7 @@ jint curses4j_pdc_acs(JNIEnv *env, jclass klass, jint w) {
   return PDC_ACS(w);
 }
 
-jint curses4j_mvaddch(JNIEnv *env, jobject that, jlong peer, jint y, jint x, jint ch) {
+jint curses4j_mvwaddch(JNIEnv *env, jobject that, jlong peer, jint y, jint x, jint ch) {
   WINDOW* win = *(WINDOW **) &peer;
   return mvwaddch(win, y, x, ch);
 }
@@ -336,7 +336,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         { "curses4j_color_pair", "(I)I", (void*) curses4j_color_pair },
         { "curses4j_pair_number", "(I)I", (void*) curses4j_pair_number },
         { "curses4j_pdc_acs", "(I)I", (void*) curses4j_pdc_acs },
-        { "curses4j_mvaddch", "(JIII)I", (void*) curses4j_mvaddch },
+        { "curses4j_mvwaddch", "(JIII)I", (void*) curses4j_mvwaddch },
         { "curses4j_getcury", "(J)I", (void*) curses4j_getcury },
         { "curses4j_getcurx", "(J)I", (void*) curses4j_getcurx },
         { "curses4j_lines", "()I", (void*)  curses4j_lines },

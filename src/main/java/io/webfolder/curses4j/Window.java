@@ -184,11 +184,11 @@ public class Window {
     }
 
     public int mvaddch(int y, int x, char ch) {
-        return peer.curses4j_mvaddch(peer.peer, y, x, (int) ch);
+        return peer.curses4j_mvwaddch(peer.peer, y, x, (int) ch);
     }
 
     public int mvaddch(int y, int x, int ch) {
-        return peer.curses4j_mvaddch(peer.peer, y, x, ch);
+        return peer.curses4j_mvwaddch(peer.peer, y, x, ch);
     }
 
     public int getcury() {
