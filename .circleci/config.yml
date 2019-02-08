@@ -17,6 +17,9 @@ jobs:
       - run:
           name: Build
           command: 'mkdir build && cd build && cmake .. && make && strip libcurses4j.so'
+      - run:
+          name: Copy library to META-INF
+          command: 'cp build/libcurses4j.so src/main/resources/META-INF'
 
       - restore_cache:
           keys:
