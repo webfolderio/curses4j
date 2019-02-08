@@ -39,4 +39,4 @@ Add the following to your POM's `<dependencies>` tag:
 
 License
 -------
-Licensed under the [Apache License](https://github.com/webfolderio/curses4j/blob/master/LICENSE).
+Licensed under the [MIT](https://github.com/webfolderio/curses4j/blob/master/LICENSE).
