@@ -13,8 +13,12 @@ jobs:
       - run:
           name: Install CMAKE
           command: 'apt-get update && sudo apt-get install -y cmake'
-      - checkout
-      - run: ./build.sh
+      - run:
+          name: Checkout source code
+          command: 'checkout'
+      - run:
+          name: Build
+          command: './build.sh'
 
       - restore_cache:
           keys:
