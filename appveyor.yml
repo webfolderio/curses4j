@@ -17,15 +17,7 @@ environment:
 
 build_script:
   - ps: Start-FileDownload 'https://github.com/wmcbrine/PDCurses/archive/3.7.zip'
-  - "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat"
-  - copy /Y src\\main\\native\\libobjs.mif PDCurses-3.7\\common\\libobjs.mif
-  - copy /Y src\\main\\native\\Makefile.vc PDCurses-3.7\\wincon\\Makefile.vc
-  - copy /Y src\\main\\native\\curses4j.c PDCurses-3.7\\pdcurses\\curses4j.c
-  - cd PDCurses-3.7\wincon
-  - nmake -f Makefile.vc UTF8=Y WIDE=Y DLL=Y clean all
-  - cd ..
-  - cd ..
-  - copy /Y PDCurses-3.7\\wincon\\pdcurses.dll src\\main\\resources\\META-INF\\curses4j.dll
+  - build.bat
   - mvn -DskipTests -q clean package
 
 artifacts:
