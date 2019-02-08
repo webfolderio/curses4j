@@ -10,9 +10,6 @@ cache:
   - $HOME/.m2
   - $HOME/Library/Caches/Homebrew
 
-before_install:
-  - brew cask uninstall oclint
-
 install:
   - brew install gcc@8
 
