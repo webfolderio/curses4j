@@ -15,34 +15,41 @@ static JavaVM *jvm;
  #include <windows.h>
  #include <fcntl.h>
 
-  void curses4j_create_console(JNIEnv *env, jobject that) {
-    int hCrt = -1;
-    FILE* hf = NULL;
+  void center_console_window() {
+    HWND hConsoleWnd = GetConsoleWindow();
+    HMONITOR hMonitor = MonitorFromWindow(hConsoleWnd, MONITOR_DEFAULTTONEAREST);
 
-      if ( ! AttachConsole( ATTACH_PARENT_PROCESS) ) {
-        AllocConsole();
+    MONITORINFO info;
+    int width = 800;
+    int height = 600;
 
-        /* redirect stdout */
-        hCrt = _open_osfhandle((intptr_t)GetStdHandle(STD_OUTPUT_HANDLE), _O_TEXT);
-        hf = _fdopen(hCrt, "w");
-        *stdout = *hf;
-        setvbuf(stdout, NULL, _IONBF, 0);
+    info.cbSize = sizeof(MONITORINFO);
 
-        /* redirect stdin */
-        hCrt = _open_osfhandle((intptr_t)GetStdHandle(STD_INPUT_HANDLE), _O_TEXT);
-        hf = _fdopen(hCrt, "r");
-        *stdin = *hf;
-        setvbuf(stdin, NULL, _IONBF, 0);
- 
-        /* stderr */
-        hCrt = _open_osfhandle((intptr_t)GetStdHandle(STD_ERROR_HANDLE), _O_TEXT);
-        hf = _fdopen(hCrt, "w");
-        *stderr = *hf;
-        setvbuf(stderr, NULL, _IONBF, 0);   
-      }
+    RECT rect;
+    if (GetWindowRect(hConsoleWnd, &rect)) {
+      width = rect.right;
+      height = rect.bottom;
+    }
+
+    if (GetMonitorInfo(hMonitor, &info)) {
+      int x = (info.rcWork.left + info.rcWork.right) / 2 - width / 2;
+      int y = (info.rcWork.top + info.rcWork.bottom) / 2 - height / 2;
+      SetWindowPos(hConsoleWnd, NULL, x, y, width, height,
+             SWP_NOZORDER | SWP_NOOWNERZORDER);
+    }
   }
+
+  jint curses4j_create_console(JNIEnv *env, jobject that) {
+    if (AllocConsole()) {
+      center_console_window();
+      return 1;
+    }
+    return 0;
+  }
+
 #elif
-  void curses4j_create_console(JNIEnv *env, jobject that) {
+  jint curses4j_create_console(JNIEnv *env, jobject that) {
+    // no op
   }
 #endif
 
@@ -325,7 +332,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
   jvm = vm;
   jclass klass = (*env)->FindClass(env, "io/webfolder/curses4j/CursesWindow");
   JNINativeMethod methods[] = {
-    { "curses4j_create_console", "()V", (void*) curses4j_create_console },
+    { "curses4j_create_console", "()I", (void*) curses4j_create_console },
     { "curses4j_initscr", "()J", (void*) curses4j_initscr },
     { "curses4j_start_color", "()I", (void*) curses4j_start_color },
     { "curses4j_init_pair", "(SSS)I", (void*) curses4j_init_pair },

@@ -1,17 +1,19 @@
 package io.webfolder.curses4j;
 
-import static io.webfolder.curses4j.CursesWindow.*;
 import static io.webfolder.curses4j.CursesWindow.curses4j_beep;
 import static io.webfolder.curses4j.CursesWindow.curses4j_can_change_color;
 import static io.webfolder.curses4j.CursesWindow.curses4j_color_pair;
 import static io.webfolder.curses4j.CursesWindow.curses4j_color_pairs;
 import static io.webfolder.curses4j.CursesWindow.curses4j_colors;
+import static io.webfolder.curses4j.CursesWindow.curses4j_cols;
+import static io.webfolder.curses4j.CursesWindow.curses4j_create_console;
 import static io.webfolder.curses4j.CursesWindow.curses4j_def_shell_mode;
 import static io.webfolder.curses4j.CursesWindow.curses4j_endwin;
 import static io.webfolder.curses4j.CursesWindow.curses4j_flash;
 import static io.webfolder.curses4j.CursesWindow.curses4j_has_colors;
 import static io.webfolder.curses4j.CursesWindow.curses4j_init_color;
 import static io.webfolder.curses4j.CursesWindow.curses4j_init_pair;
+import static io.webfolder.curses4j.CursesWindow.curses4j_lines;
 import static io.webfolder.curses4j.CursesWindow.curses4j_napms;
 import static io.webfolder.curses4j.CursesWindow.curses4j_noecho;
 import static io.webfolder.curses4j.CursesWindow.curses4j_pair_number;
@@ -20,8 +22,14 @@ import static io.webfolder.curses4j.CursesWindow.curses4j_start_color;
 import static io.webfolder.curses4j.CursesWindow.curses4j_typeahead;
 import static io.webfolder.curses4j.CursesWindow.curses4j_unctrl;
 import static io.webfolder.curses4j.Window.stdscr;
+import static java.io.File.pathSeparator;
+import static java.lang.System.console;
+
+import java.io.Console;
 
 public class Curses {
+
+	private static final boolean windows = ";".equals(pathSeparator);
 
     public static final short COLOR_BLACK   = 0;
     public static final short COLOR_RED     = 1;
@@ -312,7 +320,14 @@ public class Curses {
         return curses4j_cols();
     }
 
-    public static void create_console() {
-        curses4j_create_console();
+    public static boolean create_console() {
+    	if ( ! windows ) {
+    		return false;
+    	}
+    	Console console = console();
+    	if (console == null) {
+    		return curses4j_create_console() == TRUE ? true : false;
+    	}
+    	return false;
     }
 }
