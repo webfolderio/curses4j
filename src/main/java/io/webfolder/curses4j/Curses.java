@@ -311,4 +311,8 @@ public class Curses {
     public static int COLS() {
         return curses4j_cols();
     }
+
+    public static void create_console() {
+        curses4j_create_console();
+    }
 }

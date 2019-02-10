@@ -33,6 +33,8 @@ class CursesWindow {
         load(libFile.toAbsolutePath().toString());
     }
 
+    native static void curses4j_create_console();
+
     native static int curses4j_beep();
 
     native static int curses4j_can_change_color();

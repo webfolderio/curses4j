@@ -3,13 +3,39 @@
 #include <jni.h>
 #include "curses.h"
 
+#ifdef _MSC_VER
+ #include <windows.h>
+#endif
+
 static JavaVM *jvm;
 
 #define PDC_RGB 1
 
 #if !defined(PDC_ACS)
- #define PDC_ACS(w) ((chtype)w | A_ALTCHARSET)
+ #define PDC_ACS(w) ((chtype) w | A_ALTCHARSET)
 #endif
+
+void curses4j_create_console(JNIEnv *env, jobject that) {
+  int hCrt = -1;
+  FILE* hf = NULL;
+
+  AllocConsole();
+
+  hCrt = _open_osfhandle((intptr_t)GetStdHandle(STD_OUTPUT_HANDLE), _O_TEXT);
+  hf = _fdopen(hCrt, "w");
+  *stdout = *hf;
+  setvbuf(stdout, NULL, _IONBF, 0);
+
+  hCrt = _open_osfhandle((intptr_t)GetStdHandle(STD_INPUT_HANDLE), _O_TEXT);
+  hf = _fdopen(hCrt, "r");
+  *stdin = *hf;
+  setvbuf(stdin, NULL, _IONBF, 0);
+
+  hCrt = _open_osfhandle((intptr_t)GetStdHandle(STD_ERROR_HANDLE), _O_TEXT);
+  hf = _fdopen(hCrt, "w");
+  *stderr = *hf;
+  setvbuf(stderr, NULL, _IONBF, 0);
+}
 
 jlong curses4j_initscr(JNIEnv *env, jobject that) {
   WINDOW* win = initscr();
@@ -290,6 +316,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
   jvm = vm;
   jclass klass = (*env)->FindClass(env, "io/webfolder/curses4j/CursesWindow");
   JNINativeMethod methods[] = {
+    { "curses4j_create_console", "()V", (void*) curses4j_create_console },
     { "curses4j_initscr", "()J", (void*) curses4j_initscr },
     { "curses4j_start_color", "()I", (void*) curses4j_start_color },
     { "curses4j_init_pair", "(SSS)I", (void*) curses4j_init_pair },
