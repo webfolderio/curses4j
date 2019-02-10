@@ -3,10 +3,6 @@
 #include <jni.h>
 #include "curses.h"
 
-#ifdef _MSC_VER
- #include <windows.h>
-#endif
-
 static JavaVM *jvm;
 
 #define PDC_RGB 1
@@ -15,27 +11,40 @@ static JavaVM *jvm;
  #define PDC_ACS(w) ((chtype) w | A_ALTCHARSET)
 #endif
 
-void curses4j_create_console(JNIEnv *env, jobject that) {
-  int hCrt = -1;
-  FILE* hf = NULL;
+#ifdef _WIN32
+ #include <windows.h>
+ #include <fcntl.h>
 
-  AllocConsole();
+  void curses4j_create_console(JNIEnv *env, jobject that) {
+    int hCrt = -1;
+    FILE* hf = NULL;
 
-  hCrt = _open_osfhandle((intptr_t)GetStdHandle(STD_OUTPUT_HANDLE), _O_TEXT);
-  hf = _fdopen(hCrt, "w");
-  *stdout = *hf;
-  setvbuf(stdout, NULL, _IONBF, 0);
+      if ( ! AttachConsole( ATTACH_PARENT_PROCESS) ) {
+        AllocConsole();
 
-  hCrt = _open_osfhandle((intptr_t)GetStdHandle(STD_INPUT_HANDLE), _O_TEXT);
-  hf = _fdopen(hCrt, "r");
-  *stdin = *hf;
-  setvbuf(stdin, NULL, _IONBF, 0);
+        /* redirect stdout */
+        hCrt = _open_osfhandle((intptr_t)GetStdHandle(STD_OUTPUT_HANDLE), _O_TEXT);
+        hf = _fdopen(hCrt, "w");
+        *stdout = *hf;
+        setvbuf(stdout, NULL, _IONBF, 0);
 
-  hCrt = _open_osfhandle((intptr_t)GetStdHandle(STD_ERROR_HANDLE), _O_TEXT);
-  hf = _fdopen(hCrt, "w");
-  *stderr = *hf;
-  setvbuf(stderr, NULL, _IONBF, 0);
-}
+        /* redirect stdin */
+        hCrt = _open_osfhandle((intptr_t)GetStdHandle(STD_INPUT_HANDLE), _O_TEXT);
+        hf = _fdopen(hCrt, "r");
+        *stdin = *hf;
+        setvbuf(stdin, NULL, _IONBF, 0);
+ 
+        /* stderr */
+        hCrt = _open_osfhandle((intptr_t)GetStdHandle(STD_ERROR_HANDLE), _O_TEXT);
+        hf = _fdopen(hCrt, "w");
+        *stderr = *hf;
+        setvbuf(stderr, NULL, _IONBF, 0);   
+      }
+  }
+#elif
+  void curses4j_create_console(JNIEnv *env, jobject that) {
+  }
+#endif
 
 jlong curses4j_initscr(JNIEnv *env, jobject that) {
   WINDOW* win = initscr();
