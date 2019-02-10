@@ -29,7 +29,7 @@ import java.io.Console;
 
 public class Curses {
 
-	private static final boolean windows = ";".equals(pathSeparator);
+    private static final boolean windows = ";".equals(pathSeparator);
 
     public static final short COLOR_BLACK   = 0;
     public static final short COLOR_RED     = 1;
