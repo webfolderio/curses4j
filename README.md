@@ -39,4 +39,13 @@ Add the following to your POM's `<dependencies>` tag:
 
 License
 -------
-Licensed under the [MIT](https://github.com/webfolderio/curses4j/blob/master/LICENSE).
+Licensed under the [MIT](https://github.com/webfolderio/curses4j/blob/master/LICENSE). You can integrate and use this project in your applications for __free__!
+You can even change the source code and redistribute (even resell it).
+
+
+Contrubition
+------------
+ * We will never accept pull request.
+ * Please do not report bug or fill feature request.
+
+__All kinds of support request will be rejected.__
