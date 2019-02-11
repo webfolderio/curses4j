@@ -20,7 +20,7 @@ static JavaVM *jvm;
     HMONITOR hMonitor = MonitorFromWindow(hConsoleWnd, MONITOR_DEFAULTTONEAREST);
 
     MONITORINFO info;
-    RECT rect = NULL;
+    RECT rect;
 
     int width = 800;
     int height = 600;
@@ -366,7 +366,7 @@ jint curses4j_winsdelln(JNIEnv *env, jobject that, jlong peer, jint n) {
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
   JNIEnv* env;
   jclass klass;
-  JNINativeMethod methods[] = {
+  JNINativeMethod methods[57] = {
     { "curses4j_create_console", "()I", (void*) curses4j_create_console },
     { "curses4j_initscr", "()J", (void*) curses4j_initscr },
     { "curses4j_start_color", "()I", (void*) curses4j_start_color },
