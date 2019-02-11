@@ -365,11 +365,7 @@ jint curses4j_winsdelln(JNIEnv *env, jobject that, jlong peer, jint n) {
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
   JNIEnv* env;
-  if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
-      return -1;
-  }
-  jvm = vm;
-  jclass klass = (*env)->FindClass(env, "io/webfolder/curses4j/CursesWindow");
+  jclass klass;
   JNINativeMethod methods[] = {
     { "curses4j_create_console", "()I", (void*) curses4j_create_console },
     { "curses4j_initscr", "()J", (void*) curses4j_initscr },
@@ -430,6 +426,11 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_wdelch", "(J)I", (void*) curses4j_wdelch },
     { "curses4j_winsdelln", "(JI)I", (void*) curses4j_winsdelln }
   };
+  if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
+      return -1;
+  }
+  jvm = vm;
+  klass = (*env)->FindClass(env, "io/webfolder/curses4j/CursesWindow");
   (*env)->RegisterNatives(env, klass, methods, sizeof(methods) / sizeof(methods[0]));
   return JNI_VERSION_1_8;
 }
