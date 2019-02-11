@@ -366,7 +366,7 @@ jint curses4j_winsdelln(JNIEnv *env, jobject that, jlong peer, jint n) {
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
   JNIEnv* env;
   jclass klass;
-  JNINativeMethod methods[57] = {
+  JNINativeMethod methods[] = {
     { "curses4j_create_console", "()I", (void*) curses4j_create_console },
     { "curses4j_initscr", "()J", (void*) curses4j_initscr },
     { "curses4j_start_color", "()I", (void*) curses4j_start_color },
