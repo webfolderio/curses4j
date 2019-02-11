@@ -20,12 +20,13 @@ static JavaVM *jvm;
     HMONITOR hMonitor = MonitorFromWindow(hConsoleWnd, MONITOR_DEFAULTTONEAREST);
 
     MONITORINFO info;
+    RECT rect = NULL;
+
     int width = 800;
     int height = 600;
 
     info.cbSize = sizeof(MONITORINFO);
 
-    RECT rect;
     if (GetWindowRect(hConsoleWnd, &rect)) {
       width = rect.right;
       height = rect.bottom;
