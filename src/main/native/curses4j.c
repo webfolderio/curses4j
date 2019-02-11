@@ -46,8 +46,9 @@ static JavaVM *jvm;
     }
     return 0;
   }
+#endif
 
-#elif
+#if __GNUC__
   jint curses4j_create_console(JNIEnv *env, jobject that) {
     // no op
   }
