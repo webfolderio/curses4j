@@ -390,7 +390,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_getcurx", "(J)I", (void*) curses4j_getcurx },
     { "curses4j_lines", "()I", (void*)  curses4j_lines },
     { "curses4j_cols", "()I", (void*) curses4j_cols },
-    { "curses4j_winsertln", "()I", (void*) curses4j_winsertln }
+    { "curses4j_winsertln", "(J)I", (void*) curses4j_winsertln }
   };
   (*env)->RegisterNatives(env, klass, methods, sizeof(methods) / sizeof(methods[0]));
   return JNI_VERSION_1_8;
