@@ -174,7 +174,6 @@ public class Window {
         return peer.curses4j_winsch(peer.peer, ch);
     }
 
-
     public int insch(char ch) {
         return peer.curses4j_winsch(peer.peer, (int) ch);
     }

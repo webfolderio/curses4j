@@ -1,6 +1,13 @@
 package io.webfolder.curses4j.chapter05;
 
-import static io.webfolder.curses4j.Curses.*;
+import static io.webfolder.curses4j.Curses.addstr;
+import static io.webfolder.curses4j.Curses.endwin;
+import static io.webfolder.curses4j.Curses.getch;
+import static io.webfolder.curses4j.Curses.getcurx;
+import static io.webfolder.curses4j.Curses.getcury;
+import static io.webfolder.curses4j.Curses.initscr;
+import static io.webfolder.curses4j.Curses.printw;
+import static io.webfolder.curses4j.Curses.refresh;
 
 /**
  * @see https://c-for-dummies.com/ncurses/source_code/05-05_whereami.php

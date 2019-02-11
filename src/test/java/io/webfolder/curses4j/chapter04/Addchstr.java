@@ -20,7 +20,7 @@ public class Addchstr {
                 'l' | A_REVERSE, 'o', '!' | A_UNDERLINE,
                 0
             };
-            
+
             initscr();
             
             for (int i = 0; i < string.length; i++) {
@@ -29,7 +29,7 @@ public class Addchstr {
 
             refresh();
             getch();
-                
+
             endwin();
     }
 }
