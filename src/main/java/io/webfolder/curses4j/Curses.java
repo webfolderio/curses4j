@@ -330,4 +330,8 @@ public class Curses {
     	}
     	return false;
     }
+
+    public static int insertln() {
+        return stdscr.insertln();
+    }
 }

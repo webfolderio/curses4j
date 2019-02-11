@@ -77,6 +77,8 @@ class CursesWindow {
 
     native static String curses4j_unctrl(int c);
 
+    native int curses4j_winsertln(long peer);
+
     native int curses4j_box(long peer, char verch, char horch);
 
     native long curses4j_derwin(long peer, int nlines, int ncols, int begy, int begx);

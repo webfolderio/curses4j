@@ -198,4 +198,8 @@ public class Window {
     public int getcurx() {
         return peer.curses4j_getcurx(peer.peer);
     }
+
+    public int insertln() {
+        return peer.curses4j_winsertln(peer.peer);
+    }
 }
