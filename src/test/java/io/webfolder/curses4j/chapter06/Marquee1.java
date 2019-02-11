@@ -8,6 +8,9 @@ import static io.webfolder.curses4j.Curses.move;
 import static io.webfolder.curses4j.Curses.napms;
 import static io.webfolder.curses4j.Curses.refresh;
 
+/**
+ * @see https://c-for-dummies.com/ncurses/source_code/06-05_marquee1.php
+ */
 public class Marquee1 {
 
     public static void main(String[] args) {

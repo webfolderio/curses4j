@@ -1,6 +1,14 @@
 package io.webfolder.curses4j.chapter06;
 
-import static io.webfolder.curses4j.Curses.*;
+import static io.webfolder.curses4j.Curses.COLS;
+import static io.webfolder.curses4j.Curses.LINES;
+import static io.webfolder.curses4j.Curses.addch;
+import static io.webfolder.curses4j.Curses.endwin;
+import static io.webfolder.curses4j.Curses.getch;
+import static io.webfolder.curses4j.Curses.initscr;
+import static io.webfolder.curses4j.Curses.insdelln;
+import static io.webfolder.curses4j.Curses.move;
+import static io.webfolder.curses4j.Curses.refresh;
 
 /**
  * @see https://c-for-dummies.com/ncurses/source_code/06-11_insdel.php
