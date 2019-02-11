@@ -12,14 +12,6 @@ public class Window {
 
     private final CursesWindow peer = new CursesWindow();
 
-    /**
-     * initscr() should be the first curses routine called. It will initialize all
-     * curses data structures, and arrange that the first call to refresh() will
-     * clear the screen.
-     * <p>
-     * In case of error, initscr() will write a message to standard error and end
-     * the program.
-     */
     static void initscr() {
         if (stdscr.peer.peer == 0) {
             stdscr.peer.peer = stdscr.peer.curses4j_initscr();
@@ -50,10 +42,6 @@ public class Window {
         return peer.curses4j_waddstr(peer.peer, str);
     }
 
-    /**
-     * Turn on attrs in the current or specified window without affecting any
-     * others.
-     */
     public int attr_on(int attrs) {
         return peer.curses4j_wattr_on(peer.peer, attrs);
     }
@@ -136,31 +124,10 @@ public class Window {
         return peer.curses4j_nodelay(peer.peer, bf ? TRUE : FALSE);
     }
 
-    /**
-     * Prints a string.
-     */
     public int printw(String str, Object... args) {
         return peer.curses4j_wprintw(peer.peer, format(str, args));
     }
 
-    /**
-     * wrefresh() copies the named window to the physical terminal screen, taking
-     * into account what is already there in order to optimize cursor movement.
-     * <p>
-     * These routines must be called to get any output on the terminal, as other
-     * routines only manipulate data structures. Unless leaveok() has been enabled,
-     * the physical cursor of the terminal is left at the location of the window's
-     * cursor.
-     * <p>
-     * wnoutrefresh() and doupdate() allow multiple updates with more efficiency
-     * than wrefresh() alone. wrefresh() works by first calling wnoutrefresh(),
-     * which copies the named window to the virtual screen. It then calls
-     * doupdate(), which compares the virtual screen to the physical screen and does
-     * the actual update. A series of calls to wrefresh() will result in alternating
-     * calls to wnoutrefresh() and doupdate(), causing several bursts of output to
-     * the screen. By first calling wnoutrefresh() for each window, it is then
-     * possible to call doupdate() only once.
-     */
     public int refresh() {
         return peer.curses4j_wrefresh(peer.peer);
     }

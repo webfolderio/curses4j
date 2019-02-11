@@ -27,6 +27,13 @@ import static java.lang.System.console;
 
 import java.io.Console;
 
+/**
+ * curses api doc.:
+ * 
+ * @see <a href="https://github.com/wmcbrine/PDCurses/blob/master/man/MANUAL.md">PDCurses Manual</a>
+ * 
+ * @see <a href="https://pubs.opengroup.org/onlinepubs/007908799/cursesix.html">X/Open Curses Reference Pages</a>
+ */
 public class Curses {
 
     private static final boolean windows = ";".equals(pathSeparator);
@@ -204,16 +211,6 @@ public class Curses {
         return curses4j_init_color(color, red, green, blue);
     }
 
-    /**
-     * init_pair() changes the definition of a color-pair.
-     * <p>
-     * It takes three arguments: the number of the color-pair to be redefined, and
-     * the new values of the foreground and background colors. The pair number must
-     * be between 0 and COLOR_PAIRS - 1, inclusive. The foreground and background
-     * must be between 0 and COLORS - 1, inclusive. If the color pair was previously
-     * initialized, the screen is refreshed, and all occurrences of that color-pair
-     * are changed to the new definition.
-     */
     public static int init_pair(int pair, short fg, short bg) {
         if (pair > Short.MAX_VALUE) {
             throw new RuntimeException("pair must be smaller than: " + Short.MAX_VALUE);
@@ -290,12 +287,6 @@ public class Curses {
         return stdscr.getcurx();
     }
 
-    /**
-     * initializes eight basic colors (black, red, green, yellow, blue, magenta,
-     * cyan, and white), and two global variables: COLORS and COLOR_PAIRS
-     * (respectively defining the maximum number of colors and color-pairs the
-     * terminal is capable of displaying).
-     */
     public static int start_color() {
         return curses4j_start_color();
     }
