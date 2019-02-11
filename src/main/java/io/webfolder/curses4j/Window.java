@@ -202,4 +202,29 @@ public class Window {
     public int insertln() {
         return peer.curses4j_winsertln(peer.peer);
     }
+
+    public int insch(int ch) {
+        return peer.curses4j_winsch(peer.peer, ch);
+    }
+
+
+    public int insch(char ch) {
+        return peer.curses4j_winsch(peer.peer, (int) ch);
+    }
+
+    public int insstr(String str) {
+        return peer.curses4j_winsstr(peer.peer, str);
+    }
+
+    public int deleteln() {
+        return peer.curses4j_wdeleteln(peer.peer);
+    }
+
+    public int delch() {
+        return peer.curses4j_wdelch(peer.peer);
+    }
+
+    public int insdelln(int n) {
+        return peer.curses4j_winsdelln(peer.peer, n);
+    }
 }

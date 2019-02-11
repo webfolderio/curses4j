@@ -227,7 +227,7 @@ public class Curses {
     }
 
     public static int move(int y, int x) {
-        return stdscr.move(x, y);
+        return stdscr.move(y, x);
     }
 
     public static int napms(int delay) {
@@ -320,6 +320,18 @@ public class Curses {
         return curses4j_cols();
     }
 
+    public static int insch(char ch) {
+        return stdscr.insch((int) ch);
+    }
+
+    public static int insch(int ch) {
+        return stdscr.insch(ch);
+    }
+
+    public static int insstr(String str) {
+        return stdscr.insstr(str);
+    }
+
     public static boolean create_console() {
     	if ( ! windows ) {
     		return false;
@@ -333,5 +345,17 @@ public class Curses {
 
     public static int insertln() {
         return stdscr.insertln();
+    }
+
+    public static int deleteln() {
+        return stdscr.deleteln();        
+    }
+
+    public static int delch() {
+        return stdscr.delch();
+    }
+
+    public static int insdelln(int n) {
+        return stdscr.insdelln(n);
     }
 }

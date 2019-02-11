@@ -330,6 +330,36 @@ jint curses4j_winsertln(JNIEnv *env, jobject that, jlong peer) {
   return winsertln(win);
 }
 
+jint curses4j_winsch(JNIEnv *env, jobject that, jlong peer, jint ch) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return winsch(win, ch);
+}
+
+jint curses4j_winsstr(JNIEnv *env, jobject that, jlong peer, jstring str) {
+  const char *_str = str == NULL ? NULL : (char *) (*env)->GetStringUTFChars(env, str, NULL);
+  WINDOW* win = *(WINDOW **) &peer;
+  jint ret = (jint) winsstr(win, _str);
+  if (_str) {
+    (*env)->ReleaseStringUTFChars(env, str, _str);
+  }
+  return ret;
+}
+
+jint curses4j_wdeleteln(JNIEnv *env, jobject that, jlong peer) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return wdeleteln(win);
+}
+
+jint curses4j_wdelch(JNIEnv *env, jobject that, jlong peer) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return wdelch(win);
+}
+
+jint curses4j_winsdelln(JNIEnv *env, jobject that, jlong peer, jint n) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return winsdelln(win, n);
+}
+
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
   JNIEnv* env;
   if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
@@ -390,7 +420,12 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_getcurx", "(J)I", (void*) curses4j_getcurx },
     { "curses4j_lines", "()I", (void*)  curses4j_lines },
     { "curses4j_cols", "()I", (void*) curses4j_cols },
-    { "curses4j_winsertln", "(J)I", (void*) curses4j_winsertln }
+    { "curses4j_winsertln", "(J)I", (void*) curses4j_winsertln },
+    { "curses4j_winsch", "(JI)I", (void*) curses4j_winsch },
+    { "curses4j_winsstr", "(JLjava/lang/String;)I", (void*) curses4j_winsstr },
+    { "curses4j_wdeleteln", "(J)I", (void*) curses4j_wdeleteln },
+    { "curses4j_wdelch", "(J)I", (void*) curses4j_wdelch },
+    { "curses4j_winsdelln", "(JI)I", (void*) curses4j_winsdelln }
   };
   (*env)->RegisterNatives(env, klass, methods, sizeof(methods) / sizeof(methods[0]));
   return JNI_VERSION_1_8;

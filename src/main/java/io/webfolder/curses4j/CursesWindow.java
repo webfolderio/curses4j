@@ -138,4 +138,14 @@ class CursesWindow {
     native int curses4j_getcury(long peer);
 
     native int curses4j_getcurx(long peer);
+
+    native int curses4j_winsch(long peer, int ch);
+
+    native int curses4j_winsstr(long peer, String str);
+
+    native int curses4j_wdeleteln(long peer);
+
+    native int curses4j_wdelch(long peer);
+
+    native int curses4j_winsdelln(long peer, int n);
 }
