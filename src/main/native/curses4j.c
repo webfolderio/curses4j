@@ -90,11 +90,13 @@ jint curses4j_wprintw(JNIEnv *env, jobject that, jlong peer, jstring str) {
 }
 
 jstring curses4j_wgetnstr(JNIEnv *env, jobject that, jlong peer, jint n) {
+  char *_str = NULL;
+  WINDOW* win = NULL;
   if (n <= 0) {
    return NULL;
   }
-  WINDOW* win = *(WINDOW **) &peer;
-  char *_str = malloc(sizeof(char) * (n + 1));
+  win = *(WINDOW **) &peer;
+  _str = malloc(sizeof(char) * (n + 1));
   if (wgetnstr(win, _str, n) > ERR) {
    jstring str = (*env)->NewStringUTF(env, _str);
    free(_str);
