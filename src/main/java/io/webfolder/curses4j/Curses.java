@@ -349,4 +349,12 @@ public class Curses {
     public static int insdelln(int n) {
         return stdscr.insdelln(n);
     }
+
+    public static int clrtoeol() {
+        return stdscr.clrtoeol();
+    }
+
+    public static int clrtobot() {
+        return stdscr.clrtobot();
+    }
 }

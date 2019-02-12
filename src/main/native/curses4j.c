@@ -363,6 +363,16 @@ jint curses4j_winsdelln(JNIEnv *env, jobject that, jlong peer, jint n) {
   return winsdelln(win, n);
 }
 
+jint curses4j_wclrtoeol(JNIEnv *env, jobject that, jlong peer) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return wclrtoeol(win);  
+}
+
+jint curses4j_wclrtobot(JNIEnv *env, jobject that, jlong peer) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return wclrtobot(win);
+}
+
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
   JNIEnv* env;
   jclass klass;
@@ -424,7 +434,9 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_winsstr", "(JLjava/lang/String;)I", (void*) curses4j_winsstr },
     { "curses4j_wdeleteln", "(J)I", (void*) curses4j_wdeleteln },
     { "curses4j_wdelch", "(J)I", (void*) curses4j_wdelch },
-    { "curses4j_winsdelln", "(JI)I", (void*) curses4j_winsdelln }
+    { "curses4j_winsdelln", "(JI)I", (void*) curses4j_winsdelln },
+    { "curses4j_wclrtoeol", "(J)I", (void*) curses4j_wclrtoeol },
+    { "curses4j_wclrtobot", "(J)I", (void*) curses4j_wclrtobot }
   };
   if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
       return -1;

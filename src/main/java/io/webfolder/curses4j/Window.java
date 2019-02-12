@@ -193,4 +193,12 @@ public class Window {
     public int insdelln(int n) {
         return peer.curses4j_winsdelln(peer.peer, n);
     }
+
+    public int clrtoeol() {
+        return peer.curses4j_wclrtoeol(peer.peer);
+    }
+
+    public int clrtobot() {
+        return peer.curses4j_wclrtobot(peer.peer);
+    }
 }

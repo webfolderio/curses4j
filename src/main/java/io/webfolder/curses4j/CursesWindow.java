@@ -148,4 +148,8 @@ class CursesWindow {
     native int curses4j_wdelch(long peer);
 
     native int curses4j_winsdelln(long peer, int n);
+
+    native int curses4j_wclrtoeol(long peer);
+
+    native int curses4j_wclrtobot(long peer);
 }
