@@ -21,6 +21,7 @@ import static io.webfolder.curses4j.CursesWindow.curses4j_napms;
 import static io.webfolder.curses4j.CursesWindow.curses4j_noecho;
 import static io.webfolder.curses4j.CursesWindow.curses4j_pair_number;
 import static io.webfolder.curses4j.CursesWindow.curses4j_pdc_acs;
+import static io.webfolder.curses4j.CursesWindow.curses4j_resize_term;
 import static io.webfolder.curses4j.CursesWindow.curses4j_start_color;
 import static io.webfolder.curses4j.CursesWindow.curses4j_typeahead;
 import static io.webfolder.curses4j.CursesWindow.curses4j_unctrl;
@@ -482,5 +483,9 @@ public class Curses {
 
     public static boolean is_termresized() {
         return curses4j_is_termresized() == TRUE;
+    }
+
+    public static int resize_term(int nlines, int ncols) {
+        return curses4j_resize_term(nlines, ncols);
     }
 }
