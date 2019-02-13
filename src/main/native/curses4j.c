@@ -43,15 +43,32 @@ static JavaVM *jvm;
   jint curses4j_create_console(JNIEnv *env, jobject that) {
     if (AllocConsole()) {
       center_console_window();
-      return 1;
+      return TRUE;
     }
-    return 0;
+    return FALSE;
+  }
+
+  jint curses4j_disable_resize(JNIEnv *env, jobject that) {
+    HWND hConsoleWnd = GetConsoleWindow();
+    if (hConsoleWnd) {
+      HMENU sysMenu = GetSystemMenu(hConsoleWnd, FALSE);
+      if (sysMenu) {
+        DeleteMenu(sysMenu, SC_MAXIMIZE, 0x00000000);
+        DeleteMenu(sysMenu, SC_SIZE, 0x00000000);  
+        return TRUE;
+      }
+    }
+    return FALSE;
   }
 #endif
 
 #if __GNUC__
   jint curses4j_create_console(JNIEnv *env, jobject that) {
-    // no op
+    return FALSE;
+  }
+
+  jint curses4j_disable_resize(JNIEnv *env, jobject that) {
+    return FALSE;
   }
 #endif
 
@@ -467,7 +484,8 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_keypad", "(JI)I", (void*) curses4j_keypad },
     { "curses4j_flushinp", "()I", (void*) curses4j_flushinp },
     { "curses4j_is_termresized", "()I", (void*) curses4j_is_termresized },
-    { "curses4j_resize_term", "(II)I", (void*) curses4j_resize_term }
+    { "curses4j_resize_term", "(II)I", (void*) curses4j_resize_term },
+    { "curses4j_disable_resize", "()I", (void*) curses4j_disable_resize }
   };
   if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
       return -1;

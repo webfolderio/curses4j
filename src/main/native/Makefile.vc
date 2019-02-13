@@ -58,7 +58,6 @@ LIBCURSES	= pdcurses.lib
 CURSESDLL	= pdcurses.dll
 
 !ifdef DLL
-DLLOPT		= -DPDC_DLL_BUILD
 PDCLIBS		= $(CURSESDLL)
 !else
 PDCLIBS		= $(LIBCURSES)
