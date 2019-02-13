@@ -201,4 +201,8 @@ public class Window {
     public int clrtobot() {
         return peer.curses4j_wclrtobot(peer.peer);
     }
+
+    public int keypad(boolean bf) {
+        return peer.curses4j_keypad(peer.peer, bf ? TRUE : FALSE);
+    }
 }

@@ -373,6 +373,23 @@ jint curses4j_wclrtobot(JNIEnv *env, jobject that, jlong peer) {
   return wclrtobot(win);
 }
 
+jint curses4j_unget_wch(JNIEnv *env, jobject that, jint ch) {
+  return ungetch(ch);
+}
+
+jint curses4j_echo(JNIEnv *env, jobject that) {
+  return echo();
+}
+
+jint curses4j_keypad(JNIEnv *env, jobject that, jlong peer, jint bf) {
+  WINDOW* win = *(WINDOW **) &peer;
+  keypad(win, bf);
+}
+
+jint curses4j_flushinp(JNIEnv *env, jobject that) {
+  return flushinp();
+}
+
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
   JNIEnv* env;
   jclass klass;
@@ -436,7 +453,11 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_wdelch", "(J)I", (void*) curses4j_wdelch },
     { "curses4j_winsdelln", "(JI)I", (void*) curses4j_winsdelln },
     { "curses4j_wclrtoeol", "(J)I", (void*) curses4j_wclrtoeol },
-    { "curses4j_wclrtobot", "(J)I", (void*) curses4j_wclrtobot }
+    { "curses4j_wclrtobot", "(J)I", (void*) curses4j_wclrtobot },
+    { "curses4j_unget_wch", "(I)I", (void*) curses4j_unget_wch },
+    { "curses4j_echo", "()I", (void*) curses4j_echo },
+    { "curses4j_keypad", "(JI)I", (void*) curses4j_keypad },
+    { "curses4j_flushinp", "()I", (void*) curses4j_flushinp }
   };
   if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
       return -1;

@@ -63,6 +63,8 @@ class CursesWindow {
 
     native static int curses4j_noecho();
 
+    native static int curses4j_echo();
+
     native static int curses4j_pair_number(int n);
 
     native static int curses4j_pdc_acs(int w);
@@ -76,6 +78,10 @@ class CursesWindow {
     native static int curses4j_cols();
 
     native static String curses4j_unctrl(int c);
+
+    native static int curses4j_unget_wch(int ch);
+
+    native static int curses4j_flushinp();
 
     native int curses4j_winsertln(long peer);
 
@@ -152,4 +158,6 @@ class CursesWindow {
     native int curses4j_wclrtoeol(long peer);
 
     native int curses4j_wclrtobot(long peer);
+
+    native int curses4j_keypad(long peer, int bf);
 }

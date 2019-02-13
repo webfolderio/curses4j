@@ -4,8 +4,6 @@
 
 This is an easy-to-use, fully cross-platform Java wrapper for the [ncurses](https://en.wikipedia.org/wiki/Ncurses) in GNU/Linux and [PDCurses](https://en.wikipedia.org/wiki/PDCurses) in Windows. The project is able to load the OS-specific native implementation of curses at runtime which means you can deploy the same binary to GNU/Linux & Windows.
 
-Whether you just need colors & styles, build a simple interactive command line tool or a complex terminal application: this is the absolute terminal library for Java.
-
 Supported Java Versions
 -----------------------
 
