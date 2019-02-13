@@ -374,7 +374,7 @@ jint curses4j_wclrtobot(JNIEnv *env, jobject that, jlong peer) {
 }
 
 jint curses4j_unget_wch(JNIEnv *env, jobject that, jint ch) {
-  return ungetch(ch);
+  return unget_wch(ch);
 }
 
 jint curses4j_echo(JNIEnv *env, jobject that) {

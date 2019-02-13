@@ -13,7 +13,7 @@ import static io.webfolder.curses4j.Curses.nodelay;
 import static io.webfolder.curses4j.Curses.noecho;
 import static io.webfolder.curses4j.Curses.printw;
 import static io.webfolder.curses4j.Curses.refresh;
-import static io.webfolder.curses4j.Curses.ungetch;
+import static io.webfolder.curses4j.Curses.unget_wch;
 
 /**
  * @see https://c-for-dummies.com/ncurses/source_code/08-05_kbhit.php
@@ -37,7 +37,7 @@ public class Kbhit {
         {
             r = TRUE;
             /* return key to queue */
-            ungetch(ch);
+            unget_wch(ch);
         }
 
     /* restore block and echo */

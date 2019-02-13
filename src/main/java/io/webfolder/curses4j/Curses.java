@@ -463,7 +463,7 @@ public class Curses {
         return stdscr.nodelay(bf);
     }
 
-    public static int ungetch(int ch) {
+    public static int unget_wch(int ch) {
         return curses4j_unget_wch(ch);
     }
 
