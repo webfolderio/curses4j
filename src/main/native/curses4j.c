@@ -390,6 +390,10 @@ jint curses4j_flushinp(JNIEnv *env, jobject that) {
   return flushinp();
 }
 
+jint curses4j_is_termresized(JNIEnv *env, jobject that) {
+  return is_termresized() == TRUE ? 1 : 0;
+}
+
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
   JNIEnv* env;
   jclass klass;
@@ -457,7 +461,8 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_unget_wch", "(I)I", (void*) curses4j_unget_wch },
     { "curses4j_echo", "()I", (void*) curses4j_echo },
     { "curses4j_keypad", "(JI)I", (void*) curses4j_keypad },
-    { "curses4j_flushinp", "()I", (void*) curses4j_flushinp }
+    { "curses4j_flushinp", "()I", (void*) curses4j_flushinp },
+    { "curses4j_is_termresized", "()I", (void*) curses4j_is_termresized }
   };
   if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
       return -1;

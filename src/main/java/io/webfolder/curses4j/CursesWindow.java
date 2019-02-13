@@ -83,6 +83,8 @@ class CursesWindow {
 
     native static int curses4j_flushinp();
 
+    native static int curses4j_is_termresized();
+
     native int curses4j_winsertln(long peer);
 
     native int curses4j_box(long peer, char verch, char horch);

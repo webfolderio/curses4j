@@ -15,6 +15,7 @@ import static io.webfolder.curses4j.CursesWindow.curses4j_flushinp;
 import static io.webfolder.curses4j.CursesWindow.curses4j_has_colors;
 import static io.webfolder.curses4j.CursesWindow.curses4j_init_color;
 import static io.webfolder.curses4j.CursesWindow.curses4j_init_pair;
+import static io.webfolder.curses4j.CursesWindow.curses4j_is_termresized;
 import static io.webfolder.curses4j.CursesWindow.curses4j_lines;
 import static io.webfolder.curses4j.CursesWindow.curses4j_napms;
 import static io.webfolder.curses4j.CursesWindow.curses4j_noecho;
@@ -477,5 +478,9 @@ public class Curses {
 
     public static int flushinp() {
         return curses4j_flushinp();
+    }
+
+    public static boolean is_termresized() {
+        return curses4j_is_termresized() == TRUE;
     }
 }
