@@ -91,8 +91,6 @@ class CursesWindow {
 
     native int curses4j_winsertln(long peer);
 
-    native int curses4j_box(long peer, char verch, char horch);
-
     native long curses4j_derwin(long peer, int nlines, int ncols, int begy, int begx);
 
     native int curses4j_getmaxx(long peer);
@@ -166,4 +164,10 @@ class CursesWindow {
     native int curses4j_wclrtobot(long peer);
 
     native int curses4j_keypad(long peer, int bf);
+
+    native int curses4j_delwin(long peer);
+
+    native int curses4j_wborder(long peer, int ls, int rs, int ts, int bs, int tl, int tr, int bl, int br);
+
+    native int curses4j_box(long peer, int verch, int horch);
 }

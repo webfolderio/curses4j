@@ -205,4 +205,17 @@ public class Window {
     public int keypad(boolean bf) {
         return peer.curses4j_keypad(peer.peer, bf ? TRUE : FALSE);
     }
+
+    public int delwin() {
+        return peer.curses4j_delwin(peer.peer);
+    }
+
+    public int border(int ls, int rs, int ts,
+            int bs, int tl, int tr, int bl, int br) {
+        return peer.curses4j_wborder(peer.peer, ls, rs, ts, bs, tl, tr, bl, br);
+    }
+
+    public int box(int verch, int horch) {
+        return peer.curses4j_box(peer.peer, verch, horch);
+    }
 }

@@ -1,6 +1,5 @@
 package io.webfolder.curses4j;
 
-
 import static io.webfolder.curses4j.CursesWindow.curses4j_beep;
 import static io.webfolder.curses4j.CursesWindow.curses4j_can_change_color;
 import static io.webfolder.curses4j.CursesWindow.curses4j_color_pair;
@@ -480,5 +479,17 @@ public class Curses {
 
     public static boolean disable_resize() {
         return curses4j_disable_resize() == TRUE;
+    }
+
+    public static int delwin() {
+        return stdscr.delwin();
+    }
+
+    public static int border(int ls, int rs, int ts, int bs, int tl, int tr, int bl, int br) {
+        return stdscr.border(ls, rs, ts, bs, tl, tr, bl, br);
+    }
+
+    public static int box(int verch, int horch) {
+        return stdscr.box(verch, horch);        
     }
 }

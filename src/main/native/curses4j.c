@@ -54,7 +54,8 @@ static JavaVM *jvm;
       HMENU sysMenu = GetSystemMenu(hConsoleWnd, FALSE);
       if (sysMenu) {
         DeleteMenu(sysMenu, SC_MAXIMIZE, 0x00000000);
-        DeleteMenu(sysMenu, SC_SIZE, 0x00000000);  
+        DeleteMenu(sysMenu, SC_SIZE, 0x00000000);
+        DeleteMenu(sysMenu, WS_SYSMENU, 0x00000000);
         return TRUE;
       }
     }
@@ -257,11 +258,6 @@ jint curses4j_scrollok(JNIEnv *env, jobject that, jlong peer, int bf) {
   return (jint) scrollok(win, bf);
 }
 
-jint curses4j_box(JNIEnv *env, jobject that, jlong peer, jchar verch, jchar horch) {
-  WINDOW* win = *(WINDOW **) &peer;
-  return (jint) box(win, verch, horch);
-}
-
 jint curses4j_wmove(JNIEnv *env, jobject that, jlong peer, jint y, jint x) {
   WINDOW* win = *(WINDOW **) &peer;
   return (jint) wmove(win, y, x);
@@ -415,6 +411,21 @@ jint curses4j_resize_term(JNIEnv *env, jobject that, jint nlines, jint ncols) {
   return resize_term(nlines, ncols);
 }
 
+jint curses4j_delwin(JNIEnv *env, jobject that, jlong peer) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return delwin(win);
+}
+
+jint curses4j_wborder(JNIEnv *env, jobject that, jlong peer, jint ls, jint rs, jint ts, jint bs, jint tl, jint tr, jint bl, jint br) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return wborder(win, ls, rs, ts, bs, tl, tr, bl, br);
+}
+
+jint curses4j_box(JNIEnv *env, jobject that, jlong peer, jint verch, jint horch) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return box(win, verch, horch);
+}
+
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
   JNIEnv* env;
   jclass klass;
@@ -451,7 +462,6 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_touchwin", "(J)I", (void*) curses4j_touchwin },
     { "curses4j_derwin", "(JIIII)J", (void*) curses4j_derwin },
     { "curses4j_scrollok", "(JI)I", (void*) curses4j_scrollok },
-    { "curses4j_box", "(JCC)I", (void*) curses4j_box },
     { "curses4j_wmove", "(JII)I", (void*) curses4j_wmove },
     { "curses4j_wattron", "(JI)I", (void*) curses4j_wattron },
     { "curses4j_wattroff", "(JI)I", (void*) curses4j_wattroff },
@@ -485,7 +495,10 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_flushinp", "()I", (void*) curses4j_flushinp },
     { "curses4j_is_termresized", "()I", (void*) curses4j_is_termresized },
     { "curses4j_resize_term", "(II)I", (void*) curses4j_resize_term },
-    { "curses4j_disable_resize", "()I", (void*) curses4j_disable_resize }
+    { "curses4j_disable_resize", "()I", (void*) curses4j_disable_resize },
+    { "curses4j_delwin", "(J)I", (void*) curses4j_delwin },
+    { "curses4j_wborder", "(JIIIIIIII)I", (void*) curses4j_wborder },
+    { "curses4j_box", "(JII)I", (void*) curses4j_box }
   };
   if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
       return -1;
