@@ -451,6 +451,11 @@ jlong curses4j_dupwin(JNIEnv *env, jobject that, jlong peer) {
   return (jlong) dupwin(win);
 }
 
+jint curses4j_mvwin(JNIEnv *env, jobject that, jlong peer, jint y, jint x) {
+  WINDOW* win = *(WINDOW **) &peer;
+  mvwin(win, y, x);
+}
+
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
   JNIEnv* env;
   jclass klass;
@@ -527,7 +532,8 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_overwrite", "(JJ)I", (void*) curses4j_overwrite },
     { "curses4j_overlay", "(JJ)I", (void*) curses4j_overlay },
     { "curses4j_copywin", "(JJIIIIIII)I", (void*) curses4j_copywin },
-    { "curses4j_dupwin", "(J)J", (void*) curses4j_dupwin }
+    { "curses4j_dupwin", "(J)J", (void*) curses4j_dupwin },
+    { "curses4j_mvwin", "(JII)I", (void*) curses4j_mvwin }
   };
 
   if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {

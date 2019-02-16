@@ -180,4 +180,6 @@ class CursesWindow {
     native int curses4j_wborder(long peer, int ls, int rs, int ts, int bs, int tl, int tr, int bl, int br);
 
     native int curses4j_box(long peer, int verch, int horch);
+
+	native int curses4j_mvwin(long peer, int y, int x);
 }

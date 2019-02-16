@@ -218,4 +218,8 @@ public class Window {
     public int box(int verch, int horch) {
         return peer.curses4j_box(peer.peer, verch, horch);
     }
+
+	public int mvwin(int y, int x) {
+		return peer.curses4j_mvwin(peer.peer, y, x);
+	}
 }

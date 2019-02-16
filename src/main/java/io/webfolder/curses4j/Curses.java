@@ -289,6 +289,10 @@ public class Curses {
         return stdscr.getch();
     }
 
+    public static int mvwin(int y, int x) {
+        return stdscr.mvwin(y, x);
+    }
+
     public static String getnstr(int n) {
         return stdscr.getnstr(n);
     }
