@@ -505,7 +505,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_delwin", "(J)I", (void*) curses4j_delwin },
     { "curses4j_wborder", "(JIIIIIIII)I", (void*) curses4j_wborder },
     { "curses4j_box", "(JII)I", (void*) curses4j_box },
-    { "curses4j_overwrite", "(II)I", (void*) curses4j_overwrite }
+    { "curses4j_overwrite", "(JJ)I", (void*) curses4j_overwrite }
   };
   if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
       return -1;
