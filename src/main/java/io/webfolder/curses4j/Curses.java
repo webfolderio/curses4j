@@ -524,4 +524,8 @@ public class Curses {
     	window.peer.peer = peer;
     	return window;
     }
+
+    public static Window derwin(int nlines, int ncols, int begy, int begx) {
+    	return stdscr.derwin(nlines, ncols, begy, begx);
+    }
 }
