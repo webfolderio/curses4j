@@ -426,6 +426,12 @@ jint curses4j_box(JNIEnv *env, jobject that, jlong peer, jint verch, jint horch)
   return box(win, verch, horch);
 }
 
+jint curses4j_overwrite(JNIEnv *env, jobject that, jlong src_w, jlong dst_w) {
+  WINDOW* src = *(WINDOW **) &src_w;
+  WINDOW* dst = *(WINDOW **) &dst_w;
+  return overwrite(src, dst);
+}
+
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
   JNIEnv* env;
   jclass klass;
@@ -498,7 +504,8 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_disable_resize", "()I", (void*) curses4j_disable_resize },
     { "curses4j_delwin", "(J)I", (void*) curses4j_delwin },
     { "curses4j_wborder", "(JIIIIIIII)I", (void*) curses4j_wborder },
-    { "curses4j_box", "(JII)I", (void*) curses4j_box }
+    { "curses4j_box", "(JII)I", (void*) curses4j_box },
+    { "curses4j_overwrite", "(II)I", (void*) curses4j_overwrite }
   };
   if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
       return -1;

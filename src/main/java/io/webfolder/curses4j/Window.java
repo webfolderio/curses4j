@@ -8,9 +8,9 @@ import static java.lang.String.format;
 
 public class Window {
 
-    static final Window stdscr = new Window();
+    public static final Window stdscr = new Window();
 
-    private final CursesWindow peer = new CursesWindow();
+    final CursesWindow peer = new CursesWindow();
 
     static void initscr() {
         if (stdscr.peer.peer == 0) {

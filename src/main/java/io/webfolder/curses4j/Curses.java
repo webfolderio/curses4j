@@ -20,6 +20,7 @@ import static io.webfolder.curses4j.CursesWindow.curses4j_is_termresized;
 import static io.webfolder.curses4j.CursesWindow.curses4j_lines;
 import static io.webfolder.curses4j.CursesWindow.curses4j_napms;
 import static io.webfolder.curses4j.CursesWindow.curses4j_noecho;
+import static io.webfolder.curses4j.CursesWindow.curses4j_overwrite;
 import static io.webfolder.curses4j.CursesWindow.curses4j_pair_number;
 import static io.webfolder.curses4j.CursesWindow.curses4j_pdc_acs;
 import static io.webfolder.curses4j.CursesWindow.curses4j_resize_term;
@@ -491,5 +492,9 @@ public class Curses {
 
     public static int box(int verch, int horch) {
         return stdscr.box(verch, horch);        
+    }
+
+    public static int overwrite(Window src_w, Window dst_w) {
+    	return curses4j_overwrite(src_w.peer.peer, dst_w.peer.peer);
     }
 }
