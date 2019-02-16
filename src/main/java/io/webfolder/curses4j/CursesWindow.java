@@ -93,6 +93,10 @@ class CursesWindow {
 
 	native static int curses4j_overlay(long src_w, long dst_w);
 
+    native static int curses4j_copywin(long src_w, long dst_w, int src_tr,
+            int src_tc, int dst_tr, int dst_tc, int dst_br,
+            int dst_bc, int _overlay);
+
     native int curses4j_winsertln(long peer);
 
     native long curses4j_derwin(long peer, int nlines, int ncols, int begy, int begx);

@@ -6,6 +6,7 @@ import static io.webfolder.curses4j.CursesWindow.curses4j_color_pair;
 import static io.webfolder.curses4j.CursesWindow.curses4j_color_pairs;
 import static io.webfolder.curses4j.CursesWindow.curses4j_colors;
 import static io.webfolder.curses4j.CursesWindow.curses4j_cols;
+import static io.webfolder.curses4j.CursesWindow.curses4j_copywin;
 import static io.webfolder.curses4j.CursesWindow.curses4j_create_console;
 import static io.webfolder.curses4j.CursesWindow.curses4j_def_shell_mode;
 import static io.webfolder.curses4j.CursesWindow.curses4j_disable_resize;
@@ -501,5 +502,11 @@ public class Curses {
 
     public static int overlay(Window src_w, Window dst_w) {
     	return curses4j_overlay(src_w.peer.peer, dst_w.peer.peer);
+    }
+
+    public static int copywin(Window src_w, Window dst_w, int src_tr,
+            int src_tc, int dst_tr, int dst_tc, int dst_br,
+            int dst_bc, int _overlay) {
+    	return curses4j_copywin(src_w.peer.peer, dst_w.peer.peer, src_tr, src_tc, dst_tr, dst_tc, dst_br, dst_bc, _overlay);
     }
 }
