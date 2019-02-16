@@ -1,4 +1,4 @@
-package io.webfolder.curses4j.chapter10;
+package io.webfolder.curses4j.chapter11;
 
 import static io.webfolder.curses4j.Curses.dupwin;
 import static io.webfolder.curses4j.Curses.endwin;
@@ -9,6 +9,9 @@ import static io.webfolder.curses4j.Curses.refresh;
 
 import io.webfolder.curses4j.Window;
 
+/**
+ * @see https://c-for-dummies.com/ncurses/source_code/11-06_dup.php
+ */
 public class Dup {
 
 	public static void main(String[] args) {

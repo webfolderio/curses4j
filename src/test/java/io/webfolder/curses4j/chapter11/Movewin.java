@@ -1,4 +1,4 @@
-package io.webfolder.curses4j.chapter10;
+package io.webfolder.curses4j.chapter11;
 
 import static io.webfolder.curses4j.Curses.COLOR_GREEN;
 import static io.webfolder.curses4j.Curses.COLOR_PAIR;
@@ -13,6 +13,9 @@ import static io.webfolder.curses4j.Curses.start_color;
 
 import io.webfolder.curses4j.Window;
 
+/**
+ * @see https://c-for-dummies.com/ncurses/source_code/11-07_movewin.php
+ */
 public class Movewin {
 
 	public static void main(String[] args) {

@@ -1,27 +1,28 @@
-package io.webfolder.curses4j.chapter10;
+package io.webfolder.curses4j.chapter11;
 
 import static io.webfolder.curses4j.Curses.COLOR_BLUE;
 import static io.webfolder.curses4j.Curses.COLOR_PAIR;
 import static io.webfolder.curses4j.Curses.COLOR_RED;
 import static io.webfolder.curses4j.Curses.COLOR_WHITE;
-import static io.webfolder.curses4j.Curses.FALSE;
-import static io.webfolder.curses4j.Curses.copywin;
 import static io.webfolder.curses4j.Curses.endwin;
 import static io.webfolder.curses4j.Curses.getch;
 import static io.webfolder.curses4j.Curses.init_pair;
 import static io.webfolder.curses4j.Curses.initscr;
 import static io.webfolder.curses4j.Curses.newwin;
+import static io.webfolder.curses4j.Curses.overwrite;
 import static io.webfolder.curses4j.Curses.refresh;
 import static io.webfolder.curses4j.Curses.start_color;
 
 import io.webfolder.curses4j.Window;
 
-public class Clober {
+/**
+ * @see https://c-for-dummies.com/ncurses/source_code/11-02_overwrite2.php
+ */
+public class Overwrite2 {
 
 	public static void main(String[] args) {
 	    Window red,blue;
-	    int x;
-
+ 
 	    initscr();
 	    refresh();
 
@@ -31,8 +32,8 @@ public class Clober {
 	    init_pair(2,COLOR_WHITE,COLOR_BLUE);
 
 	    /* create windows */
-	    red = newwin(10,24,5,10);
-	    blue = newwin(10,24,5,40);
+	    red = newwin(10,20,2,22);
+	    blue = newwin(10,20,5,32);
 	    if( red==null || blue==null)
 	    {
 	        endwin();
@@ -41,19 +42,16 @@ public class Clober {
 	    }
 
 	    /* color and fill windows */
-	    red.bkgd(COLOR_PAIR(1));
-	    blue.bkgd(COLOR_PAIR(2));
-	    for(x=0;x<34;x++)
-	    {
-	        red.addstr("red    ");
-	        blue.addstr("   blue");
-	    }
+	    red.bkgd(COLOR_PAIR(1) | 'r');
+	    blue.bkgd(COLOR_PAIR(2) | 'b');
 	    red.refresh();
 	    blue.refresh();
 	    getch();
 
-	    /* copy window */
-	    copywin(red,blue,0,0,1,4,5,10,FALSE);
+	    /* overwrite windows */
+	    overwrite(red,blue);
+	    red.bkgd(COLOR_PAIR(1) | ' ');
+	    red.refresh();
 	    blue.refresh();
 	    getch();
 
