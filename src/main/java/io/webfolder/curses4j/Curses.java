@@ -10,6 +10,7 @@ import static io.webfolder.curses4j.CursesWindow.curses4j_copywin;
 import static io.webfolder.curses4j.CursesWindow.curses4j_create_console;
 import static io.webfolder.curses4j.CursesWindow.curses4j_def_shell_mode;
 import static io.webfolder.curses4j.CursesWindow.curses4j_disable_resize;
+import static io.webfolder.curses4j.CursesWindow.curses4j_dupwin;
 import static io.webfolder.curses4j.CursesWindow.curses4j_echo;
 import static io.webfolder.curses4j.CursesWindow.curses4j_endwin;
 import static io.webfolder.curses4j.CursesWindow.curses4j_flash;
@@ -508,5 +509,15 @@ public class Curses {
             int src_tc, int dst_tr, int dst_tc, int dst_br,
             int dst_bc, int _overlay) {
     	return curses4j_copywin(src_w.peer.peer, dst_w.peer.peer, src_tr, src_tc, dst_tr, dst_tc, dst_br, dst_bc, _overlay);
+    }
+
+    public static Window dupwin(Window win) {
+    	long peer = curses4j_dupwin(win.peer.peer);
+        if (peer <= ERR) {
+            return null;
+        }
+    	Window window = new Window();
+    	window.peer.peer = peer;
+    	return window;
     }
 }
