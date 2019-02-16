@@ -180,35 +180,46 @@ public class Curses {
     public static final int A_VERTICAL   = A_NORMAL;
 
     /* VT100-compatible symbols -- box chars */
-    public static final int ACS_ULCORNER = PDC_ACS('l');
-    public static final int ACS_LLCORNER = PDC_ACS('m');
-    public static final int ACS_URCORNER = PDC_ACS('k');
-    public static final int ACS_LRCORNER = PDC_ACS('j');
-    public static final int ACS_RTEE     = PDC_ACS('u');
-    public static final int ACS_LTEE     = PDC_ACS('t');
-    public static final int ACS_BTEE     = PDC_ACS('v');
-    public static final int ACS_TTEE     = PDC_ACS('w');
-    public static final int ACS_HLINE    = PDC_ACS('q');
-    public static final int ACS_VLINE    = PDC_ACS('x');
-    public static final int ACS_PLUS     = PDC_ACS('n');
+    public static final int ACS_ULCORNER = PDC_ACS('l'); // ┏
+    public static final int ACS_LLCORNER = PDC_ACS('m'); // ┗
+    public static final int ACS_URCORNER = PDC_ACS('k'); // ┓
+    public static final int ACS_LRCORNER = PDC_ACS('j'); // ┛
+    public static final int ACS_RTEE     = PDC_ACS('u'); // ┫
+    public static final int ACS_LTEE     = PDC_ACS('t'); // ┣
+    public static final int ACS_BTEE     = PDC_ACS('v'); // ┻
+    public static final int ACS_TTEE     = PDC_ACS('w'); // ┳
+    public static final int ACS_HLINE    = PDC_ACS('q'); // ━
+    public static final int ACS_VLINE    = PDC_ACS('x'); // ━
+    public static final int ACS_PLUS     = PDC_ACS('n'); // ╋
 
     /* VT100-compatible symbols -- other */
-    public static final int ACS_S1       = PDC_ACS('o');
-    public static final int ACS_S9       = PDC_ACS('s');
-    public static final int ACS_DIAMOND  = PDC_ACS('`');
-    public static final int ACS_CKBOARD  = PDC_ACS('a');
-    public static final int ACS_DEGREE   = PDC_ACS('f');
-    public static final int ACS_PLMINUS  = PDC_ACS('g');
-    public static final int ACS_BULLET   = PDC_ACS('~');
+    public static final int ACS_S1       = PDC_ACS('o'); // ⎺
+    public static final int ACS_S9       = PDC_ACS('s'); // ⎽
+    public static final int ACS_DIAMOND  = PDC_ACS('`'); // ♦
+    public static final int ACS_CKBOARD  = PDC_ACS('a'); // ░
+    public static final int ACS_DEGREE   = PDC_ACS('f'); // °
+    public static final int ACS_PLMINUS  = PDC_ACS('g'); // ±
+    public static final int ACS_BULLET   = PDC_ACS('~'); // °
 
     /* That goes double for these -- undocumented SysV symbols. Don't use them. */
     public static final int ACS_S3       = PDC_ACS('p');
     public static final int ACS_S7       = PDC_ACS('r');
-    public static final int ACS_LEQUAL   = PDC_ACS('y');
-    public static final int ACS_GEQUAL   = PDC_ACS('z');
-    public static final int ACS_PI       = PDC_ACS('{');
-    public static final int ACS_NEQUAL   = PDC_ACS('|');
-    public static final int ACS_STERLING = PDC_ACS('}');
+    public static final int ACS_LEQUAL   = PDC_ACS('y'); // ≤
+    public static final int ACS_GEQUAL   = PDC_ACS('z'); // ≥
+    public static final int ACS_PI       = PDC_ACS('{'); // π
+    public static final int ACS_NEQUAL   = PDC_ACS('|'); // ≠
+    public static final int ACS_STERLING = PDC_ACS('}'); // £
+
+    /* Teletype 5410v1 symbols -- these are defined in SysV curses, but
+    are not well-supported by most terminals. Stick to VT100 characters
+    for optimum portability. */
+    public static final int ACS_LARROW   = PDC_ACS(','); // ←
+    public static final int ACS_RARROW   = PDC_ACS('+'); // →
+    public static final int ACS_DARROW   = PDC_ACS('.'); // ↓
+    public static final int ACS_UARROW   = PDC_ACS('-'); // ↑
+    public static final int ACS_BOARD    = PDC_ACS('h'); // ░
+    public static final int ACS_LANTERN  = PDC_ACS('i'); // §
+    public static final int ACS_BLOCK    = PDC_ACS('0'); // █
 
     @Deprecated
     public static final int CHR_MSK = A_CHARTEXT;
