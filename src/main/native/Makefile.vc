@@ -1,4 +1,4 @@
-# Visual C++ NMakefile for PDCurses library - Windows console VC++ 2.0+
+# Visual C++ Makefile for PDCurses - Windows console
 #
 # Usage: nmake -f [path\]Makefile.vc [DEBUG=Y] [DLL=Y] [WIDE=Y] [UTF8=Y]
 #        [INFOEX=N] [target]
@@ -14,7 +14,6 @@ RM = del
 PDCURSES_SRCDIR = ..
 !endif
 
-!include $(PDCURSES_SRCDIR)\version.mif
 !include $(PDCURSES_SRCDIR)\common\libobjs.mif
 
 osdir		= $(PDCURSES_SRCDIR)\wincon
@@ -49,7 +48,7 @@ SHL_LD = link $(LDFLAGS) -nologo -dll -machine:$(PLATFORM) -out:pdcurses.dll
 LINK		= link.exe -nologo
 
 CCLIBS		= user32.lib advapi32.lib
-# may need to add msvcrt.lib for VC 2.x, VC 5.0 doesn't want it
+# may need to add msvcrt for older compilers
 #CCLIBS		= msvcrt.lib user32.lib advapi32.lib
 
 LIBEXE		= lib -nologo
@@ -94,7 +93,7 @@ $(LIBCURSES) : $(LIBOBJS) $(PDCOBJS)
 $(CURSESDLL) : $(LIBOBJS) $(PDCOBJS) pdcurses.obj
 	$(SHL_LD) $(LIBOBJS) $(PDCOBJS) pdcurses.obj $(CCLIBS)
 
-pdcurses.res pdcurses.obj: $(common)\pdcurses.rc $(common)\pdcurses.ico
+pdcurses.res pdcurses.obj: $(common)\pdcurses.rc
 	rc -r -fopdcurses.res $(common)\pdcurses.rc
 	cvtres -machine:$(PLATFORM) -nologo -out:pdcurses.obj pdcurses.res
 
@@ -118,9 +117,3 @@ tui.obj: $(demodir)\tui.c $(demodir)\tui.h
 
 tuidemo.obj: $(demodir)\tuidemo.c
 	$(BUILD) -I$(demodir) $(demodir)\tuidemo.c
-
-PLATFORM1 = Visual C++
-PLATFORM2 = Microsoft Visual C/C++ for Windows console
-ARCNAME = pdc$(VER)_vc_wincon
-
-!include $(PDCURSES_SRCDIR)\common\makedist.mif
