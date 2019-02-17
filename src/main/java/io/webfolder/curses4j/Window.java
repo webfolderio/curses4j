@@ -222,4 +222,20 @@ public class Window {
 	public int mvwin(int y, int x) {
 		return peer.curses4j_mvwin(peer.peer, y, x);
 	}
+
+	public int mvprint(int y, int x, String str, Object... args) {
+		return peer.curses4j_mvwprintw(peer.peer, y, x, format(str, args));
+	}
+
+	public int scroll() {
+		return peer.curses4j_scroll(peer.peer);
+	}
+
+	public int scrl(int n) {
+		return peer.curses4j_wscrl(peer.peer, n);
+	}
+
+	public int setscrreg(int top, int bot) {
+		return peer.curses4j_wsetscrreg(peer.peer, top, bot);
+	}
 }

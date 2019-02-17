@@ -182,4 +182,12 @@ class CursesWindow {
     native int curses4j_box(long peer, int verch, int horch);
 
 	native int curses4j_mvwin(long peer, int y, int x);
+
+	native int curses4j_mvwprintw(long peer, int y, int x, String str);
+
+	native int curses4j_scroll(long peer);
+
+	native int curses4j_wscrl(long peer, int n);
+
+	native int curses4j_wsetscrreg(long peer, int top, int bot);
 }

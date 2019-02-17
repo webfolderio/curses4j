@@ -539,4 +539,20 @@ public class Curses {
     public static Window derwin(int nlines, int ncols, int begy, int begx) {
     	return stdscr.derwin(nlines, ncols, begy, begx);
     }
+
+    public static int mvprintw(int y, int x, String str, Object ...args) {
+    	return stdscr.mvprint(y, x, str, args);
+    }
+
+    public static int scroll() {
+    	return stdscr.scroll();
+    }
+
+    public static int scrl(int n) {
+    	return stdscr.scrl(n);
+    }
+
+    public static int setscrreg(int top, int bot) {
+    	return stdscr.setscrreg(top, bot);
+    }
 }

@@ -1,4 +1,4 @@
-package io.webfolder.curses4j;
+package io.webfolder.curses4j.chapter00;
 
 import static io.webfolder.curses4j.Curses.box;
 import static io.webfolder.curses4j.Curses.endwin;

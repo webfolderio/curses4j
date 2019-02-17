@@ -396,7 +396,7 @@ jint curses4j_echo(JNIEnv *env, jobject that) {
 
 jint curses4j_keypad(JNIEnv *env, jobject that, jlong peer, jint bf) {
   WINDOW* win = *(WINDOW **) &peer;
-  keypad(win, bf);
+  return keypad(win, bf);
 }
 
 jint curses4j_flushinp(JNIEnv *env, jobject that) {
@@ -453,7 +453,32 @@ jlong curses4j_dupwin(JNIEnv *env, jobject that, jlong peer) {
 
 jint curses4j_mvwin(JNIEnv *env, jobject that, jlong peer, jint y, jint x) {
   WINDOW* win = *(WINDOW **) &peer;
-  mvwin(win, y, x);
+  return mvwin(win, y, x);
+}
+
+jint curses4j_mvwprintw(JNIEnv *env, jobject that, jlong peer, jint y, jint x, jstring str) {
+  const char *_str = str == NULL ? NULL : (char *) (*env)->GetStringUTFChars(env, str, NULL);
+  WINDOW* win = *(WINDOW **) &peer;
+  jint ret = (jint) mvwprintw(win, y, x, _str);
+  if (_str) {
+    (*env)->ReleaseStringUTFChars(env, str, _str);
+  }
+  return ret;
+}
+
+jint curses4j_scroll(JNIEnv *env, jobject that, jlong peer) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return scroll(win);
+}
+
+jint curses4j_wscrl(JNIEnv *env, jobject that, jlong peer, jint n) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return wscrl(win, n);
+}
+
+jint curses4j_wsetscrreg(JNIEnv *env, jobject that, jlong peer, jint top, jint bot) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return wsetscrreg(win, top, bot);
 }
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
@@ -533,7 +558,11 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_overlay", "(JJ)I", (void*) curses4j_overlay },
     { "curses4j_copywin", "(JJIIIIIII)I", (void*) curses4j_copywin },
     { "curses4j_dupwin", "(J)J", (void*) curses4j_dupwin },
-    { "curses4j_mvwin", "(JII)I", (void*) curses4j_mvwin }
+    { "curses4j_mvwin", "(JII)I", (void*) curses4j_mvwin },
+    { "curses4j_mvwprintw", "(JIILjava/lang/String;)I", (void*) curses4j_mvwprintw },
+    { "curses4j_scroll", "(J)I", (void*) curses4j_scroll },
+    { "curses4j_wscrl", "(JI)I", (void*) curses4j_wscrl },
+    { "curses4j_wsetscrreg", "(JII)I", (void*) curses4j_wsetscrreg }
   };
 
   if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {
