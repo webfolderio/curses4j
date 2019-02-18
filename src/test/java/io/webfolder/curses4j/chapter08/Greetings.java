@@ -23,9 +23,7 @@ public class Greetings {
         first = getnstr(32);
         addstr("Last name: ");
         last = getnstr(31);
-        printw("Pleased to meet you, %s %s\n",
-                first,
-                last);
+        printw("Pleased to meet you, %s %s\n", first, last);
         refresh();
         getch();
 

@@ -23,10 +23,9 @@ public class Twowin {
         /* update the standard screen regardless */
         refresh();
         /* create two half-size windows */
-        one = newwin(LINES(),COLS()/2,0,0);
-        two = newwin(LINES(),COLS()/2,0,COLS()/2);
-        if( one==null || two==null )
-        {
+        one = newwin(LINES(), COLS() / 2, 0, 0);
+        two = newwin(LINES(), COLS() / 2, 0, COLS() / 2);
+        if (one == null || two == null) {
             endwin();
             System.err.println("Unable to create windows");
             System.exit(1);

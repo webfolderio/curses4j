@@ -15,7 +15,7 @@ import static io.webfolder.curses4j.Curses.refresh;
 public class Cls {
 
     public static void main(String[] args) {
-        int c,y,x,cmax;
+        int c, y, x, cmax;
 
         initscr();
 
@@ -23,7 +23,7 @@ public class Cls {
         x = getmaxx();
 
         cmax = (x * y) / 5;
-        for(c=0;c<cmax;c++)
+        for (c = 0; c < cmax; c++)
             addstr("blah ");
         refresh();
         getch();
@@ -31,7 +31,7 @@ public class Cls {
         clear(); /* clear the screen */
         refresh(); /* don't forget this! */
         getch();
-        
+
         endwin();
     }
 }

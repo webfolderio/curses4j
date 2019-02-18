@@ -481,6 +481,22 @@ jint curses4j_wsetscrreg(JNIEnv *env, jobject that, jlong peer, jint top, jint b
   return wsetscrreg(win, top, bot);
 }
 
+jlong curses4j_newpad(JNIEnv *env, jobject that, jint nlines, jint ncols) {
+  WINDOW* win = newpad(nlines, ncols);
+  return (jlong) win;
+}
+
+jlong curses4j_prefresh(JNIEnv *env, jobject that, jlong peer,
+							jint py, jint px, jint sy1, jint sx1, jint sy2, jint sx2) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return (jlong) prefresh(win, py, px, sy1, sx1, sy2, sx2);
+}
+
+jlong curses4j_subpad(JNIEnv *env, jobject that, jlong peer, jint nlines, jint ncols, jint begy, jint begx) {
+  WINDOW* win = *(WINDOW **) &peer;
+  return (jlong) subpad(win, nlines, ncols, begy, begx);
+}
+
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
   JNIEnv* env;
   jclass klass;
@@ -562,7 +578,10 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     { "curses4j_mvwprintw", "(JIILjava/lang/String;)I", (void*) curses4j_mvwprintw },
     { "curses4j_scroll", "(J)I", (void*) curses4j_scroll },
     { "curses4j_wscrl", "(JI)I", (void*) curses4j_wscrl },
-    { "curses4j_wsetscrreg", "(JII)I", (void*) curses4j_wsetscrreg }
+    { "curses4j_wsetscrreg", "(JII)I", (void*) curses4j_wsetscrreg },
+    { "curses4j_newpad", "(II)J", (void*) curses4j_newpad },
+    { "curses4j_prefresh", "(JIIIIII)I", (void*) curses4j_prefresh },
+    { "curses4j_subpad", "(JIIII)J", (void*) curses4j_subpad }
   };
 
   if ((*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_8) != JNI_OK) {

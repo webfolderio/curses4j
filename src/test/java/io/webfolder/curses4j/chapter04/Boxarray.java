@@ -17,12 +17,12 @@ public class Boxarray {
         String box = "lqk\nx x\nmqj\n";
 
         initscr();
-            
+
         attrset(A_ALTCHARSET);
         addstr(box);
         refresh();
         getch();
-        
+
         endwin();
     }
 }

@@ -17,31 +17,30 @@ import io.webfolder.curses4j.Window;
  */
 public class Sub3 {
 
-	public static void main(String[] args) {
-	    Window sub;
-	    initscr();
+    public static void main(String[] args) {
+        Window sub;
+        initscr();
 
-	    /* create subwindow on stdscr */
-	    sub = derwin(LINES()-2,COLS()-2,1,1);
-	    if( sub==null)
-	    {
-	        endwin();
-	        System.err.println("Unable to create subwindow");
-	        System.exit(1);
-	    }
+        /* create subwindow on stdscr */
+        sub = derwin(LINES() - 2, COLS() - 2, 1, 1);
+        if (sub == null) {
+            endwin();
+            System.err.println("Unable to create subwindow");
+            System.exit(1);
+        }
 
-	    /* draw a box around stdscr */
-	    box(0,0);
-	    /* put text to the stdscr */
-	    addstr("I'm writing text\n");
-	    addstr("to the standard screen.");
-	    refresh();
-	    getch();
+        /* draw a box around stdscr */
+        box(0, 0);
+        /* put text to the stdscr */
+        addstr("I'm writing text\n");
+        addstr("to the standard screen.");
+        refresh();
+        getch();
 
-	    sub.clear();
-	    sub.refresh();
-	    getch();
+        sub.clear();
+        sub.refresh();
+        getch();
 
-	    endwin();
-	}
+        endwin();
+    }
 }

@@ -20,41 +20,40 @@ import io.webfolder.curses4j.Window;
  */
 public class Overwrite2 {
 
-	public static void main(String[] args) {
-	    Window red,blue;
- 
-	    initscr();
-	    refresh();
+    public static void main(String[] args) {
+        Window red, blue;
 
-	    /* colors */
-	    start_color();
-	    init_pair(1,COLOR_WHITE,COLOR_RED);
-	    init_pair(2,COLOR_WHITE,COLOR_BLUE);
+        initscr();
+        refresh();
 
-	    /* create windows */
-	    red = newwin(10,20,2,22);
-	    blue = newwin(10,20,5,32);
-	    if( red==null || blue==null)
-	    {
-	        endwin();
-	        System.err.println("Unable to create windows");
-	        System.exit(1);
-	    }
+        /* colors */
+        start_color();
+        init_pair(1, COLOR_WHITE, COLOR_RED);
+        init_pair(2, COLOR_WHITE, COLOR_BLUE);
 
-	    /* color and fill windows */
-	    red.bkgd(COLOR_PAIR(1) | 'r');
-	    blue.bkgd(COLOR_PAIR(2) | 'b');
-	    red.refresh();
-	    blue.refresh();
-	    getch();
+        /* create windows */
+        red = newwin(10, 20, 2, 22);
+        blue = newwin(10, 20, 5, 32);
+        if (red == null || blue == null) {
+            endwin();
+            System.err.println("Unable to create windows");
+            System.exit(1);
+        }
 
-	    /* overwrite windows */
-	    overwrite(red,blue);
-	    red.bkgd(COLOR_PAIR(1) | ' ');
-	    red.refresh();
-	    blue.refresh();
-	    getch();
+        /* color and fill windows */
+        red.bkgd(COLOR_PAIR(1) | 'r');
+        blue.bkgd(COLOR_PAIR(2) | 'b');
+        red.refresh();
+        blue.refresh();
+        getch();
 
-	    endwin();
-	}
+        /* overwrite windows */
+        overwrite(red, blue);
+        red.bkgd(COLOR_PAIR(1) | ' ');
+        red.refresh();
+        blue.refresh();
+        getch();
+
+        endwin();
+    }
 }

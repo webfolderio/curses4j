@@ -13,21 +13,20 @@ import static io.webfolder.curses4j.Curses.scrollok;
  */
 public class Scrolling2 {
 
-	public static void main(String[] args) {
-	    String text = "This is some wrapping. ";
-	    int x;
+    public static void main(String[] args) {
+        String text = "This is some wrapping. ";
+        int x;
 
-	    initscr();
+        initscr();
 
-	    scrollok(true);
-	    for(x=0;x<200;x++)
-	    {
-	        addstr(text);
-	        napms(100);
-	        refresh();
-	    }   
-	    getch();
+        scrollok(true);
+        for (x = 0; x < 200; x++) {
+            addstr(text);
+            napms(100);
+            refresh();
+        }
+        getch();
 
-	    endwin();
-	}
+        endwin();
+    }
 }

@@ -14,35 +14,35 @@ import io.webfolder.curses4j.Window;
  */
 public class Dup {
 
-	public static void main(String[] args) {
-	    Window fred,barney;
+    public static void main(String[] args) {
+        Window fred, barney;
 
-	    initscr();
-	    refresh();
+        initscr();
+        refresh();
 
-	    /* Build window & wait */
-	    fred = newwin(0,0,0,0);
-	    fred.addstr("This is Fred.\n");
-	    fred.refresh();
-	    getch();
+        /* Build window & wait */
+        fred = newwin(0, 0, 0, 0);
+        fred.addstr("This is Fred.\n");
+        fred.refresh();
+        getch();
 
-	    /* Create and show barney */
-	    barney = dupwin(fred);
-	    barney.addstr("This is Barney.\n");
-	    barney.refresh();
-	    getch();
+        /* Create and show barney */
+        barney = dupwin(fred);
+        barney.addstr("This is Barney.\n");
+        barney.refresh();
+        getch();
 
-	    /* Go back to fred */
-	    fred.addstr("Nice to see you!\n");
-	    fred.refresh();
-	    getch();
+        /* Go back to fred */
+        fred.addstr("Nice to see you!\n");
+        fred.refresh();
+        getch();
 
-	    /* One more time to barney */
-	    barney.addstr("You too!\n");
-	    barney.touchwin();
-	    barney.refresh();
-	    getch();
+        /* One more time to barney */
+        barney.addstr("You too!\n");
+        barney.touchwin();
+        barney.refresh();
+        getch();
 
-	    endwin();
-	}
+        endwin();
+    }
 }

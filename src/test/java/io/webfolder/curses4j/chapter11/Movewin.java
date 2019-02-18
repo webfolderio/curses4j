@@ -18,37 +18,36 @@ import io.webfolder.curses4j.Window;
  */
 public class Movewin {
 
-	public static void main(String[] args) {
-	    Window alpha;
+    public static void main(String[] args) {
+        Window alpha;
 
-	    initscr();
-	    refresh();
+        initscr();
+        refresh();
 
-	    /* configure color */
-	    start_color();
-	    init_pair(1,COLOR_WHITE,COLOR_GREEN);
+        /* configure color */
+        start_color();
+        init_pair(1, COLOR_WHITE, COLOR_GREEN);
 
-	    /* create window */
-	    alpha = newwin(7,20,3,10);
-	    if( alpha==null )
-	    {
-	        endwin();
-	        System.err.println("Unable to create window");
-	        System.exit(1);
-	    }
+        /* create window */
+        alpha = newwin(7, 20, 3, 10);
+        if (alpha == null) {
+            endwin();
+            System.err.println("Unable to create window");
+            System.exit(1);
+        }
 
-	    /* put text on alpha */
-	    alpha.bkgd(COLOR_PAIR(1));
-	    alpha.mvaddstr(1,2,"Window Alpha");
-	    alpha.refresh();
-	    getch();
+        /* put text on alpha */
+        alpha.bkgd(COLOR_PAIR(1));
+        alpha.mvaddstr(1, 2, "Window Alpha");
+        alpha.refresh();
+        getch();
 
-	    /* move window alpha */
-	    alpha.mvwin(10,43);
-	    alpha.mvaddstr(2,2,"Moved!");
-	    alpha.refresh();
-	    getch();
+        /* move window alpha */
+        alpha.mvwin(10, 43);
+        alpha.mvaddstr(2, 2, "Moved!");
+        alpha.refresh();
+        getch();
 
-	    endwin();
-	}
+        endwin();
+    }
 }

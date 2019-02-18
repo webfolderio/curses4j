@@ -28,13 +28,12 @@ public class Keywait2 {
         /* turn off getch() wait */
         nodelay(true);
         addstr("Press the Spacebar to stop the loop!\n");
-        while(getch() != ' ')
-        {
-            printw("%d",value++);
+        while (getch() != ' ') {
+            printw("%d", value++);
             refresh();
             move(getcury(), 0);
             clrtoeol();
-        }   
+        }
 
         endwin();
     }

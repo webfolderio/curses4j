@@ -14,25 +14,25 @@ import static io.webfolder.curses4j.Curses.scrollok;
  */
 public class Scroll {
 
-	public static void main(String[] args) {
-	    int y;
+    public static void main(String[] args) {
+        int y;
 
-	    initscr();
+        initscr();
 
-	    /* enable scrolling */
-	    scrollok(true);
+        /* enable scrolling */
+        scrollok(true);
 
-	    /* place junk on the screen */
-	    for(y=0;y<LINES();y++)
-	    	mvprintw(y,0,"%2d",y);
-	    refresh();
-	    getch();
+        /* place junk on the screen */
+        for (y = 0; y < LINES(); y++)
+            mvprintw(y, 0, "%2d", y);
+        refresh();
+        getch();
 
-	    /* scroll up one line */
-	    scroll();
-	    refresh();
-	    getch();
+        /* scroll up one line */
+        scroll();
+        refresh();
+        getch();
 
-	    endwin();
-	}
+        endwin();
+    }
 }

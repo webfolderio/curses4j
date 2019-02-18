@@ -24,7 +24,7 @@ public class Changechar {
         getch();
 
         /* replace the 't' with 'r' */
-        move(0,2);
+        move(0, 2);
         addch('r');
         refresh();
         getch();

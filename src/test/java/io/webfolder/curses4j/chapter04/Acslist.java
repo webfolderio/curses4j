@@ -17,10 +17,9 @@ public class Acslist {
         int a;
 
         initscr();
-        
-        for(a=0;a<127;a++)
-        {
-            printw("\t%2X:",a);
+
+        for (a = 0; a < 127; a++) {
+            printw("\t%2X:", a);
             addch(A_ALTCHARSET | a);
         }
         refresh();

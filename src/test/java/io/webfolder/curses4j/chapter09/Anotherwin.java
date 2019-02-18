@@ -24,15 +24,12 @@ public class Anotherwin {
         getch();
 
         /* create another window */
-        another = newwin(0,0,0,0);
-        if( another == null)
-        {
+        another = newwin(0, 0, 0, 0);
+        if (another == null) {
             addstr("Unable to create window");
             refresh();
             getch();
-        }
-        else
-        {
+        } else {
             another.addstr("This is another window");
             another.refresh();
             another.getch();

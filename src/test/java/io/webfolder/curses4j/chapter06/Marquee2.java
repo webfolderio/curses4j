@@ -27,20 +27,18 @@ public class Marquee2 {
 
         /* display a line of text */
         move(5, 0);
-        for(a='A'; a<'Z'+1; a++)
-        {
+        for (a = 'A'; a < 'Z' + 1; a++) {
             addch(a);
-            addstr("  ");   /* two spaces */
-        }   
+            addstr("  "); /* two spaces */
+        }
 
         len = text.length();
         int i = 0;
-        while(len > 0)
-        {
-            move(5, 5);      /* insert same spot */
-            insch(text.charAt(i));  /* work backwards */
+        while (len > 0) {
+            move(5, 5); /* insert same spot */
+            insch(text.charAt(i)); /* work backwards */
             refresh();
-            napms(100);         /* .1 sec. delay */
+            napms(100); /* .1 sec. delay */
             len--;
             i += 1;
         }

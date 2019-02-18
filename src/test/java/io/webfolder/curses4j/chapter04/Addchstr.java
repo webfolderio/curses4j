@@ -15,21 +15,17 @@ import static io.webfolder.curses4j.Curses.refresh;
 public class Addchstr {
 
     public static void main(String[] args) {
-        int string[] = {
-                'H' | A_BOLD, 'e', 'l' | A_REVERSE,
-                'l' | A_REVERSE, 'o', '!' | A_UNDERLINE,
-                0
-            };
+        int string[] = { 'H' | A_BOLD, 'e', 'l' | A_REVERSE, 'l' | A_REVERSE, 'o', '!' | A_UNDERLINE, 0 };
 
-            initscr();
-            
-            for (int i = 0; i < string.length; i++) {
-                addch(string[i]);
-            }
+        initscr();
 
-            refresh();
-            getch();
+        for (int i = 0; i < string.length; i++) {
+            addch(string[i]);
+        }
 
-            endwin();
+        refresh();
+        getch();
+
+        endwin();
     }
 }

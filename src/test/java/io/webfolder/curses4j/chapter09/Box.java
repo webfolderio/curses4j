@@ -14,7 +14,7 @@ public class Box {
     public static void main(String[] args) {
         initscr();
 
-        box(0,0); 
+        box(0, 0);
         refresh();
         getch();
 

@@ -19,39 +19,38 @@ import io.webfolder.curses4j.Window;
 
 public class Delsub {
 
-	public static void main(String[] args) {
-	    Window sub;
-	    int x;
+    public static void main(String[] args) {
+        Window sub;
+        int x;
 
-	    initscr();
-	    start_color();
-	    init_pair(1,COLOR_BLACK,COLOR_BLUE);
+        initscr();
+        start_color();
+        init_pair(1, COLOR_BLACK, COLOR_BLUE);
 
-	    /* create subwindow */
-	    sub=subwin(LINES()-10,COLS()-10,4,5);
-	    if( sub==null)
-	    {
-	        endwin();
-	        System.err.println("Unable to create subwindow");
-	        System.exit(1);
-	    }
+        /* create subwindow */
+        sub = subwin(LINES() - 10, COLS() - 10, 4, 5);
+        if (sub == null) {
+            endwin();
+            System.err.println("Unable to create subwindow");
+            System.exit(1);
+        }
 
-	    /* fill windows */
-	    for(x=0;x<120;x++)
-	        addstr("standard screen ");
-	    sub.bkgd(COLOR_PAIR(1));
-	    for(x=0;x<200;x++)
-	        sub.addstr(" sub ");
-	    refresh();
-	    sub.refresh();
-	    getch();
+        /* fill windows */
+        for (x = 0; x < 120; x++)
+            addstr("standard screen ");
+        sub.bkgd(COLOR_PAIR(1));
+        for (x = 0; x < 200; x++)
+            sub.addstr(" sub ");
+        refresh();
+        sub.refresh();
+        getch();
 
-	    /* delete subwindow */
-	    sub.delwin();
-	    mvaddstr(0,0,"Subwindow deleted ");
-	    refresh();
-	    getch();
+        /* delete subwindow */
+        sub.delwin();
+        mvaddstr(0, 0, "Subwindow deleted ");
+        refresh();
+        getch();
 
-	    endwin();
+        endwin();
     }
 }

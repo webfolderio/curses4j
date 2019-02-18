@@ -17,7 +17,7 @@ public class Aborder {
         initscr();
 
         border('|', '|', '-', '-', '+', '+', '+', '+');
-        move(1,1);
+        move(1, 1);
         addstr("Now that's a swell border!");
         refresh();
         getch();

@@ -24,7 +24,7 @@ public class Text3 {
         addstr(text1);
         addstr(text3);
         addstr(text5);
-        refresh();      
+        refresh();
         getch();
 
         move(1, 0); /* Second line/row */

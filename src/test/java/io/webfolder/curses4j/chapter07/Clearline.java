@@ -16,7 +16,7 @@ import static io.webfolder.curses4j.Curses.refresh;
 public class Clearline {
 
     public static void main(String[] args) {
-        int c,y,x,cmax;
+        int c, y, x, cmax;
 
         initscr();
 
@@ -24,12 +24,12 @@ public class Clearline {
         y = getmaxy();
 
         cmax = (x * y) / 5;
-        for(c=0;c<cmax;c++)
+        for (c = 0; c < cmax; c++)
             addstr("blah ");
         refresh();
         getch();
 
-        move(5,20); /* Setup the cursor */
+        move(5, 20); /* Setup the cursor */
         clrtoeol(); /* Clear to end of line */
         refresh();
         getch();

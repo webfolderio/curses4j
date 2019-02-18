@@ -21,7 +21,7 @@ public class Flush {
 
         addstr("Type. I'll wait...\n");
         refresh();
-        napms(5000);            /* 5 seconds */
+        napms(5000); /* 5 seconds */
 
         addstr("Flushing buffer.\n");
         flushinp();

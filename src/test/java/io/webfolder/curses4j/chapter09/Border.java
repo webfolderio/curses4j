@@ -16,8 +16,8 @@ public class Border {
     public static void main(String[] args) {
         initscr();
 
-        border(0,0,0,0,0,0,0,0);
-        move(1,1);
+        border(0, 0, 0, 0, 0, 0, 0, 0);
+        move(1, 1);
         addstr("Now that's a swell border!\n");
         refresh();
         getch();

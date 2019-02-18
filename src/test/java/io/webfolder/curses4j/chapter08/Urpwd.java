@@ -29,9 +29,7 @@ public class Urpwd {
         password = getnstr(31);
         /* enable text output */
         echo();
-        printw("%s's password is '%s'\n",
-                name,
-                password);
+        printw("%s's password is '%s'\n", name, password);
         refresh();
         getch();
 

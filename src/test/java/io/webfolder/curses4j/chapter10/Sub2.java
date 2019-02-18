@@ -16,33 +16,32 @@ import io.webfolder.curses4j.Window;
  */
 public class Sub2 {
 
-	public static void main(String[] args) {
-	    Window quartersub;
-	    int slines,scols,sposy,sposx;
+    public static void main(String[] args) {
+        Window quartersub;
+        int slines, scols, sposy, sposx;
 
-	    initscr();
-	    
-	    /* subwindow location math */
-	    slines = LINES()/2;
-	    scols = COLS()/2;
-	    sposy = (LINES()-slines)/2;
-	    sposx = (COLS()-scols)/2;
-   
-	    /* create subwindow */
-	    quartersub=subwin(slines,scols,sposy,sposx);
-	    if( quartersub==null)
-	    {
-	        endwin();
-	        System.err.println("Unable to create subwindow");
-	        System.exit(1);
-	    }
+        initscr();
 
-	    /* add text */
-	    addstr("This is the standard screen");
-	    quartersub.addstr("This is the subwindow");
-	    refresh();
-	    getch();
+        /* subwindow location math */
+        slines = LINES() / 2;
+        scols = COLS() / 2;
+        sposy = (LINES() - slines) / 2;
+        sposx = (COLS() - scols) / 2;
 
-	    endwin();
-	}
+        /* create subwindow */
+        quartersub = subwin(slines, scols, sposy, sposx);
+        if (quartersub == null) {
+            endwin();
+            System.err.println("Unable to create subwindow");
+            System.exit(1);
+        }
+
+        /* add text */
+        addstr("This is the standard screen");
+        quartersub.addstr("This is the subwindow");
+        refresh();
+        getch();
+
+        endwin();
+    }
 }

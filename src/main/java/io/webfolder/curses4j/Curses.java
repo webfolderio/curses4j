@@ -21,6 +21,7 @@ import static io.webfolder.curses4j.CursesWindow.curses4j_init_pair;
 import static io.webfolder.curses4j.CursesWindow.curses4j_is_termresized;
 import static io.webfolder.curses4j.CursesWindow.curses4j_lines;
 import static io.webfolder.curses4j.CursesWindow.curses4j_napms;
+import static io.webfolder.curses4j.CursesWindow.curses4j_newpad;
 import static io.webfolder.curses4j.CursesWindow.curses4j_noecho;
 import static io.webfolder.curses4j.CursesWindow.curses4j_overlay;
 import static io.webfolder.curses4j.CursesWindow.curses4j_overwrite;
@@ -36,199 +37,203 @@ import static io.webfolder.curses4j.Window.stdscr;
 /**
  * curses api doc.:
  * 
- * @see <a href="https://github.com/wmcbrine/PDCurses/blob/master/man/MANUAL.md">PDCurses Manual</a>
+ * @see <a href=
+ *      "https://github.com/wmcbrine/PDCurses/blob/master/man/MANUAL.md">PDCurses
+ *      Manual</a>
  * 
- * @see <a href="https://pubs.opengroup.org/onlinepubs/007908799/cursesix.html">X/Open Curses Reference Pages</a>
+ * @see <a href=
+ *      "https://pubs.opengroup.org/onlinepubs/007908799/cursesix.html">X/Open
+ *      Curses Reference Pages</a>
  */
 public class Curses {
 
-   /*----------------------------------------------------------------------
-    *  Function and Keypad Key Definitions
-    *  Many are just for compatibility
-    */
-   public static final int KEY_CODE_YES  = 0x100; /* If get_wch() gives a key code */
-   public static final int KEY_BREAK     = 0x101; /* Not on PC KBD */
-   public static final int KEY_DOWN      = 0x102; /* Down arrow key */
-   public static final int KEY_UP        = 0x103; /* Up arrow key */
-   public static final int KEY_LEFT      = 0x104; /* Left arrow key */
-   public static final int KEY_RIGHT     = 0x105; /* Right arrow key */
-   public static final int KEY_HOME      = 0x106; /* home key */
-   public static final int KEY_BACKSPACE = 0x107; /* not on pc */
-   public static final int KEY_F0        = 0x108; /* function keys; 64 reserved */
+    /*----------------------------------------------------------------------
+     *  Function and Keypad Key Definitions
+     *  Many are just for compatibility
+     */
+    public static final int KEY_CODE_YES  = 0x100; /* If get_wch() gives a key code */
+    public static final int KEY_BREAK     = 0x101; /* Not on PC KBD */
+    public static final int KEY_DOWN      = 0x102; /* Down arrow key */
+    public static final int KEY_UP        = 0x103; /* Up arrow key */
+    public static final int KEY_LEFT      = 0x104; /* Left arrow key */
+    public static final int KEY_RIGHT     = 0x105; /* Right arrow key */
+    public static final int KEY_HOME      = 0x106; /* home key */
+    public static final int KEY_BACKSPACE = 0x107; /* not on pc */
+    public static final int KEY_F0        = 0x108; /* function keys; 64 reserved */
 
-   public static final int KEY_DL        = 0x148; /* delete line */
-   public static final int KEY_IL        = 0x149; /* insert line */
-   public static final int KEY_DC        = 0x14a; /* delete character */
-   public static final int KEY_IC        = 0x14b; /* insert char or enter ins mode */
-   public static final int KEY_EIC       = 0x14c; /* exit insert char mode */
-   public static final int KEY_CLEAR     = 0x14d; /* clear screen */
-   public static final int KEY_EOS       = 0x14e; /* clear to end of screen */
-   public static final int KEY_EOL       = 0x14f; /* clear to end of line */
-   public static final int KEY_SF        = 0x150; /* scroll 1 line forward */
-   public static final int KEY_SR        = 0x151; /* scroll 1 line back (reverse) */
-   public static final int KEY_NPAGE     = 0x152; /* next page */
-   public static final int KEY_PPAGE     = 0x153; /* previous page */
-   public static final int KEY_STAB      = 0x154; /* set tab */
-   public static final int KEY_CTAB      = 0x155; /* clear tab */
-   public static final int KEY_CATAB     = 0x156; /* clear all tabs */
-   public static final int KEY_ENTER     = 0x157; /* enter or send (unreliable) */
-   public static final int KEY_SRESET    = 0x158; /* soft/reset (partial/unreliable) */
-   public static final int KEY_RESET     = 0x159; /* reset/hard reset (unreliable) */
-   public static final int KEY_PRINT     = 0x15a; /* print/copy */
-   public static final int KEY_LL        = 0x15b; /* home down/bottom (lower left) */
-   public static final int KEY_ABORT     = 0x15c; /* abort/terminate key (any) */
-   public static final int KEY_SHELP     = 0x15d; /* short help */
-   public static final int KEY_LHELP     = 0x15e; /* long help */
-   public static final int KEY_BTAB      = 0x15f; /* Back tab key */
-   public static final int KEY_BEG       = 0x160; /* beg(inning) key */
-   public static final int KEY_CANCEL    = 0x161; /* cancel key */
-   public static final int KEY_CLOSE     = 0x162; /* close key */
-   public static final int KEY_COMMAND   = 0x163; /* cmd (command) key */
-   public static final int KEY_COPY      = 0x164; /* copy key */
-   public static final int KEY_CREATE    = 0x165; /* create key */
-   public static final int KEY_END       = 0x166; /* end key */
-   public static final int KEY_EXIT      = 0x167; /* exit key */
-   public static final int KEY_FIND      = 0x168; /* find key */
-   public static final int KEY_HELP      = 0x169; /* help key */
-   public static final int KEY_MARK      = 0x16a; /* mark key */
-   public static final int KEY_MESSAGE   = 0x16b; /* message key */
-   public static final int KEY_MOVE      = 0x16c; /* move key */
-   public static final int KEY_NEXT      = 0x16d; /* next object key */
-   public static final int KEY_OPEN      = 0x16e; /* open key */
-   public static final int KEY_OPTIONS   = 0x16f; /* options key */
-   public static final int KEY_PREVIOUS  = 0x170; /* previous object key */
-   public static final int KEY_REDO      = 0x171; /* redo key */
-   public static final int KEY_REFERENCE = 0x172; /* ref(erence) key */
-   public static final int KEY_REFRESH   = 0x173; /* refresh key */
-   public static final int KEY_REPLACE   = 0x174; /* replace key */
-   public static final int KEY_RESTART   = 0x175; /* restart key */
-   public static final int KEY_RESUME    = 0x176; /* resume key */
-   public static final int KEY_SAVE      = 0x177; /* save key */
-   public static final int KEY_SBEG      = 0x178; /* shifted beginning key */
-   public static final int KEY_SCANCEL   = 0x179; /* shifted cancel key */
-   public static final int KEY_SCOMMAND  = 0x17a; /* shifted command key */
-   public static final int KEY_SCOPY     = 0x17b; /* shifted copy key */
-   public static final int KEY_SCREATE   = 0x17c; /* shifted create key */
-   public static final int KEY_SDC       = 0x17d; /* shifted delete char key */
-   public static final int KEY_SDL       = 0x17e; /* shifted delete line key */
-   public static final int KEY_SELECT    = 0x17f; /* select key */
-   public static final int KEY_SEND      = 0x180; /* shifted end key */
-   public static final int KEY_SEOL      = 0x181; /* shifted clear line key */
-   public static final int KEY_SEXIT     = 0x182; /* shifted exit key */
-   public static final int KEY_SFIND     = 0x183; /* shifted find key */
-   public static final int KEY_SHOME     = 0x184; /* shifted home key */
-   public static final int KEY_SIC       = 0x185; /* shifted input key */
+    public static final int KEY_DL        = 0x148; /* delete line */
+    public static final int KEY_IL        = 0x149; /* insert line */
+    public static final int KEY_DC        = 0x14a; /* delete character */
+    public static final int KEY_IC        = 0x14b; /* insert char or enter ins mode */
+    public static final int KEY_EIC       = 0x14c; /* exit insert char mode */
+    public static final int KEY_CLEAR     = 0x14d; /* clear screen */
+    public static final int KEY_EOS       = 0x14e; /* clear to end of screen */
+    public static final int KEY_EOL       = 0x14f; /* clear to end of line */
+    public static final int KEY_SF        = 0x150; /* scroll 1 line forward */
+    public static final int KEY_SR        = 0x151; /* scroll 1 line back (reverse) */
+    public static final int KEY_NPAGE     = 0x152; /* next page */
+    public static final int KEY_PPAGE     = 0x153; /* previous page */
+    public static final int KEY_STAB      = 0x154; /* set tab */
+    public static final int KEY_CTAB      = 0x155; /* clear tab */
+    public static final int KEY_CATAB     = 0x156; /* clear all tabs */
+    public static final int KEY_ENTER     = 0x157; /* enter or send (unreliable) */
+    public static final int KEY_SRESET    = 0x158; /* soft/reset (partial/unreliable) */
+    public static final int KEY_RESET     = 0x159; /* reset/hard reset (unreliable) */
+    public static final int KEY_PRINT     = 0x15a; /* print/copy */
+    public static final int KEY_LL        = 0x15b; /* home down/bottom (lower left) */
+    public static final int KEY_ABORT     = 0x15c; /* abort/terminate key (any) */
+    public static final int KEY_SHELP     = 0x15d; /* short help */
+    public static final int KEY_LHELP     = 0x15e; /* long help */
+    public static final int KEY_BTAB      = 0x15f; /* Back tab key */
+    public static final int KEY_BEG       = 0x160; /* beg(inning) key */
+    public static final int KEY_CANCEL    = 0x161; /* cancel key */
+    public static final int KEY_CLOSE     = 0x162; /* close key */
+    public static final int KEY_COMMAND   = 0x163; /* cmd (command) key */
+    public static final int KEY_COPY      = 0x164; /* copy key */
+    public static final int KEY_CREATE    = 0x165; /* create key */
+    public static final int KEY_END       = 0x166; /* end key */
+    public static final int KEY_EXIT      = 0x167; /* exit key */
+    public static final int KEY_FIND      = 0x168; /* find key */
+    public static final int KEY_HELP      = 0x169; /* help key */
+    public static final int KEY_MARK      = 0x16a; /* mark key */
+    public static final int KEY_MESSAGE   = 0x16b; /* message key */
+    public static final int KEY_MOVE      = 0x16c; /* move key */
+    public static final int KEY_NEXT      = 0x16d; /* next object key */
+    public static final int KEY_OPEN      = 0x16e; /* open key */
+    public static final int KEY_OPTIONS   = 0x16f; /* options key */
+    public static final int KEY_PREVIOUS  = 0x170; /* previous object key */
+    public static final int KEY_REDO      = 0x171; /* redo key */
+    public static final int KEY_REFERENCE = 0x172; /* ref(erence) key */
+    public static final int KEY_REFRESH   = 0x173; /* refresh key */
+    public static final int KEY_REPLACE   = 0x174; /* replace key */
+    public static final int KEY_RESTART   = 0x175; /* restart key */
+    public static final int KEY_RESUME    = 0x176; /* resume key */
+    public static final int KEY_SAVE      = 0x177; /* save key */
+    public static final int KEY_SBEG      = 0x178; /* shifted beginning key */
+    public static final int KEY_SCANCEL   = 0x179; /* shifted cancel key */
+    public static final int KEY_SCOMMAND  = 0x17a; /* shifted command key */
+    public static final int KEY_SCOPY     = 0x17b; /* shifted copy key */
+    public static final int KEY_SCREATE   = 0x17c; /* shifted create key */
+    public static final int KEY_SDC       = 0x17d; /* shifted delete char key */
+    public static final int KEY_SDL       = 0x17e; /* shifted delete line key */
+    public static final int KEY_SELECT    = 0x17f; /* select key */
+    public static final int KEY_SEND      = 0x180; /* shifted end key */
+    public static final int KEY_SEOL      = 0x181; /* shifted clear line key */
+    public static final int KEY_SEXIT     = 0x182; /* shifted exit key */
+    public static final int KEY_SFIND     = 0x183; /* shifted find key */
+    public static final int KEY_SHOME     = 0x184; /* shifted home key */
+    public static final int KEY_SIC       = 0x185; /* shifted input key */
 
-   public static final int KEY_SLEFT     = 0x187; /* shifted left arrow key */
-   public static final int KEY_SMESSAGE  = 0x188; /* shifted message key */
-   public static final int KEY_SMOVE     = 0x189; /* shifted move key */
-   public static final int KEY_SNEXT     = 0x18a; /* shifted next key */
-   public static final int KEY_SOPTIONS  = 0x18b; /* shifted options key */
-   public static final int KEY_SPREVIOUS = 0x18c; /* shifted prev key */
-   public static final int KEY_SPRINT    = 0x18d; /* shifted print key */
-   public static final int KEY_SREDO     = 0x18e; /* shifted redo key */
-   public static final int KEY_SREPLACE  = 0x18f; /* shifted replace key */
-   public static final int KEY_SRIGHT    = 0x190; /* shifted right arrow */
-   public static final int KEY_SRSUME    = 0x191; /* shifted resume key */
-   public static final int KEY_SSAVE     = 0x192; /* shifted save key */
-   public static final int KEY_SSUSPEND  = 0x193; /* shifted suspend key */
-   public static final int KEY_SUNDO     = 0x194; /* shifted undo key */
-   public static final int KEY_SUSPEND   = 0x195; /* suspend key */
-   public static final int KEY_UNDO      = 0x196; /* undo key */
+    public static final int KEY_SLEFT     = 0x187; /* shifted left arrow key */
+    public static final int KEY_SMESSAGE  = 0x188; /* shifted message key */
+    public static final int KEY_SMOVE     = 0x189; /* shifted move key */
+    public static final int KEY_SNEXT     = 0x18a; /* shifted next key */
+    public static final int KEY_SOPTIONS  = 0x18b; /* shifted options key */
+    public static final int KEY_SPREVIOUS = 0x18c; /* shifted prev key */
+    public static final int KEY_SPRINT    = 0x18d; /* shifted print key */
+    public static final int KEY_SREDO     = 0x18e; /* shifted redo key */
+    public static final int KEY_SREPLACE  = 0x18f; /* shifted replace key */
+    public static final int KEY_SRIGHT    = 0x190; /* shifted right arrow */
+    public static final int KEY_SRSUME    = 0x191; /* shifted resume key */
+    public static final int KEY_SSAVE     = 0x192; /* shifted save key */
+    public static final int KEY_SSUSPEND  = 0x193; /* shifted suspend key */
+    public static final int KEY_SUNDO     = 0x194; /* shifted undo key */
+    public static final int KEY_SUSPEND   = 0x195; /* suspend key */
+    public static final int KEY_UNDO      = 0x196; /* undo key */
 
-    public static final short COLOR_BLACK   = 0;
-    public static final short COLOR_RED     = 1;
-    public static final short COLOR_GREEN   = 2;
-    public static final short COLOR_BLUE    = 4;
-    public static final short COLOR_WHITE   = 7;
-    public static final short COLOR_CYAN    = COLOR_BLUE | COLOR_GREEN;
-    public static final short COLOR_MAGENTA = COLOR_RED  | COLOR_BLUE ;
-    public static final short COLOR_YELLOW  = COLOR_RED  | COLOR_GREEN;
+     public static final short COLOR_BLACK   = 0;
+     public static final short COLOR_RED     = 1;
+     public static final short COLOR_GREEN   = 2;
+     public static final short COLOR_BLUE    = 4;
+     public static final short COLOR_WHITE   = 7;
+     public static final short COLOR_CYAN    = COLOR_BLUE | COLOR_GREEN;
+     public static final short COLOR_MAGENTA = COLOR_RED  | COLOR_BLUE ;
+     public static final short COLOR_YELLOW  = COLOR_RED  | COLOR_GREEN;
 
-    public static final int FALSE        = 0;
-    public static final int TRUE         = 1;
+     public static final int FALSE        = 0;
+     public static final int TRUE         = 1;
 
-    public static final int ERR          = -1;
-    public static final int OK           =  0;
+     public static final int ERR          = -1;
+     public static final int OK           =  0;
 
-    /* Video attribute macros */
-    public static final int A_NORMAL     = 0x00000000;
-    public static final int A_COLOR      = 0xff000000;
-    public static final int A_ALTCHARSET = 0x00010000;
-    public static final int A_RIGHT      = 0x00020000;
-    public static final int A_LEFT       = 0x00040000;
-    public static final int A_ITALIC     = 0x00080000;
-    public static final int A_UNDERLINE  = 0x00100000;
-    public static final int A_REVERSE    = 0x00200000;
-    public static final int A_BLINK      = 0x00400000;
-    public static final int A_BOLD       = 0x00800000;
+     /* Video attribute macros */
+     public static final int A_NORMAL     = 0x00000000;
+     public static final int A_COLOR      = 0xff000000;
+     public static final int A_ALTCHARSET = 0x00010000;
+     public static final int A_RIGHT      = 0x00020000;
+     public static final int A_LEFT       = 0x00040000;
+     public static final int A_ITALIC     = 0x00080000;
+     public static final int A_UNDERLINE  = 0x00100000;
+     public static final int A_REVERSE    = 0x00200000;
+     public static final int A_BLINK      = 0x00400000;
+     public static final int A_BOLD       = 0x00800000;
 
-    public static final int A_ATTRIBUTES = 0xffff0000;
-    public static final int A_CHARTEXT   = 0x0000ffff;
+     public static final int A_ATTRIBUTES = 0xffff0000;
+     public static final int A_CHARTEXT   = 0x0000ffff;
 
-    public static final int A_LEFTLINE   = A_LEFT;
-    public static final int A_RIGHTLINE  = A_RIGHT;
-    public static final int A_STANDOUT   = A_REVERSE | A_BOLD; /* X/Open */
+     public static final int A_LEFTLINE   = A_LEFT;
+     public static final int A_RIGHTLINE  = A_RIGHT;
+     public static final int A_STANDOUT   = A_REVERSE | A_BOLD; /* X/Open */
 
-    public static final int A_DIM        = A_NORMAL;
-    public static final int A_INVIS      = A_NORMAL;
-    public static final int A_PROTECT    = A_NORMAL;
+     public static final int A_DIM        = A_NORMAL;
+     public static final int A_INVIS      = A_NORMAL;
+     public static final int A_PROTECT    = A_NORMAL;
 
-    public static final int A_HORIZONTAL = A_NORMAL;
-    public static final int A_LOW        = A_NORMAL;
-    public static final int A_TOP        = A_NORMAL;
-    public static final int A_VERTICAL   = A_NORMAL;
+     public static final int A_HORIZONTAL = A_NORMAL;
+     public static final int A_LOW        = A_NORMAL;
+     public static final int A_TOP        = A_NORMAL;
+     public static final int A_VERTICAL   = A_NORMAL;
 
-    /* VT100-compatible symbols -- box chars */
-    public static final int ACS_ULCORNER = PDC_ACS('l'); // ┏
-    public static final int ACS_LLCORNER = PDC_ACS('m'); // ┗
-    public static final int ACS_URCORNER = PDC_ACS('k'); // ┓
-    public static final int ACS_LRCORNER = PDC_ACS('j'); // ┛
-    public static final int ACS_RTEE     = PDC_ACS('u'); // ┫
-    public static final int ACS_LTEE     = PDC_ACS('t'); // ┣
-    public static final int ACS_BTEE     = PDC_ACS('v'); // ┻
-    public static final int ACS_TTEE     = PDC_ACS('w'); // ┳
-    public static final int ACS_HLINE    = PDC_ACS('q'); // ━
-    public static final int ACS_VLINE    = PDC_ACS('x'); // ━
-    public static final int ACS_PLUS     = PDC_ACS('n'); // ╋
+     /* VT100-compatible symbols -- box chars */
+     public static final int ACS_ULCORNER = PDC_ACS('l'); // ┏
+     public static final int ACS_LLCORNER = PDC_ACS('m'); // ┗
+     public static final int ACS_URCORNER = PDC_ACS('k'); // ┓
+     public static final int ACS_LRCORNER = PDC_ACS('j'); // ┛
+     public static final int ACS_RTEE     = PDC_ACS('u'); // ┫
+     public static final int ACS_LTEE     = PDC_ACS('t'); // ┣
+     public static final int ACS_BTEE     = PDC_ACS('v'); // ┻
+     public static final int ACS_TTEE     = PDC_ACS('w'); // ┳
+     public static final int ACS_HLINE    = PDC_ACS('q'); // ━
+     public static final int ACS_VLINE    = PDC_ACS('x'); // ━
+     public static final int ACS_PLUS     = PDC_ACS('n'); // ╋
 
-    /* VT100-compatible symbols -- other */
-    public static final int ACS_S1       = PDC_ACS('o'); // ⎺
-    public static final int ACS_S9       = PDC_ACS('s'); // ⎽
-    public static final int ACS_DIAMOND  = PDC_ACS('`'); // ♦
-    public static final int ACS_CKBOARD  = PDC_ACS('a'); // ░
-    public static final int ACS_DEGREE   = PDC_ACS('f'); // °
-    public static final int ACS_PLMINUS  = PDC_ACS('g'); // ±
-    public static final int ACS_BULLET   = PDC_ACS('~'); // °
+     /* VT100-compatible symbols -- other */
+     public static final int ACS_S1       = PDC_ACS('o'); // ⎺
+     public static final int ACS_S9       = PDC_ACS('s'); // ⎽
+     public static final int ACS_DIAMOND  = PDC_ACS('`'); // ♦
+     public static final int ACS_CKBOARD  = PDC_ACS('a'); // ░
+     public static final int ACS_DEGREE   = PDC_ACS('f'); // °
+     public static final int ACS_PLMINUS  = PDC_ACS('g'); // ±
+     public static final int ACS_BULLET   = PDC_ACS('~'); // °
 
-    /* That goes double for these -- undocumented SysV symbols. Don't use them. */
-    public static final int ACS_S3       = PDC_ACS('p');
-    public static final int ACS_S7       = PDC_ACS('r');
-    public static final int ACS_LEQUAL   = PDC_ACS('y'); // ≤
-    public static final int ACS_GEQUAL   = PDC_ACS('z'); // ≥
-    public static final int ACS_PI       = PDC_ACS('{'); // π
-    public static final int ACS_NEQUAL   = PDC_ACS('|'); // ≠
-    public static final int ACS_STERLING = PDC_ACS('}'); // £
+     /* That goes double for these -- undocumented SysV symbols. Don't use them. */
+     public static final int ACS_S3       = PDC_ACS('p');
+     public static final int ACS_S7       = PDC_ACS('r');
+     public static final int ACS_LEQUAL   = PDC_ACS('y'); // ≤
+     public static final int ACS_GEQUAL   = PDC_ACS('z'); // ≥
+     public static final int ACS_PI       = PDC_ACS('{'); // π
+     public static final int ACS_NEQUAL   = PDC_ACS('|'); // ≠
+     public static final int ACS_STERLING = PDC_ACS('}'); // £
 
-    /* Teletype 5410v1 symbols -- these are defined in SysV curses, but
-    are not well-supported by most terminals. Stick to VT100 characters
-    for optimum portability. */
-    public static final int ACS_LARROW   = PDC_ACS(','); // ←
-    public static final int ACS_RARROW   = PDC_ACS('+'); // →
-    public static final int ACS_DARROW   = PDC_ACS('.'); // ↓
-    public static final int ACS_UARROW   = PDC_ACS('-'); // ↑
-    public static final int ACS_BOARD    = PDC_ACS('h'); // ░
-    public static final int ACS_LANTERN  = PDC_ACS('i'); // §
-    public static final int ACS_BLOCK    = PDC_ACS('0'); // █
+     /* Teletype 5410v1 symbols -- these are defined in SysV curses, but
+     are not well-supported by most terminals. Stick to VT100 characters
+     for optimum portability. */
+     public static final int ACS_LARROW   = PDC_ACS(','); // ←
+     public static final int ACS_RARROW   = PDC_ACS('+'); // →
+     public static final int ACS_DARROW   = PDC_ACS('.'); // ↓
+     public static final int ACS_UARROW   = PDC_ACS('-'); // ↑
+     public static final int ACS_BOARD    = PDC_ACS('h'); // ░
+     public static final int ACS_LANTERN  = PDC_ACS('i'); // §
+     public static final int ACS_BLOCK    = PDC_ACS('0'); // █
 
-    @Deprecated
-    public static final int CHR_MSK = A_CHARTEXT;
-    @Deprecated
-    public static final int ATR_MSK = A_ATTRIBUTES;
-    @Deprecated
-    public static final int ATR_NRM = A_NORMAL;
+     @Deprecated
+     public static final int CHR_MSK = A_CHARTEXT;
+     @Deprecated
+     public static final int ATR_MSK = A_ATTRIBUTES;
+     @Deprecated
+     public static final int ATR_NRM = A_NORMAL;
 
-    public static int addch(int ch) {
+     public static int addch(int ch) {
         return stdscr.addch(ch);
     }
 
@@ -449,7 +454,7 @@ public class Curses {
     }
 
     public static int deleteln() {
-        return stdscr.deleteln();        
+        return stdscr.deleteln();
     }
 
     public static int delch() {
@@ -509,50 +514,68 @@ public class Curses {
     }
 
     public static int box(int verch, int horch) {
-        return stdscr.box(verch, horch);        
+        return stdscr.box(verch, horch);
     }
 
     public static int overwrite(Window src_w, Window dst_w) {
-    	return curses4j_overwrite(src_w.peer.peer, dst_w.peer.peer);
+        return curses4j_overwrite(src_w.peer.peer, dst_w.peer.peer);
     }
 
     public static int overlay(Window src_w, Window dst_w) {
-    	return curses4j_overlay(src_w.peer.peer, dst_w.peer.peer);
+        return curses4j_overlay(src_w.peer.peer, dst_w.peer.peer);
     }
 
-    public static int copywin(Window src_w, Window dst_w, int src_tr,
-            int src_tc, int dst_tr, int dst_tc, int dst_br,
+    public static int copywin(Window src_w, Window dst_w, int src_tr, int src_tc, int dst_tr, int dst_tc, int dst_br,
             int dst_bc, int _overlay) {
-    	return curses4j_copywin(src_w.peer.peer, dst_w.peer.peer, src_tr, src_tc, dst_tr, dst_tc, dst_br, dst_bc, _overlay);
+        return curses4j_copywin(src_w.peer.peer, dst_w.peer.peer, src_tr, src_tc, dst_tr, dst_tc, dst_br, dst_bc,
+                _overlay);
     }
 
     public static Window dupwin(Window win) {
-    	long peer = curses4j_dupwin(win.peer.peer);
+        long peer = curses4j_dupwin(win.peer.peer);
         if (peer <= ERR) {
             return null;
         }
-    	Window window = new Window();
-    	window.peer.peer = peer;
-    	return window;
+        Window window = new Window();
+        window.peer.peer = peer;
+        return window;
     }
 
     public static Window derwin(int nlines, int ncols, int begy, int begx) {
-    	return stdscr.derwin(nlines, ncols, begy, begx);
+        return stdscr.derwin(nlines, ncols, begy, begx);
     }
 
-    public static int mvprintw(int y, int x, String str, Object ...args) {
-    	return stdscr.mvprint(y, x, str, args);
+    public static int mvprintw(int y, int x, String str, Object... args) {
+        return stdscr.mvprint(y, x, str, args);
     }
 
     public static int scroll() {
-    	return stdscr.scroll();
+        return stdscr.scroll();
     }
 
     public static int scrl(int n) {
-    	return stdscr.scrl(n);
+        return stdscr.scrl(n);
     }
 
     public static int setscrreg(int top, int bot) {
-    	return stdscr.setscrreg(top, bot);
+        return stdscr.setscrreg(top, bot);
+    }
+
+    public static Window newpad(int nlines, int ncols) {
+        long peer = curses4j_newpad(nlines, ncols);
+        if (peer <= ERR) {
+            return null;
+        }
+        Window window = new Window();
+        window.peer.peer = peer;
+        return window;
+    }
+
+    public static int prefresh(int py, int px, int sy1, int sx1, int sy2, int sx2) {
+        return stdscr.prefresh(py, px, sy1, sx1, sy2, sx2);
+    }
+
+    public static Window subpad(int nlines, int ncols, int begy, int begx) {
+        return stdscr.subpad(nlines, ncols, begy, begx);
     }
 }

@@ -18,19 +18,18 @@ public class Yourname {
         int ch;
         String name;
         initscr();
-        
-        do
-        {
+
+        do {
             clear();
             addstr("Enter your name: ");
             name = getnstr(31);
-            move(1,0);
-            printw("Your name is %s. ",name);
+            move(1, 0);
+            printw("Your name is %s. ", name);
             printw("Is this correct? ");
             ch = getch();
-        } while( ch != 'y');
-        move(2,0);
-        printw("Pleased to meet you, %s\n",name);
+        } while (ch != 'y');
+        move(2, 0);
+        printw("Pleased to meet you, %s\n", name);
         getch();
 
         endwin();

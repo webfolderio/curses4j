@@ -15,7 +15,7 @@ import static io.webfolder.curses4j.Curses.refresh;
 public class Secretkey {
 
     public static void main(String[] args) {
-        int key1,key2;
+        int key1, key2;
 
         initscr();
 
@@ -26,8 +26,8 @@ public class Secretkey {
         addstr("Type the same key: ");
         noecho();
         key2 = getch();
-        move(1,0);
-        if( key1 == key2 )
+        move(1, 0);
+        if (key1 == key2)
             addstr("The keys match");
         else
             addstr("The keys don't match");

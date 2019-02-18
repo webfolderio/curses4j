@@ -21,47 +21,45 @@ import static io.webfolder.curses4j.Curses.unget_wch;
 public class Kbhit {
 
     /* check the keyboard queue */
-    private static boolean kbhit()
-    {
-        int ch,r;
+    private static boolean kbhit() {
+        int ch, r;
 
-    /* turn off blocking and echo */
+        /* turn off blocking and echo */
         nodelay(true);
         noecho();
-        
-    /* check for input */
+
+        /* check for input */
         ch = getch();
-        if( ch == ERR)      /* no input */
+        if (ch == ERR) /* no input */
             r = FALSE;
-        else                /* input */
+        else /* input */
         {
             r = TRUE;
             /* return key to queue */
             unget_wch(ch);
         }
 
-    /* restore block and echo */
+        /* restore block and echo */
         echo();
         nodelay(false);
-        return(r == TRUE) ? true : false;
+        return (r == TRUE) ? true : false;
     }
 
     public static void main(String[] args) {
         int x;
-        
+
         initscr();
 
         addstr("Tap a key while I count...\n");
-        for(x=1;x<21;x++)
-        {
-            printw("%2d ",x);
+        for (x = 1; x < 21; x++) {
+            printw("%2d ", x);
             refresh();
             napms(500);
-            if(kbhit())
+            if (kbhit())
                 break;
         }
         addstr("\nDone!\n");
-        printw("You pressed the '%c' key\n",getch());
+        printw("You pressed the '%c' key\n", getch());
         refresh();
         getch();
 

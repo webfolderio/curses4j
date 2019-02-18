@@ -16,27 +16,26 @@ import io.webfolder.curses4j.Window;
  */
 public class Sub {
 
-	public static void main(String[] args) {
-	    Window sub;
+    public static void main(String[] args) {
+        Window sub;
 
-	    initscr();
+        initscr();
 
-	    /* create subwindow on stdscr */
-	    sub = subwin(LINES()-2,COLS()-2,1,1);
-	    if( sub==null)
-	    {
-	        endwin();
-	        System.err.println("Unable to create subwindow");
-	        System.exit(1);
-	    }
+        /* create subwindow on stdscr */
+        sub = subwin(LINES() - 2, COLS() - 2, 1, 1);
+        if (sub == null) {
+            endwin();
+            System.err.println("Unable to create subwindow");
+            System.exit(1);
+        }
 
-	    /* draw a box around stdscr */
-	    box(0,0);
-	    /* put text to the subwindow */
-	    sub.addstr("I'm in a subwindow.\n");
-	    refresh();
-	    getch();
+        /* draw a box around stdscr */
+        box(0, 0);
+        /* put text to the subwindow */
+        sub.addstr("I'm in a subwindow.\n");
+        refresh();
+        getch();
 
-	    endwin();
-	}
+        endwin();
+    }
 }

@@ -20,38 +20,38 @@ import io.webfolder.curses4j.Window;
  */
 public class Overwrite1 {
 
-	public static void main(String[] args) {
-		Window red, blue;
+    public static void main(String[] args) {
+        Window red, blue;
 
-		initscr();
-		refresh();
+        initscr();
+        refresh();
 
-		/* colors */
-		start_color();
-		init_pair(1, COLOR_WHITE, COLOR_RED);
-		init_pair(2, COLOR_WHITE, COLOR_BLUE);
+        /* colors */
+        start_color();
+        init_pair(1, COLOR_WHITE, COLOR_RED);
+        init_pair(2, COLOR_WHITE, COLOR_BLUE);
 
-		/* create windows */
-		red = newwin(10, 20, 2, 22);
-		blue = newwin(10, 20, 5, 32);
-		if (red == null || blue == null) {
-			endwin();
-			System.err.println("Unable to create windows");
-			System.exit(1);
-		}
+        /* create windows */
+        red = newwin(10, 20, 2, 22);
+        blue = newwin(10, 20, 5, 32);
+        if (red == null || blue == null) {
+            endwin();
+            System.err.println("Unable to create windows");
+            System.exit(1);
+        }
 
-		/* color and fill windows */
-		red.bkgd(COLOR_PAIR(1) | 'r');
-		blue.bkgd(COLOR_PAIR(2) | 'b');
-		red.refresh();
-		blue.refresh();
-		getch();
+        /* color and fill windows */
+        red.bkgd(COLOR_PAIR(1) | 'r');
+        blue.bkgd(COLOR_PAIR(2) | 'b');
+        red.refresh();
+        blue.refresh();
+        getch();
 
-		/* overwrite windows */
-		overwrite(red, blue);
-		blue.refresh();
-		getch();
+        /* overwrite windows */
+        overwrite(red, blue);
+        blue.refresh();
+        getch();
 
-		endwin();
-	}
+        endwin();
+    }
 }

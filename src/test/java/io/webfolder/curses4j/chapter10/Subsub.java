@@ -24,37 +24,37 @@ import io.webfolder.curses4j.Window;
  */
 public class Subsub {
 
-	public static void main(String[] args) {
-	    Window grandpa,father,son;
-	    int gl,gc;
+    public static void main(String[] args) {
+        Window grandpa, father, son;
+        int gl, gc;
 
-	    initscr();
-	    refresh();  /* update stdscr */
+        initscr();
+        refresh(); /* update stdscr */
 
-	    /* set colors */
-	    start_color();
-	    init_pair(1,COLOR_WHITE,COLOR_BLUE);
-	    init_pair(2,COLOR_RED,COLOR_YELLOW);
-	    init_pair(3,COLOR_BLACK,COLOR_GREEN);
+        /* set colors */
+        start_color();
+        init_pair(1, COLOR_WHITE, COLOR_BLUE);
+        init_pair(2, COLOR_RED, COLOR_YELLOW);
+        init_pair(3, COLOR_BLACK, COLOR_GREEN);
 
-	    /* create windows */
-	    grandpa = newwin(LINES()-4,COLS()-10,2,5);
-	    gl = grandpa.getmaxy();
-	    gc = grandpa.getmaxx();
-	    father = grandpa.derwin(gl/2,gc,gl/2,0);
-	    son = father.derwin(gl/2,3,0,(gc-4)/2);
+        /* create windows */
+        grandpa = newwin(LINES() - 4, COLS() - 10, 2, 5);
+        gl = grandpa.getmaxy();
+        gc = grandpa.getmaxx();
+        father = grandpa.derwin(gl / 2, gc, gl / 2, 0);
+        son = father.derwin(gl / 2, 3, 0, (gc - 4) / 2);
 
-	    /* color windows and splash some text */
-	    grandpa.bkgd(COLOR_PAIR(1));
-	    grandpa.addstr("I am Grandpa\n");
-		father.bkgd(COLOR_PAIR(2));
-	    father.addstr("I am Father\n");
-	    father.clrtobot();
-	    son.bkgd(COLOR_PAIR(3));
-	    son.addstr("I am the boy\n");
-	    grandpa.refresh();
-	    getch();
+        /* color windows and splash some text */
+        grandpa.bkgd(COLOR_PAIR(1));
+        grandpa.addstr("I am Grandpa\n");
+        father.bkgd(COLOR_PAIR(2));
+        father.addstr("I am Father\n");
+        father.clrtobot();
+        son.bkgd(COLOR_PAIR(3));
+        son.addstr("I am the boy\n");
+        grandpa.refresh();
+        getch();
 
-	    endwin();
-	}
+        endwin();
+    }
 }

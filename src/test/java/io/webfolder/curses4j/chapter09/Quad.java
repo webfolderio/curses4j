@@ -24,17 +24,17 @@ import io.webfolder.curses4j.Window;
 public class Quad {
 
     public static void main(String[] args) {
-        Window a,b,c,d;
-        int maxx,maxy,halfx,halfy;
+        Window a, b, c, d;
+        int maxx, maxy, halfx, halfy;
 
         /* initialize stuff */
         initscr();
         refresh();
         start_color();
-        init_pair(1,COLOR_BLACK,COLOR_BLUE);
-        init_pair(2,COLOR_BLACK,COLOR_RED);
-        init_pair(3,COLOR_BLACK,COLOR_GREEN);
-        init_pair(4,COLOR_BLACK,COLOR_CYAN);
+        init_pair(1, COLOR_BLACK, COLOR_BLUE);
+        init_pair(2, COLOR_BLACK, COLOR_RED);
+        init_pair(3, COLOR_BLACK, COLOR_GREEN);
+        init_pair(4, COLOR_BLACK, COLOR_CYAN);
 
         /* calculate window sizes and locations */
         maxx = getmaxx();
@@ -44,12 +44,11 @@ public class Quad {
         halfy = maxy >> 1;
 
         /* create four quarter windows */
-        a = newwin(halfy,halfx,0,0);
-        b = newwin(halfy,halfx,0,halfx);
-        c = newwin(halfy,halfx,halfy,0);
-        d = newwin(halfy,halfx,halfy,halfx);
-        if( a==null || b==null || c==null || d==null)
-        {
+        a = newwin(halfy, halfx, 0, 0);
+        b = newwin(halfy, halfx, 0, halfx);
+        c = newwin(halfy, halfx, halfy, 0);
+        d = newwin(halfy, halfx, halfy, halfx);
+        if (a == null || b == null || c == null || d == null) {
             endwin();
             System.err.println("Some kind of error creating the windows");
             System.exit(1);
@@ -57,13 +56,13 @@ public class Quad {
 
         /* Write to each window */
         a.bkgd(COLOR_PAIR(1));
-        a.mvaddstr(0,0,"This is window A\n");
+        a.mvaddstr(0, 0, "This is window A\n");
         b.bkgd(COLOR_PAIR(2));
-        b.mvaddstr(0,0,"This is window B\n");
+        b.mvaddstr(0, 0, "This is window B\n");
         c.bkgd(COLOR_PAIR(3));
-        c.mvaddstr(0,0,"This is window C\n");
+        c.mvaddstr(0, 0, "This is window C\n");
         d.bkgd(COLOR_PAIR(4));
-        d.mvaddstr(0,0,"This is window D\n");
+        d.mvaddstr(0, 0, "This is window D\n");
         /* update the windows */
         a.refresh();
         b.refresh();

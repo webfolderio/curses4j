@@ -29,14 +29,13 @@ public class Keywait1 {
         /* turn off getch() wait */
         nodelay(true);
         addstr("Press any key to stop the loop!\n");
-        while(getch() == ERR)
-        {
+        while (getch() == ERR) {
             addstr(valueOf(value++));
             refresh();
             move(getcury(), 0);
             clrtoeol();
-        }   
-   
+        }
+
         endwin();
     }
 }

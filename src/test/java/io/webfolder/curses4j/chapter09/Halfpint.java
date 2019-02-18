@@ -31,17 +31,12 @@ public class Halfpint {
         start_color();
 
         /* configure colors */
-        init_pair(1,COLOR_WHITE,COLOR_BLUE);
-        init_pair(2,COLOR_WHITE,COLOR_RED);
+        init_pair(1, COLOR_WHITE, COLOR_BLUE);
+        init_pair(2, COLOR_WHITE, COLOR_RED);
 
         /* create the tiny window */
-        tiny = newwin(
-                LINES()/2,
-                COLS()/2,
-                LINES()/4,
-                COLS()/4);
-        if(tiny == null)
-        {
+        tiny = newwin(LINES() / 2, COLS() / 2, LINES() / 4, COLS() / 4);
+        if (tiny == null) {
             endwin();
             System.err.println("Unable to create window");
             System.exit(1);

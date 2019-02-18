@@ -86,18 +86,19 @@ class CursesWindow {
     native static int curses4j_is_termresized();
 
     native static int curses4j_resize_term(int nlines, int ncols);
-    
+
     native static int curses4j_disable_resize();
 
-	native static int curses4j_overwrite(long src_w, long dst_w);
+    native static int curses4j_overwrite(long src_w, long dst_w);
 
-	native static int curses4j_overlay(long src_w, long dst_w);
+    native static int curses4j_overlay(long src_w, long dst_w);
 
-    native static int curses4j_copywin(long src_w, long dst_w, int src_tr,
-            int src_tc, int dst_tr, int dst_tc, int dst_br,
-            int dst_bc, int _overlay);
+    native static int curses4j_copywin(long src_w, long dst_w, int src_tr, int src_tc, int dst_tr, int dst_tc,
+            int dst_br, int dst_bc, int _overlay);
 
     native static long curses4j_dupwin(long win);
+
+    native static long curses4j_newpad(int nlines, int ncols);
 
     native int curses4j_winsertln(long peer);
 
@@ -181,13 +182,17 @@ class CursesWindow {
 
     native int curses4j_box(long peer, int verch, int horch);
 
-	native int curses4j_mvwin(long peer, int y, int x);
+    native int curses4j_mvwin(long peer, int y, int x);
 
-	native int curses4j_mvwprintw(long peer, int y, int x, String str);
+    native int curses4j_mvwprintw(long peer, int y, int x, String str);
 
-	native int curses4j_scroll(long peer);
+    native int curses4j_scroll(long peer);
 
-	native int curses4j_wscrl(long peer, int n);
+    native int curses4j_wscrl(long peer, int n);
 
-	native int curses4j_wsetscrreg(long peer, int top, int bot);
+    native int curses4j_wsetscrreg(long peer, int top, int bot);
+
+    native int curses4j_prefresh(long peer, int py, int px, int sy1, int sx1, int sy2, int sx2);
+
+    native long curses4j_subpad(long peer, int nlines, int ncols, int begy, int begx);
 }

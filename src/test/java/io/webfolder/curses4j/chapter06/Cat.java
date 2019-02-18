@@ -25,18 +25,16 @@ public class Cat {
         addstr("Where did that silly cat go?");
         refresh();
         getch();
-        
+
         /* edit out the word 'silly' */
-        move(0,15);
-        for(x=0;x<5;x++)
-        {   
+        move(0, 15);
+        for (x = 0; x < 5; x++) {
             delch();
             refresh();
-            napms(250);     
+            napms(250);
         }
         /* and immediately insert the word 'fat' */
-        for (int i = 0; i < ob.length(); i++)
-        {
+        for (int i = 0; i < ob.length(); i++) {
             insch(ob.charAt(i));
             refresh();
             napms(250);

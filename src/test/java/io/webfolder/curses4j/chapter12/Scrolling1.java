@@ -12,20 +12,19 @@ import static io.webfolder.curses4j.Curses.refresh;
  */
 public class Scrolling1 {
 
-	public static void main(String[] args) {
-	    String text = "This is some wrapping. ";
-	    int x;
-	    
-	    initscr();
+    public static void main(String[] args) {
+        String text = "This is some wrapping. ";
+        int x;
 
-	    for(x=0;x<100;x++)
-	    {
-	        addstr(text);
-	        napms(100);
-	        refresh();
-	    }   
-	    getch();
-	    
-	    endwin();
+        initscr();
+
+        for (x = 0; x < 100; x++) {
+            addstr(text);
+            napms(100);
+            refresh();
+        }
+        getch();
+
+        endwin();
     }
 }

@@ -14,21 +14,21 @@ import static io.webfolder.curses4j.Curses.scrollok;
  */
 public class Scrup3 {
 
-	public static void main(String[] args) {
-	    int y;
+    public static void main(String[] args) {
+        int y;
 
-	    initscr();
+        initscr();
 
-	    scrollok(true);
-	    for(y=0;y<=LINES();y++)
-	            mvprintw(y,0,"Line %d",y);
-	    refresh();
-	    getch();
+        scrollok(true);
+        for (y = 0; y <= LINES(); y++)
+            mvprintw(y, 0, "Line %d", y);
+        refresh();
+        getch();
 
-	    scrl(3);
-	    refresh();
-	    getch();
+        scrl(3);
+        refresh();
+        getch();
 
-	    endwin();
-	}
+        endwin();
+    }
 }

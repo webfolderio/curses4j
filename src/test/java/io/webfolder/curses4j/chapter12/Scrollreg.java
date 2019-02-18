@@ -16,24 +16,23 @@ import static io.webfolder.curses4j.Curses.setscrreg;
  */
 public class Scrollreg {
 
-	public static void main(String[] args) {
-	    String text = "Scroll me! ";
-	    int x;
+    public static void main(String[] args) {
+        String text = "Scroll me! ";
+        int x;
 
-	    initscr();
+        initscr();
 
-	    bkgd('.');
-	    scrollok(true);
-	    setscrreg(3,LINES()-3);
+        bkgd('.');
+        scrollok(true);
+        setscrreg(3, LINES() - 3);
 
-	    for(x=0;x<200;x++)
-	    {
-	        addstr(text);
-	        napms(25);
-	        refresh();
-	    }
-	    getch();
+        for (x = 0; x < 200; x++) {
+            addstr(text);
+            napms(25);
+            refresh();
+        }
+        getch();
 
-	    endwin();
-	}
+        endwin();
+    }
 }

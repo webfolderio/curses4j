@@ -16,23 +16,23 @@ import static io.webfolder.curses4j.Curses.refresh;
 public class Insdel {
 
     public static void main(String[] args) {
-        int row,col; 
+        int row, col;
 
         initscr();
 
-        for(row=0;row<LINES();row++)
-            for(col=0;col<COLS();col++)
+        for (row = 0; row < LINES(); row++)
+            for (col = 0; col < COLS(); col++)
                 addch('.');
         refresh();
         getch();
 
-        move(5,0);
+        move(5, 0);
         insdelln(3);
         refresh();
         getch();
 
         insdelln(-5);
-        refresh();   
+        refresh();
         getch();
 
         endwin();

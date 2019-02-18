@@ -18,32 +18,30 @@ public class Arrowkeys {
 
     public static void main(String[] args) {
         int ch;
-        
+
         initscr();
 
         keypad(true);
-        do
-        {
+        do {
             ch = getch();
-            switch(ch)
-            {
-                case KEY_DOWN:
-                    addstr("Down\n");
-                    break;
-                case KEY_UP:
-                    addstr("Up\n");
-                    break;
-                case KEY_LEFT:
-                    addstr("Left\n");
-                    break;
-                case KEY_RIGHT:
-                    addstr("Right\n");
-                default:
-                    break;
+            switch (ch) {
+            case KEY_DOWN:
+                addstr("Down\n");
+                break;
+            case KEY_UP:
+                addstr("Up\n");
+                break;
+            case KEY_LEFT:
+                addstr("Left\n");
+                break;
+            case KEY_RIGHT:
+                addstr("Right\n");
+            default:
+                break;
             }
             refresh();
-        } while(ch != '\n');
-        
+        } while (ch != '\n');
+
         endwin();
     }
 }

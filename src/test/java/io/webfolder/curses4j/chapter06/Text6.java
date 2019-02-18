@@ -25,10 +25,10 @@ public class Text6 {
         refresh();
         getch();
 
-        /* remove a line*/
-        move(2,0);
+        /* remove a line */
+        move(2, 0);
         deleteln();
-        refresh();      
+        refresh();
         getch();
 
         endwin();

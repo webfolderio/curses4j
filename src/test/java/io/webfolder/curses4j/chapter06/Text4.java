@@ -19,25 +19,25 @@ public class Text4 {
         String text3 = "The third line\n";
         String text4 = "Fourth line here\n";
         String text5 = "And the fifth line\n";
-        
+
         initscr();
 
         addstr(text1);
         addstr(text3);
         addstr(text5);
-        refresh();      
+        refresh();
         getch();
 
-        move(1,0); /* Second line/row */
+        move(1, 0); /* Second line/row */
         insertln(); /* add a blank line */
-        move(3,0); /* Fourth row */
+        move(3, 0); /* Fourth row */
         insertln();
         refresh();
         getch();
 
-        move(1,0); /* Second row */
+        move(1, 0); /* Second row */
         addstr(text2);
-        move(3,0); /* Fourth row */
+        move(3, 0); /* Fourth row */
         addstr(text4);
         refresh();
         getch();

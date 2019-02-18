@@ -35,6 +35,6 @@ public class Abox {
         refresh();
         getch();
 
-        endwin();   
+        endwin();
     }
 }

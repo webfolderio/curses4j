@@ -28,13 +28,12 @@ public class Switch {
         start_color();
 
         /* configure colors */
-        init_pair(1,COLOR_WHITE,COLOR_BLUE);
-        init_pair(2,COLOR_WHITE,COLOR_RED);
+        init_pair(1, COLOR_WHITE, COLOR_BLUE);
+        init_pair(2, COLOR_WHITE, COLOR_RED);
 
         /* create the second window */
-        second = newwin(0,0,0,0);
-        if(second == null)
-        {
+        second = newwin(0, 0, 0, 0);
+        if (second == null) {
             endwin();
             System.err.println("Unable to create window");
             System.exit(1);

@@ -20,7 +20,7 @@ public class Acsstring {
         addstr("Hello there!");
         refresh();
         getch();
-            
+
         endwin();
     }
 }

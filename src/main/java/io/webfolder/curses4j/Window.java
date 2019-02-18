@@ -210,8 +210,7 @@ public class Window {
         return peer.curses4j_delwin(peer.peer);
     }
 
-    public int border(int ls, int rs, int ts,
-            int bs, int tl, int tr, int bl, int br) {
+    public int border(int ls, int rs, int ts, int bs, int tl, int tr, int bl, int br) {
         return peer.curses4j_wborder(peer.peer, ls, rs, ts, bs, tl, tr, bl, br);
     }
 
@@ -219,23 +218,34 @@ public class Window {
         return peer.curses4j_box(peer.peer, verch, horch);
     }
 
-	public int mvwin(int y, int x) {
-		return peer.curses4j_mvwin(peer.peer, y, x);
-	}
+    public int mvwin(int y, int x) {
+        return peer.curses4j_mvwin(peer.peer, y, x);
+    }
 
-	public int mvprint(int y, int x, String str, Object... args) {
-		return peer.curses4j_mvwprintw(peer.peer, y, x, format(str, args));
-	}
+    public int mvprint(int y, int x, String str, Object... args) {
+        return peer.curses4j_mvwprintw(peer.peer, y, x, format(str, args));
+    }
 
-	public int scroll() {
-		return peer.curses4j_scroll(peer.peer);
-	}
+    public int scroll() {
+        return peer.curses4j_scroll(peer.peer);
+    }
 
-	public int scrl(int n) {
-		return peer.curses4j_wscrl(peer.peer, n);
-	}
+    public int scrl(int n) {
+        return peer.curses4j_wscrl(peer.peer, n);
+    }
 
-	public int setscrreg(int top, int bot) {
-		return peer.curses4j_wsetscrreg(peer.peer, top, bot);
-	}
+    public int setscrreg(int top, int bot) {
+        return peer.curses4j_wsetscrreg(peer.peer, top, bot);
+    }
+
+    public int prefresh(int py, int px, int sy1, int sx1, int sy2, int sx2) {
+        return peer.curses4j_prefresh(peer.peer, py, px, sy1, sx1, sy2, sx2);
+    }
+
+    public Window subpad(int nlines, int ncols, int begy, int begx) {
+        long subpad = peer.curses4j_subpad(peer.peer, nlines, ncols, begy, begx);
+        Window window = new Window();
+        window.peer.peer = subpad;
+        return window;
+    }
 }

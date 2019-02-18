@@ -16,8 +16,7 @@ public class Stdscrsize {
     public static void main(String[] args) {
         initscr();
 
-        printw("Window is %d rows, %d columns.\n",
-                LINES(), COLS());
+        printw("Window is %d rows, %d columns.\n", LINES(), COLS());
         refresh();
         getch();
 

@@ -1,6 +1,10 @@
 package io.webfolder.curses4j.chapter12;
 
-import static io.webfolder.curses4j.Curses.*;
+import static io.webfolder.curses4j.Curses.endwin;
+import static io.webfolder.curses4j.Curses.getch;
+import static io.webfolder.curses4j.Curses.initscr;
+import static io.webfolder.curses4j.Curses.napms;
+import static io.webfolder.curses4j.Curses.subwin;
 
 import io.webfolder.curses4j.Window;
 
@@ -9,23 +13,22 @@ import io.webfolder.curses4j.Window;
  */
 public class Scrollsub {
 
-	public static void main(String[] args) {
-	    Window sub;
-	    String text = "Scroll away! ";
-	    int x;
+    public static void main(String[] args) {
+        Window sub;
+        String text = "Scroll away! ";
+        int x;
 
-	    initscr();
+        initscr();
 
-	    sub = subwin(10,30,6,24);
-	    sub.scrollok(true);
-	    for(x=0;x<35;x++)
-	    {
-	        sub.addstr(text);
-	        napms(50);
-	        sub.refresh();
-	    }
-	    getch();
+        sub = subwin(10, 30, 6, 24);
+        sub.scrollok(true);
+        for (x = 0; x < 35; x++) {
+            sub.addstr(text);
+            napms(50);
+            sub.refresh();
+        }
+        getch();
 
-	    endwin();
-	}
+        endwin();
+    }
 }

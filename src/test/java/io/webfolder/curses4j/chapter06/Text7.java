@@ -26,10 +26,10 @@ public class Text7 {
         getch();
 
         move(3, 7);
-        for(int x = 0; x < 5; x++) {   
+        for (int x = 0; x < 5; x++) {
             delch();
             refresh();
-            napms(250);     
+            napms(250);
         }
         getch();
 
