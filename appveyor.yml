@@ -4,13 +4,6 @@ image:
  - ubuntu1804
  - Visual Studio 2017
 
-branches:
-  only:
-    - master
-
-skip_tags: true
-skip_non_tags: true
-skip_branch_with_pr: true
 platform: x64
 configuration: Release
 
