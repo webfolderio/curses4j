@@ -1,5 +1,8 @@
 version: 1.0.'{build}'
-image: Visual Studio 2013
+
+image:
+ - ubuntu1804
+ - Visual Studio 2017
 
 branches:
   only:
@@ -16,9 +19,14 @@ environment:
     - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
 
 build_script:
-  - build.bat
-  - mvn -DskipTests -q clean package
+  - cmd: build.bat
+  - cmd: mvn -DskipTests -q clean package
+  - sh: sudo apt-get -q --yes install cmake
+  - sh: sudo apt-get -q --yes install libncurses-dev
+  - sh: mkdir build && cd build && cmake .. && make && strip libcurses4j.so
+  - sh: cp build/libcurses4j.so src/main/resources/META-INF
+  - sh: mvn -DskipTests -q clean package
 
 artifacts:
-  - path: target\curses4j-1.0.0-SNAPSHOT.jar
+  - path: target\curses4j-1.1.0.jar
     name: curses4j library (JAR)
