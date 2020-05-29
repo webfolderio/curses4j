@@ -11,7 +11,11 @@ stack: jdk 1.8
 
 environment:
   matrix:
-    - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+    only:
+      - image: ubuntu1804
+      - JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+      - image: Visual Studio 2017
+      - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
 
 build_script:
   - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
