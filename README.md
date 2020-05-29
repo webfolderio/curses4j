@@ -7,14 +7,14 @@ This is an easy-to-use, fully cross-platform Java wrapper for the [ncurses](http
 Supported Java Versions
 -----------------------
 
-Oracle & OpenJDK Java 8, 11.
+Oracle & OpenJDK 64-bit Java 8, 11.
 
 Both the JRE and the JDK are suitable for use with this library.
 
 Supported Platforms
 -------------------
-* Windows 8 & Windows 10 (64-bit)
-* GNU/Linux (64-bit)
+* Windows 8 & Windows 10
+* GNU/Linux
 
 How it is tested
 ----------------
@@ -31,7 +31,7 @@ Add the following to your POM's `<dependencies>` tag:
 <dependency>
     <groupId>io.webfolder</groupId>
     <artifactId>curses4j</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -40,10 +40,3 @@ License
 Licensed under the [MIT](https://github.com/webfolderio/curses4j/blob/master/LICENSE). You can integrate and use this project in your applications for __free__!
 You can even change the source code and redistribute (even resell it).
 
-
-Contrubition
-------------
- * We will never accept pull request.
- * Please do not report bug or fill feature request.
-
-__All kinds of support request will be rejected.__
