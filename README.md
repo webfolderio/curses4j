@@ -1,6 +1,6 @@
 # curses4j
 
-[![AppVeyor](https://img.shields.io/appveyor/ci/WebFolder/curses4j.svg?label=Windows)](https://ci.appveyor.com/project/WebFolder/curses4j) [![circleci](https://img.shields.io/appveyor/ci/WebFolder/curses4j.svg?label=Ubuntu)](https://circleci.com/gh/webfolderio/curses4j) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![AppVeyor](https://img.shields.io/appveyor/ci/WebFolder/curses4j.svg?label=Windows-GNU/Linux)](https://ci.appveyor.com/project/WebFolder/curses4j) (https://circleci.com/gh/webfolderio/curses4j) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 This is an easy-to-use, fully cross-platform Java wrapper for the [ncurses](https://en.wikipedia.org/wiki/Ncurses) in GNU/Linux and [PDCurses](https://en.wikipedia.org/wiki/PDCurses) in Windows. The project is able to load the OS-specific native implementation of curses at runtime which means you can deploy the same binary to GNU/Linux & Windows.
 
