@@ -17,7 +17,7 @@ build_script:
   - cmd: mvn -DskipTests -q clean package
   - sh: sudo apt-get -q --yes install cmake
   - sh: sudo apt-get -q --yes install libncurses-dev
-  - sh: mkdir build && cd build && cmake .. && make && strip libcurses4j.so
+  - sh: mkdir build && cd build && cmake .. && make && strip libcurses4j.so && cd ..
   - sh: cp build/libcurses4j.so src/main/resources/META-INF
   - sh: mvn -DskipTests -q clean package
 
